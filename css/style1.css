@@ -1,0 +1,86 @@
+/* BASIC PAGE STYLES */
+/* The body selector targets the entire visible part of your webpage */
+body {
+    font-family: Roboto, sans-serif; /* Sets the main font used throughout the page */
+    margin: 0; /* Removes default spacing around the page edge */
+    padding: 20px; /* Adds some space inside the page border */
+    background-color: #f5f5f5; /* Light gray background color (using hexadecimal color code) */
+    line-height: 1.6; /* Controls spacing between lines of text - 1.6 is 160% of font size */
+}
+
+/* HEADER STYLES */
+header {
+    text-align: center; /* Centers the content inside the header */
+    margin-bottom: 30px; /* Adds space below the header */
+    padding: 10px; /* Adds space inside the header */
+    background-color: #005792; /* Blue background for header */
+    color: white; /* White text color */
+    border-radius: 5px; /* Rounds the corners of the header */
+}
+
+/* SECTION STYLES */
+section {
+    background-color: white; /* White background for content sections */
+    padding: 20px; /* Adds space inside sections */
+    margin-bottom: 20px; /* Adds space between sections */
+    border-radius: 5px; /* Rounds corners of sections */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Adds a subtle shadow effect */
+}
+
+/* HEADING STYLES */
+h1, h2 {
+    color: #005792; /* Blue color for headings */
+}
+
+h1 {
+    font-size: 28px; /* Sets size of main heading */
+}
+
+h2 {
+    font-size: 22px; /* Sets size of section headings */
+    border-bottom: 1px solid #eeeeee; /* Adds a light gray line under h2 headings */
+    padding-bottom: 10px; /* Adds space below the heading text but above the line */
+}
+
+/* PARAGRAPH STYLES */
+p {
+    color: #333333; /* Dark gray for text - easier to read than pure black */
+}
+
+/* IMAGE CONTAINER STYLES */
+.image-container {
+    display: flex; /* Creates a flexible layout for the images */
+    flex-wrap: wrap; /* Allows images to wrap to next line on small screens */
+    justify-content: center; /* Centers the images horizontally */
+    gap: 20px; /* Creates space between the images */
+}
+
+/* INDIVIDUAL IMAGE BOX STYLES */
+.image-box {
+    width: 45%; /* Each image takes up roughly 45% of the container width */
+    min-width: 300px; /* But never gets smaller than 300px */
+    text-align: center; /* Centers the image and caption */
+    margin-bottom: 20px; /* Space below each image box */
+}
+
+/* IMAGE STYLES */
+img {
+    max-width: 100%; /* Makes images responsive - they'll never be wider than their container */
+    height: auto; /* Maintains the image's aspect ratio */
+    border: 1px solid #dddddd; /* Adds a light gray border around images */
+}
+
+/* CAPTION STYLES */
+.caption {
+    font-style: italic; /* Makes caption text italic */
+    font-size: 14px; /* Smaller text for captions */
+    margin-top: 8px; /* Space between image and its caption */
+}
+
+/* FOOTER STYLES */
+footer {
+    text-align: center; /* Centers footer text */
+    margin-top: 30px; /* Space above footer */
+    color: #666666; /* Medium gray color for footer text */
+    font-size: 14px; /* Smaller text for footer */
+}
