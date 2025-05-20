@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tailwind CSS Introduction</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Configure Tailwind with dark mode
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4361ee',
+                        secondary: '#3a0ca3',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="tailwind.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+    <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-12 shadow-lg">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="flex justify-between items-center">
+                <a href="../../index.html" class="bg-white text-blue-600 hover:bg-gray-100 font-medium py-2 px-4 rounded-lg flex items-center gap-2 transition-colors duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                    </svg>
+                    <span>Home</span>
+                </a>
+                <button id="darkModeToggle" class="bg-white text-gray-800 hover:bg-gray-100 p-2 rounded-full transition-colors duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 dark-icon hidden" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 light-icon" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+            <div class="text-center mt-12 max-w-3xl mx-auto">
+                <h1 class="text-5xl font-extrabold mb-4">Tailwind CSS</h1>
+                <p class="text-xl opacity-90 mb-8">A utility-first CSS framework for rapidly building custom user interfaces</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="#introduction" class="bg-white text-blue-600 hover:bg-blue-50 px-6 py-3 rounded-lg font-medium transition-colors">Learn More</a>
+                    <a href="#darkmode" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-medium transition-colors">Try Dark Mode</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 md:px-6 py-12">
+        <!-- Introduction -->
+        <section id="introduction" class="mb-20">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold mb-6 text-blue-600 dark:text-blue-400">What is Tailwind CSS?</h2>
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 mb-8">
+                    <p class="mb-4">Tailwind CSS is a utility-first CSS framework that lets you build designs directly in your markup. Instead of pre-designed components like other CSS frameworks, Tailwind provides low-level utility classes that let you build completely custom designs without ever leaving your HTML.</p>
+                    <p>With Tailwind, you style elements by applying pre-existing classes directly in your HTML. This approach allows for rapid development while maintaining complete design flexibility.</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                        <h3 class="text-xl font-semibold mb-3 text-blue-600 dark:text-blue-400">Traditional CSS Approach</h3>
+                        <div class="border dark:border-gray-700 rounded-md p-4 mb-4 bg-gray-50 dark:bg-gray-900">
+                            <pre class="text-sm overflow-x-auto"><code>.card {
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2563eb;
+  margin-bottom: 0.75rem;
+}</code></pre>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Traditional CSS requires you to create custom classes and switch between HTML and CSS files.</p>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                        <h3 class="text-xl font-semibold mb-3 text-blue-600 dark:text-blue-400">Tailwind Approach</h3>
+                        <div class="border dark:border-gray-700 rounded-md p-4 mb-4 bg-gray-50 dark:bg-gray-900">
+                            <pre class="text-sm overflow-x-auto"><code>&lt;div class="bg-white rounded-lg p-6 shadow-md"&gt;
+  &lt;h2 class="text-xl font-semibold text-blue-600 mb-3"&gt;
+    Card Title
+  &lt;/h2&gt;
+&lt;/div&gt;</code></pre>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">With Tailwind, you apply utility classes directly in your HTML markup.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Use Tailwind -->
+        <section class="mb-20">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold mb-6 text-blue-600 dark:text-blue-400">Why Use Tailwind CSS?</h2>
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 mb-8">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-3 text-green-600 dark:text-green-400">Advantages</h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span><strong>Faster development</strong> - Build interfaces quickly without writing custom CSS</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span><strong>Responsive design</strong> - Built-in responsive modifiers like md: and lg:</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span><strong>Customizable</strong> - Easily extend the default configuration</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span><strong>No naming fatigue</strong> - No need to invent class names</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-3 text-red-600 dark:text-red-400">Considerations</h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <svg class="h-5 w-5 text-red-500 mr-2 mt-0.5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span><strong>Verbose HTML</strong> - Markup can become long with many utility classes</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="h-5 w-5 text-red-500 mr-2 mt-0.5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span><strong>Learning curve</strong> - Need to learn Tailwind's utility classes</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="h-5 w-5 text-red-500 mr-2 mt-0.5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span><strong>Build step required</strong> - For production, you need a build process</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-blue-600 dark:text-blue-400">When to Use Tailwind CSS</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <div class="bg-blue-100 dark:bg-blue-900 rounded-full p-1 mr-3 mt-0.5">
+                                <svg class="h-5 w-5 text-blue-600 dark:text-blue-300" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div>
+                                <strong class="text-lg">New Projects</strong>
+                                <p class="text-gray-600 dark:text-gray-400">Tailwind is ideal for new projects where you want to build a custom UI quickly without accumulating CSS technical debt.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="bg-blue-100 dark:bg-blue-900 rounded-full p-1 mr-3 mt-0.5">
+                                <svg class="h-5 w-5 text-blue-600 dark:text-blue-300" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div>
+                                <strong class="text-lg">Prototyping</strong>
+                                <p class="text-gray-600 dark:text-gray-400">The utility-first approach makes it perfect for quickly prototyping ideas without writing custom CSS.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="bg-blue-100 dark:bg-blue-900 rounded-full p-1 mr-3 mt-0.5">
+                                <svg class="h-5 w-5 text-blue-600 dark:text-blue-300" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div>
+                                <strong class="text-lg">Design Systems</strong>
+                                <p class="text-gray-600 dark:text-gray-400">Tailwind's configuration system makes it excellent for implementing and maintaining design systems.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Flexbox with Tailwind -->
+        <section class="mb-20">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold mb-6 text-blue-600 dark:text-blue-400">Flexbox with Tailwind</h2>
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 mb-8">
+                    <p class="mb-6">Tailwind makes working with Flexbox incredibly simple by providing utility classes for all common Flexbox properties:</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4 text-blue-600 dark:text-blue-400">Flexbox with Tailwind:</h3>
+                            <div class="flex justify-between items-center p-4 bg-gray-100 dark:bg-gray-700 rounded-lg mb-4">
+                                <div class="bg-blue-500 text-white p-2 rounded">Item 1</div>
+                                <div class="bg-blue-500 text-white p-2 rounded">Item 2</div>
+                                <div class="bg-blue-500 text-white p-2 rounded">Item 3</div>
+                            </div>
+                            <pre class="text-sm bg-gray-50 dark:bg-gray-900 p-3 rounded overflow-x-auto"><code>&lt;div class="flex justify-between items-center"&gt;
+  &lt;div&gt;Item 1&lt;/div&gt;
+  &lt;div&gt;Item 2&lt;/div&gt;
+  &lt;div&gt;Item 3&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4 text-blue-600 dark:text-blue-400">Common Flexbox Utilities:</h3>
+                            <ul class="space-y-2 text-sm">
+                                <li><code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">flex</code> - Create a flex container</li>
+                                <li><code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">flex-row</code> / <code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">flex-col</code> - Direction</li>
+                                <li><code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">justify-start</code> / <code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">justify-center</code> / <code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">justify-between</code> - Main axis</li>
+                                <li><code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">items-center</code> / <code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">items-start</code> / <code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">items-end</code> - Cross axis</li>
+                                <li><code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">flex-wrap</code> / <code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">flex-nowrap</code> - Wrapping</li>
+                                <li><code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">gap-{size}</code> - Gap between items</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 mb-4">
+                        <h3 class="text-xl font-semibold mb-4 text-blue-600 dark:text-blue-400">Real-world Example:</h3>
+                        <div class="bg-white dark:bg-gray-900 shadow-md rounded-lg overflow-hidden">
+                            <!-- Card with Flexbox layout -->
+                            <div class="flex flex-col md:flex-row">
+                                <div class="md:w-1/3 bg-blue-600 text-white p-6 flex items-center justify-center">
+                                    <svg class="h-20 w-20" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                    </svg>
+                                </div>
+                                <div class="p-6 md:w-2/3">
+                                    <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2">Flexible Card Layout</h3>
+                                    <p class="text-gray-600 dark:text-gray-300 mb-4">This card uses Flexbox utilities to create a responsive layout that stacks on mobile and displays side-by-side on larger screens.</p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-sm text-gray-500 dark:text-gray-400">Created with Tailwind</span>
+                                        <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition-colors">Learn More</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 bg-blue-50 dark:bg-blue-900/30 p-4 rounded-lg">
+                        <h4 class="font-semibold mb-2">Want to learn more about Flexbox?</h4>
+                        <p>For a deep dive into the fundamentals of Flexbox, check out our <a href="../flexbox/flexbox.html" class="text-blue-600 dark:text-blue-400 underline">Flexbox Tutorial</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dark Mode -->
+        <section id="darkmode" class="mb-20">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold mb-6 text-blue-600 dark:text-blue-400">Dark Mode with Tailwind</h2>
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 mb-8">
+                    <p class="mb-6">Tailwind makes it simple to implement dark mode with the <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">dark:</code> variant prefix. Simply add <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">dark:</code> before any utility class to have it applied only in dark mode.</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-8 mb-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4 text-blue-600 dark:text-blue-400">Dark Mode Examples:</h3>
+                            <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-4 shadow-sm mb-4">
+                                <h4 class="font-bold text-gray-800 dark:text-white mb-2">Color Adaptation</h4>
+                                <p class="text-gray-600 dark:text-gray-300">Text and background colors change based on mode.</p>
+                                <button class="mt-3 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white px-4 py-2 rounded">
+                                    Adaptive Button
+                                </button>
+                            </div>
+                            
+                            <div class="rounded-lg overflow-hidden shadow-sm">
+                                <div class="bg-gray-100 dark:bg-gray-800 p-3 border-b border-gray-200 dark:border-gray-700">
+                                    <h4 class="font-medium text-gray-800 dark:text-white">Component Example</h4>
+                                </div>
+                                <div class="bg-white dark:bg-gray-900 p-4">
+                                    <p class="text-gray-600 dark:text-gray-300 text-sm">This component adjusts all aspects of its appearance for dark mode.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4 text-blue-600 dark:text-blue-400">Code Example:</h3>
+                            <pre class="text-sm bg-gray-50 dark:bg-gray-900 p-3 rounded overflow-x-auto"><code>&lt;div class="bg-white dark:bg-gray-900 
+     text-gray-800 dark:text-white
+     border-gray-200 dark:border-gray-700"&gt;
+
+  &lt;h4 class="font-bold"&gt;
+    Adaptive Heading
+  &lt;/h4&gt;
+  
+  &lt;p class="text-gray-600 dark:text-gray-300"&gt;
+    This content changes for dark mode.
+  &lt;/p&gt;
+  
+&lt;/div&gt;</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-yellow-50 dark:bg-yellow-900/20 border-l-4 border-yellow-500 p-4 rounded">
+                        <h4 class="font-semibold text-yellow-800 dark:text-yellow-300 mb-2">Try Dark Mode Now!</h4>
+                        <p class="text-yellow-700 dark:text-yellow-200">Click the sun/moon icon in the top right corner to toggle between light and dark mode and see how this page adapts.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Getting Started with Tailwind -->
+        <section class="mb-20">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold mb-6 text-blue-600 dark:text-blue-400">Getting Started with Tailwind</h2>
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
+                    <p class="mb-6">There are several ways to set up Tailwind CSS in your project:</p>
+                    
+                    <div class="space-y-6">
+                        <div class="border dark:border-gray-700 rounded-lg overflow-hidden">
+                            <div class="bg-gray-100 dark:bg-gray-900 px-4 py-2 border-b dark:border-gray-700">
+                                <h3 class="font-semibold">Method 1: CDN (Quick Start)</h3>
+                            </div>
+                            <div class="p-4">
+                                <p class="mb-3 text-sm">Add the Tailwind CDN to your HTML file (not recommended for production):</p>
+                                <pre class="text-sm bg-gray-50 dark:bg-gray-900 p-3 rounded overflow-x-auto"><code>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</code></pre>
+                            </div>
+                        </div>
+                        
+                        <div class="border dark:border-gray-700 rounded-lg overflow-hidden">
+                            <div class="bg-gray-100 dark:bg-gray-900 px-4 py-2 border-b dark:border-gray-700">
+                                <h3 class="font-semibold">Method 2: Install via NPM (Recommended)</h3>
+                            </div>
+                            <div class="p-4">
+                                <p class="mb-3 text-sm">1. Install Tailwind and its dependencies:</p>
+                                <pre class="text-sm bg-gray-50 dark:bg-gray-900 p-3 rounded overflow-x-auto mb-4"><code>npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p</code></pre>
+                                
+                                <p class="mb-3 text-sm">2. Configure your tailwind.config.js file:</p>
+                                <pre class="text-sm bg-gray-50 dark:bg-gray-900 p-3 rounded overflow-x-auto mb-4"><code>module.exports = {
+  content: ["./src/**/*.{html,js}"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}</code></pre>
+                                
+                                <p class="mb-3 text-sm">3. Add the Tailwind directives to your CSS:</p>
+                                <pre class="text-sm bg-gray-50 dark:bg-gray-900 p-3 rounded overflow-x-auto"><code>@tailwind base;
+@tailwind components;
+@tailwind utilities;</code></pre>
+                            </div>
+                        </div>
+                        
+                        <div class="border dark:border-gray-700 rounded-lg overflow-hidden">
+                            <div class="bg-gray-100 dark:bg-gray-900 px-4 py-2 border-b dark:border-gray-700">
+                                <h3 class="font-semibold">Method 3: Framework Integrations</h3>
+                            </div>
+                            <div class="p-4">
+                                <p class="mb-3 text-sm">Tailwind works seamlessly with popular frameworks:</p>
+                                <ul class="space-y-2 text-sm list-disc pl-5">
+                                    <li>Next.js: <code class="bg-gray-100 dark:bg-gray-800 px-1 rounded">npm install -D tailwindcss</code></li>
+                                    <li>React: Works with Create React App</li>
+                                    <li>Vue: Compatible with Vue CLI</li>
+                                    <li>Angular: Can be integrated with Angular projects</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-blue-800 text-white py-12">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-2xl font-bold mb-4">Ready to Try Tailwind CSS?</h2>
+                <p class="mb-8 opacity-90">Start building beautiful, responsive user interfaces with Tailwind's utility-first approach.</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="https://tailwindcss.com/docs" target="_blank" rel="noopener" class="bg-white text-blue-800 hover:bg-blue-50 px-6 py-3 rounded-lg font-medium transition-colors">
+                        Official Docs
+                    </a>
+                    <a href="../../index.html" class="bg-blue-700 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-medium transition-colors">
+                        Back to Home
+                    </a>
+                </div>
+                <p class="mt-12 text-sm opacity-75">Created for educational purposes at Muza School of Code</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Dark mode toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const darkIcon = document.querySelector('.dark-icon');
+            const lightIcon = document.querySelector('.light-icon');
+            
+            // Check for saved theme preference or use system preference
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+                document.documentElement.classList.add('dark');
+                darkIcon.classList.remove('hidden');
+                lightIcon.classList.add('hidden');
+            }
+            
+            // Toggle dark/light mode
+            darkModeToggle.addEventListener('click', function() {
+                document.documentElement.classList.toggle('dark');
+                darkIcon.classList.toggle('hidden');
+                lightIcon.classList.toggle('hidden');
+                
+                // Save preference
+                if (document.documentElement.classList.contains('dark')) {
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    localStorage.setItem('theme', 'light');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
