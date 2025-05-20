@@ -1,0 +1,1098 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="1920"
+   height="1080"
+   viewBox="0 0 1920 1080"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3 (0e150ed6c4, 2023-07-21)"
+   sodipodi:docname="2D_cells.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="0.46197917"
+     inkscape:cx="125.54679"
+     inkscape:cy="76.843292"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="44"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g40" />
+  <defs
+     id="defs1">
+    <radialGradient
+       cx="0"
+       cy="1752600"
+       r="2310082"
+       gradientUnits="userSpaceOnUse"
+       spreadMethod="pad"
+       id="fill0"
+       gradientTransform="matrix(1.04987e-4,0,0,1.04987e-4,851,354)">
+      <stop
+         offset="0"
+         stop-color="#B5CFE9"
+         id="stop1" />
+      <stop
+         offset="0.68"
+         stop-color="#DEE9F5"
+         id="stop2" />
+      <stop
+         offset="1"
+         stop-color="#AFCBE8"
+         id="stop3" />
+    </radialGradient>
+    <linearGradient
+       x1="1031.64"
+       y1="436.608"
+       x2="919.359"
+       y2="342.392"
+       gradientUnits="userSpaceOnUse"
+       spreadMethod="reflect"
+       id="fill1">
+      <stop
+         offset="0"
+         stop-color="#AA9E65"
+         id="stop4" />
+      <stop
+         offset="0.18"
+         stop-color="#AA9E65"
+         id="stop5" />
+      <stop
+         offset="0.75"
+         stop-color="#C1B990"
+         id="stop6" />
+      <stop
+         offset="1"
+         stop-color="#DBD6BE"
+         id="stop7" />
+    </linearGradient>
+    <linearGradient
+       x1="933.998"
+       y1="373.083"
+       x2="926.002"
+       y2="372.917"
+       gradientUnits="userSpaceOnUse"
+       spreadMethod="reflect"
+       id="fill2">
+      <stop
+         offset="0"
+         stop-color="#7F7F7F"
+         id="stop8" />
+      <stop
+         offset="0.5"
+         stop-color="#343434"
+         id="stop9" />
+      <stop
+         offset="1"
+         stop-color="#FFFFFF"
+         id="stop10" />
+    </linearGradient>
+    <linearGradient
+       x1="888.998"
+       y1="389.579"
+       x2="881.002"
+       y2="389.421"
+       gradientUnits="userSpaceOnUse"
+       spreadMethod="reflect"
+       id="fill3">
+      <stop
+         offset="0"
+         stop-color="#8C8C8C"
+         id="stop11" />
+      <stop
+         offset="0.16"
+         stop-color="#343434"
+         id="stop12" />
+      <stop
+         offset="1"
+         stop-color="#999999"
+         id="stop13" />
+    </linearGradient>
+    <linearGradient
+       x1="982.989"
+       y1="385.803"
+       x2="967.011"
+       y2="385.197"
+       gradientUnits="userSpaceOnUse"
+       spreadMethod="reflect"
+       id="fill4">
+      <stop
+         offset="0"
+         stop-color="#212121"
+         id="stop14" />
+      <stop
+         offset="0.5"
+         stop-color="#343434"
+         id="stop15" />
+      <stop
+         offset="1"
+         stop-color="#404040"
+         id="stop16" />
+    </linearGradient>
+    <linearGradient
+       x1="935.191"
+       y1="345.603"
+       x2="925.809"
+       y2="292.397"
+       gradientUnits="userSpaceOnUse"
+       spreadMethod="reflect"
+       id="fill5">
+      <stop
+         offset="0"
+         stop-color="#99A8BD"
+         id="stop17" />
+      <stop
+         offset="0.38"
+         stop-color="#CCD4DE"
+         id="stop18" />
+      <stop
+         offset="1"
+         stop-color="#EBEEF2"
+         id="stop19" />
+    </linearGradient>
+    <image
+       width="64"
+       height="64"
+       xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCABAAEADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD4Pr+kOiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD+byv6Q6KKACiiigAooooAKKKKACiiigAooooA//2Q=="
+       preserveAspectRatio="none"
+       id="img6" />
+    <pattern
+       width="64"
+       height="64"
+       patternUnits="userSpaceOnUse"
+       id="pattern7"
+       overflow="hidden"
+       patternTransform="matrix(0.125 0 0 0.125 920 472)">
+      <use
+         width="100%"
+         height="100%"
+         xlink:href="#img6"
+         id="use19" />
+    </pattern>
+    <radialGradient
+       cx="1504950"
+       cy="1752600"
+       r="2310082"
+       gradientUnits="userSpaceOnUse"
+       spreadMethod="pad"
+       id="fill0-7"
+       gradientTransform="matrix(1.04987e-4,0,0,1.04987e-4,591,353)">
+      <stop
+         offset="0"
+         stop-color="#DCE9F5"
+         id="stop1-5" />
+      <stop
+         offset="0.44"
+         stop-color="#D3E3F2"
+         id="stop2-4" />
+      <stop
+         offset="1"
+         stop-color="#9DC0E2"
+         id="stop3-0" />
+    </radialGradient>
+    <linearGradient
+       x1="691.185"
+       y1="382.036"
+       x2="741.815"
+       y2="390.964"
+       gradientUnits="userSpaceOnUse"
+       spreadMethod="reflect"
+       id="fill1-2">
+      <stop
+         offset="0"
+         stop-color="#7A7A7A"
+         id="stop4-4" />
+      <stop
+         offset="0.66"
+         stop-color="#404040"
+         id="stop5-0" />
+      <stop
+         offset="1"
+         stop-color="#404040"
+         id="stop6-2" />
+    </linearGradient>
+    <linearGradient
+       x1="625.497"
+       y1="373.631"
+       x2="615.503"
+       y2="373.369"
+       gradientUnits="userSpaceOnUse"
+       spreadMethod="reflect"
+       id="fill2-7">
+      <stop
+         offset="0"
+         stop-color="#7F7F7F"
+         id="stop7-6" />
+      <stop
+         offset="0.5"
+         stop-color="#343434"
+         id="stop8-8" />
+      <stop
+         offset="1"
+         stop-color="#FFFFFF"
+         id="stop9-3" />
+    </linearGradient>
+    <image
+       width="64"
+       height="64"
+       xlink:href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCABAAEADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD4Pr+kOiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD+byv6Q6KKACiiigAooooAKKKKACiiigAooooA//2Q=="
+       preserveAspectRatio="none"
+       id="img3" />
+    <pattern
+       width="64"
+       height="64"
+       patternUnits="userSpaceOnUse"
+       id="pattern4"
+       overflow="hidden"
+       patternTransform="matrix(0.125 0 0 0.125 608 472)">
+      <use
+         width="100%"
+         height="100%"
+         xlink:href="#img3"
+         id="use9" />
+    </pattern>
+    <linearGradient
+       x1="651.278"
+       y1="424.84"
+       x2="690.722"
+       y2="493.16"
+       gradientUnits="userSpaceOnUse"
+       spreadMethod="reflect"
+       id="fill5-6">
+      <stop
+         offset="0"
+         stop-color="#ADB9CA"
+         id="stop10-1" />
+      <stop
+         offset="0.27"
+         stop-color="#ADB9CA"
+         id="stop11-0" />
+      <stop
+         offset="0.57"
+         stop-color="#DAE3F3"
+         id="stop12-2" />
+      <stop
+         offset="1"
+         stop-color="#ADB9CA"
+         id="stop13-7" />
+    </linearGradient>
+    <linearGradient
+       x1="649.244"
+       y1="359.016"
+       x2="688.756"
+       y2="365.984"
+       gradientUnits="userSpaceOnUse"
+       spreadMethod="reflect"
+       id="fill6">
+      <stop
+         offset="0"
+         stop-color="#A6A6A6"
+         id="stop14-7" />
+      <stop
+         offset="0.0133333"
+         stop-color="#A7A7A7"
+         id="stop15-9" />
+      <stop
+         offset="0.0266667"
+         stop-color="#A9A9A9"
+         id="stop16-8" />
+      <stop
+         offset="0.04"
+         stop-color="#ABABAB"
+         id="stop17-8" />
+      <stop
+         offset="0.0533333"
+         stop-color="#ADADAD"
+         id="stop18-1" />
+      <stop
+         offset="0.0666667"
+         stop-color="#AFAFAF"
+         id="stop19-5" />
+      <stop
+         offset="0.08"
+         stop-color="#B0B0B0"
+         id="stop20" />
+      <stop
+         offset="0.0933333"
+         stop-color="#B2B2B2"
+         id="stop21" />
+      <stop
+         offset="0.106667"
+         stop-color="#B4B4B4"
+         id="stop22" />
+      <stop
+         offset="0.12"
+         stop-color="#B6B6B6"
+         id="stop23" />
+      <stop
+         offset="0.133333"
+         stop-color="#B7B7B7"
+         id="stop24" />
+      <stop
+         offset="0.146667"
+         stop-color="#B9B9B9"
+         id="stop25" />
+      <stop
+         offset="0.16"
+         stop-color="#BBBBBB"
+         id="stop26" />
+      <stop
+         offset="0.173333"
+         stop-color="#BCBCBC"
+         id="stop27" />
+      <stop
+         offset="0.186667"
+         stop-color="#BEBEBE"
+         id="stop28" />
+      <stop
+         offset="0.2"
+         stop-color="#BFBFBF"
+         id="stop29" />
+      <stop
+         offset="0.213333"
+         stop-color="#C1C1C1"
+         id="stop30" />
+      <stop
+         offset="0.226667"
+         stop-color="#C3C3C3"
+         id="stop31" />
+      <stop
+         offset="0.24"
+         stop-color="#C4C4C4"
+         id="stop32" />
+      <stop
+         offset="0.253333"
+         stop-color="#C6C6C6"
+         id="stop33" />
+      <stop
+         offset="0.266667"
+         stop-color="#C7C7C7"
+         id="stop34" />
+      <stop
+         offset="0.28"
+         stop-color="#C8C8C8"
+         id="stop35" />
+      <stop
+         offset="0.293333"
+         stop-color="#CACACA"
+         id="stop36" />
+      <stop
+         offset="0.306667"
+         stop-color="#CBCBCB"
+         id="stop37" />
+      <stop
+         offset="0.32"
+         stop-color="#CDCDCD"
+         id="stop38" />
+      <stop
+         offset="0.333333"
+         stop-color="#CECECE"
+         id="stop39" />
+      <stop
+         offset="0.346667"
+         stop-color="#CFCFCF"
+         id="stop40" />
+      <stop
+         offset="0.36"
+         stop-color="#D1D1D1"
+         id="stop41" />
+      <stop
+         offset="0.373333"
+         stop-color="#D2D2D2"
+         id="stop42" />
+      <stop
+         offset="0.386667"
+         stop-color="#D3D3D3"
+         id="stop43" />
+      <stop
+         offset="0.4"
+         stop-color="#D4D4D4"
+         id="stop44" />
+      <stop
+         offset="0.413333"
+         stop-color="#D6D6D6"
+         id="stop45" />
+      <stop
+         offset="0.426667"
+         stop-color="#D7D7D7"
+         id="stop46" />
+      <stop
+         offset="0.44"
+         stop-color="#D8D8D8"
+         id="stop47" />
+      <stop
+         offset="0.453333"
+         stop-color="#D9D9D9"
+         id="stop48" />
+      <stop
+         offset="0.466667"
+         stop-color="#DADADA"
+         id="stop49" />
+      <stop
+         offset="0.48"
+         stop-color="#DBDBDB"
+         id="stop50" />
+      <stop
+         offset="0.493333"
+         stop-color="#DCDCDC"
+         id="stop51" />
+      <stop
+         offset="0.506667"
+         stop-color="#DDDDDD"
+         id="stop52" />
+      <stop
+         offset="0.52"
+         stop-color="#DEDEDE"
+         id="stop53" />
+      <stop
+         offset="0.533333"
+         stop-color="#DFDFDF"
+         id="stop54" />
+      <stop
+         offset="0.546667"
+         stop-color="#E0E0E0"
+         id="stop55" />
+      <stop
+         offset="0.56"
+         stop-color="#E1E1E1"
+         id="stop56" />
+      <stop
+         offset="0.573333"
+         stop-color="#E2E2E2"
+         id="stop57" />
+      <stop
+         offset="0.586667"
+         stop-color="#E3E3E3"
+         id="stop58" />
+      <stop
+         offset="0.6"
+         stop-color="#E4E4E4"
+         id="stop59" />
+      <stop
+         offset="0.613333"
+         stop-color="#E5E5E5"
+         id="stop60" />
+      <stop
+         offset="0.626667"
+         stop-color="#E6E6E6"
+         id="stop61" />
+      <stop
+         offset="0.64"
+         stop-color="#E6E6E6"
+         id="stop62" />
+      <stop
+         offset="0.653333"
+         stop-color="#E7E7E7"
+         id="stop63" />
+      <stop
+         offset="0.666667"
+         stop-color="#E8E8E8"
+         id="stop64" />
+      <stop
+         offset="0.68"
+         stop-color="#E9E9E9"
+         id="stop65" />
+      <stop
+         offset="0.693333"
+         stop-color="#E9E9E9"
+         id="stop66" />
+      <stop
+         offset="0.706667"
+         stop-color="#EAEAEA"
+         id="stop67" />
+      <stop
+         offset="0.72"
+         stop-color="#EBEBEB"
+         id="stop68" />
+      <stop
+         offset="0.733333"
+         stop-color="#EBEBEB"
+         id="stop69" />
+      <stop
+         offset="0.746667"
+         stop-color="#ECECEC"
+         id="stop70" />
+      <stop
+         offset="0.76"
+         stop-color="#ECECEC"
+         id="stop71" />
+      <stop
+         offset="0.773333"
+         stop-color="#EDEDED"
+         id="stop72" />
+      <stop
+         offset="0.786667"
+         stop-color="#EDEDED"
+         id="stop73" />
+      <stop
+         offset="0.8"
+         stop-color="#EEEEEE"
+         id="stop74" />
+      <stop
+         offset="0.813333"
+         stop-color="#EEEEEE"
+         id="stop75" />
+      <stop
+         offset="0.826667"
+         stop-color="#EFEFEF"
+         id="stop76" />
+      <stop
+         offset="0.84"
+         stop-color="#EFEFEF"
+         id="stop77" />
+      <stop
+         offset="0.853333"
+         stop-color="#EFEFEF"
+         id="stop78" />
+      <stop
+         offset="0.866667"
+         stop-color="#F0F0F0"
+         id="stop79" />
+      <stop
+         offset="0.88"
+         stop-color="#F0F0F0"
+         id="stop80" />
+      <stop
+         offset="0.893333"
+         stop-color="#F0F0F0"
+         id="stop81" />
+      <stop
+         offset="0.906667"
+         stop-color="#F1F1F1"
+         id="stop82" />
+      <stop
+         offset="0.92"
+         stop-color="#F1F1F1"
+         id="stop83" />
+      <stop
+         offset="0.933333"
+         stop-color="#F1F1F1"
+         id="stop84" />
+      <stop
+         offset="0.946667"
+         stop-color="#F1F1F1"
+         id="stop85" />
+      <stop
+         offset="0.96"
+         stop-color="#F1F1F1"
+         id="stop86" />
+      <stop
+         offset="0.973333"
+         stop-color="#F1F1F1"
+         id="stop87" />
+      <stop
+         offset="0.986667"
+         stop-color="#F1F1F1"
+         id="stop88" />
+      <stop
+         offset="1"
+         stop-color="#F2F2F2"
+         id="stop89" />
+    </linearGradient>
+    <linearGradient
+       x1="675.191"
+       y1="344.603"
+       x2="665.809"
+       y2="291.397"
+       gradientUnits="userSpaceOnUse"
+       spreadMethod="reflect"
+       id="fill7">
+      <stop
+         offset="0"
+         stop-color="#99A8BD"
+         id="stop90" />
+      <stop
+         offset="0.38"
+         stop-color="#CCD4DE"
+         id="stop91" />
+      <stop
+         offset="1"
+         stop-color="#EBEEF2"
+         id="stop92" />
+    </linearGradient>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       transform="translate(-434.81736,113.76099)"
+       id="g40">
+      <rect
+         x="851"
+         y="354"
+         width="158"
+         height="184"
+         fill="url(#fill0)"
+         id="rect19"
+         style="fill:url(#fill0)" />
+      <rect
+         x="851.5"
+         y="305.5"
+         width="158"
+         height="233"
+         stroke="#404040"
+         stroke-width="1.33333"
+         stroke-miterlimit="8"
+         fill="none"
+         id="rect20" />
+      <path
+         d="m 975.897,291.1 v -45.6 h 46.603 v -120 h -184 v 120 h 46.603 v 68"
+         stroke="#000000"
+         stroke-width="1.33333"
+         stroke-miterlimit="8"
+         fill="none"
+         fill-rule="evenodd"
+         id="path20" />
+      <path
+         d="m 1021.5,190.5 h -91 v 126"
+         stroke="#000000"
+         stroke-width="1.33333"
+         stroke-miterlimit="8"
+         fill="none"
+         fill-rule="evenodd"
+         id="path21" />
+      <path
+         d="m 957.5,190.5 c 0,-10.493 8.507,-19 19,-19 10.493,0 19,8.507 19,19 0,10.493 -8.507,19 -19,19 -10.493,0 -19,-8.507 -19,-19 z"
+         stroke="#000000"
+         stroke-width="1.33333"
+         stroke-miterlimit="8"
+         fill="#ffffff"
+         fill-rule="evenodd"
+         id="path22" />
+      <text
+         font-family="Calibri, Calibri_MSFontService, sans-serif"
+         font-weight="400"
+         font-size="24px"
+         transform="translate(968.833,198)"
+         id="text22">V</text>
+      <path
+         d="m 819.5,190.5 c 0,-10.493 8.507,-19 19,-19 10.493,0 19,8.507 19,19 0,10.493 -8.507,19 -19,19 -10.493,0 -19,-8.507 -19,-19 z"
+         stroke="#000000"
+         stroke-width="1.33333"
+         stroke-miterlimit="8"
+         fill="#ffffff"
+         fill-rule="evenodd"
+         id="path23" />
+      <text
+         font-family="Calibri, Calibri_MSFontService, sans-serif"
+         font-weight="400"
+         font-size="24px"
+         transform="translate(831.483,198)"
+         id="text23">A</text>
+      <rect
+         x="858.5"
+         y="106.5"
+         width="142"
+         height="36"
+         stroke="#000000"
+         stroke-width="1.33333"
+         stroke-miterlimit="8"
+         fill="#ffffff"
+         id="rect23" />
+      <text
+         font-family="Calibri, Calibri_MSFontService, sans-serif"
+         font-weight="400"
+         font-size="21px"
+         transform="translate(876.277,131)"
+         id="text24">Potentiostat</text>
+      <rect
+         x="965"
+         y="288"
+         width="21"
+         height="203"
+         fill="url(#fill1)"
+         id="rect24"
+         style="fill:url(#fill1)" />
+      <rect
+         x="923.5"
+         y="288.5"
+         width="15"
+         height="203"
+         stroke="#7f7f7f"
+         stroke-width="1.33333"
+         stroke-miterlimit="8"
+         fill="none"
+         id="rect25" />
+      <rect
+         x="928"
+         y="277"
+         width="4"
+         height="192"
+         fill="url(#fill2)"
+         id="rect26"
+         style="fill:url(#fill2)" />
+      <rect
+         x="923"
+         y="344"
+         width="15"
+         height="146"
+         fill="#8bbcd5"
+         fill-opacity="0.580392"
+         id="rect27" />
+      <rect
+         x="883"
+         y="288"
+         width="4"
+         height="203"
+         fill="url(#fill3)"
+         id="rect28"
+         style="fill:url(#fill3)" />
+      <rect
+         x="971"
+         y="280"
+         width="8"
+         height="211"
+         fill="url(#fill4)"
+         id="rect29"
+         style="fill:url(#fill4)" />
+      <rect
+         x="851.5"
+         y="305.5"
+         width="158"
+         height="27"
+         stroke="#7f7f7f"
+         stroke-width="1.33333"
+         stroke-miterlimit="8"
+         fill="url(#fill5)"
+         id="rect30"
+         style="fill:url(#fill5)" />
+      <rect
+         x="923"
+         y="477"
+         width="15"
+         height="15"
+         fill="url(#pattern7)"
+         id="rect31" />
+      <path
+         d="M 780,531 H 882.533"
+         stroke="#8bbcd5"
+         stroke-width="2"
+         stroke-linecap="square"
+         stroke-miterlimit="8"
+         stroke-dasharray="6, 2"
+         fill="none"
+         fill-rule="evenodd"
+         id="path31" />
+      <path
+         d="M 771,469 H 882.933"
+         stroke="#8bbcd5"
+         stroke-width="2"
+         stroke-linecap="square"
+         stroke-miterlimit="8"
+         stroke-dasharray="6, 2"
+         fill="none"
+         fill-rule="evenodd"
+         id="path32" />
+      <path
+         d="M 780,395 H 919"
+         stroke="#8bbcd5"
+         stroke-width="2"
+         stroke-linecap="square"
+         stroke-miterlimit="8"
+         stroke-dasharray="6, 2"
+         fill="none"
+         fill-rule="evenodd"
+         id="path33" />
+      <path
+         d="m 1134,427 v 85 H 975 v -18.889"
+         stroke="#8bbcd5"
+         stroke-width="2"
+         stroke-linecap="square"
+         stroke-miterlimit="8"
+         stroke-dasharray="6, 2"
+         fill="none"
+         fill-rule="evenodd"
+         id="path34" />
+      <text
+         font-family="Calibri, Calibri_MSFontService, sans-serif"
+         font-weight="400"
+         font-size="24px"
+         transform="translate(1089.6,388)"
+         id="text34">Working</text>
+      <text
+         font-family="Calibri, Calibri_MSFontService, sans-serif"
+         font-weight="400"
+         font-size="24px"
+         transform="translate(1089.6,417)"
+         id="text35">electrode</text>
+      <text
+         font-family="Calibri, Calibri_MSFontService, sans-serif"
+         font-weight="400"
+         font-size="24px"
+         transform="translate(670.275,388)"
+         id="text36">Reference</text>
+      <text
+         font-family="Calibri, Calibri_MSFontService, sans-serif"
+         font-weight="400"
+         font-size="24px"
+         transform="translate(670.275,417)"
+         id="text37">electrode</text>
+      <text
+         font-family="Calibri, Calibri_MSFontService, sans-serif"
+         font-weight="400"
+         font-size="24px"
+         transform="translate(668.9,464)"
+         id="text38">Counter</text>
+      <text
+         font-family="Calibri, Calibri_MSFontService, sans-serif"
+         font-weight="400"
+         font-size="24px"
+         transform="translate(668.9,493)"
+         id="text39">electrode</text>
+      <text
+         font-family="Calibri, Calibri_MSFontService, sans-serif"
+         font-weight="400"
+         font-size="24px"
+         transform="translate(665.167,537)"
+         id="text40">Electrolyte</text>
+      <g
+         transform="translate(845.6945,-2.6588313)"
+         id="g111">
+        <path
+           d="m 619.783,280.8 v -24 H 542 V 128 H 797 V 256.8 H 716.811 V 288"
+           stroke="#000000"
+           stroke-width="2"
+           stroke-miterlimit="8"
+           fill="none"
+           fill-rule="evenodd"
+           id="path92" />
+        <path
+           d="M 670,287 V 218 H 543"
+           stroke="#000000"
+           stroke-width="2"
+           stroke-miterlimit="8"
+           fill="none"
+           fill-rule="evenodd"
+           id="path93" />
+        <rect
+           x="591"
+           y="353"
+           width="158"
+           height="184"
+           fill="url(#fill0)"
+           id="rect93"
+           style="fill:url(#fill0-7)" />
+        <rect
+           x="591.5"
+           y="304.5"
+           width="158"
+           height="233"
+           stroke="#404040"
+           stroke-width="1.33333"
+           stroke-miterlimit="8"
+           fill="none"
+           id="rect94" />
+        <path
+           d="m 599.5,217.5 c 0,-10.493 8.507,-19 19,-19 10.493,0 19,8.507 19,19 0,10.493 -8.507,19 -19,19 -10.493,0 -19,-8.507 -19,-19 z"
+           stroke="#000000"
+           stroke-width="1.33333"
+           stroke-miterlimit="8"
+           fill="#ffffff"
+           fill-rule="evenodd"
+           id="path94" />
+        <text
+           font-family="Calibri, Calibri_MSFontService, sans-serif"
+           font-weight="400"
+           font-size="24px"
+           transform="translate(611.033,225)"
+           id="text94">V</text>
+        <path
+           d="m 777.5,217.5 c 0,-10.493 8.507,-19 19,-19 10.493,0 19,8.507 19,19 0,10.493 -8.507,19 -19,19 -10.493,0 -19,-8.507 -19,-19 z"
+           stroke="#000000"
+           stroke-width="1.33333"
+           stroke-miterlimit="8"
+           fill="#ffffff"
+           fill-rule="evenodd"
+           id="path95" />
+        <text
+           font-family="Calibri, Calibri_MSFontService, sans-serif"
+           font-weight="400"
+           font-size="24px"
+           transform="translate(789.246,225)"
+           id="text95">A</text>
+        <rect
+           x="607.5"
+           y="107.5"
+           width="142"
+           height="37"
+           stroke="#000000"
+           stroke-width="1.33333"
+           stroke-miterlimit="8"
+           fill="#ffffff"
+           id="rect95" />
+        <text
+           font-family="Calibri, Calibri_MSFontService, sans-serif"
+           font-weight="400"
+           font-size="21px"
+           transform="translate(624.793,133)"
+           id="text96">Potentiostat</text>
+        <rect
+           x="709"
+           y="281"
+           width="15"
+           height="211"
+           fill="url(#fill1)"
+           id="rect96"
+           style="fill:url(#fill1-2)" />
+        <rect
+           x="613.5"
+           y="289.5"
+           width="15"
+           height="203"
+           stroke="#7f7f7f"
+           stroke-width="1.33333"
+           stroke-miterlimit="8"
+           fill="none"
+           id="rect97" />
+        <rect
+           x="618"
+           y="278"
+           width="5"
+           height="191"
+           fill="url(#fill2)"
+           id="rect98"
+           style="fill:url(#fill2-7)" />
+        <rect
+           x="613"
+           y="345"
+           width="15"
+           height="146"
+           fill="#8bbcd5"
+           fill-opacity="0.580392"
+           id="rect99" />
+        <rect
+           x="613"
+           y="478"
+           width="15"
+           height="14"
+           fill="url(#pattern4)"
+           id="rect100" />
+        <path
+           d="M 518,520 H 620.533"
+           stroke="#8bbcd5"
+           stroke-width="2"
+           stroke-linecap="square"
+           stroke-miterlimit="8"
+           stroke-dasharray="6, 2"
+           fill="none"
+           fill-rule="evenodd"
+           id="path100" />
+        <path
+           d="m 724,343 h 92.525"
+           stroke="#8bbcd5"
+           stroke-width="2"
+           stroke-linecap="square"
+           stroke-miterlimit="8"
+           stroke-dasharray="6, 2"
+           fill="none"
+           fill-rule="evenodd"
+           id="path101" />
+        <path
+           d="m 520,370 h 92.817"
+           stroke="#8bbcd5"
+           stroke-width="2"
+           stroke-linecap="square"
+           stroke-miterlimit="8"
+           stroke-dasharray="6, 2"
+           fill="none"
+           fill-rule="evenodd"
+           id="path102" />
+        <path
+           d="m 874,445 v 64 H 668 v -14.222"
+           stroke="#8bbcd5"
+           stroke-width="2"
+           stroke-linecap="square"
+           stroke-miterlimit="8"
+           stroke-dasharray="6, 2"
+           fill="none"
+           fill-rule="evenodd"
+           id="path103" />
+        <text
+           font-family="Calibri, Calibri_MSFontService, sans-serif"
+           font-weight="400"
+           font-size="24px"
+           transform="translate(832.162,410)"
+           id="text103">Working</text>
+        <text
+           font-family="Calibri, Calibri_MSFontService, sans-serif"
+           font-weight="400"
+           font-size="24px"
+           transform="translate(832.162,439)"
+           id="text104">electrode</text>
+        <text
+           font-family="Calibri, Calibri_MSFontService, sans-serif"
+           font-weight="400"
+           font-size="24px"
+           transform="translate(410.275,363)"
+           id="text105">Reference</text>
+        <text
+           font-family="Calibri, Calibri_MSFontService, sans-serif"
+           font-weight="400"
+           font-size="24px"
+           transform="translate(410.275,392)"
+           id="text106">electrode</text>
+        <text
+           font-family="Calibri, Calibri_MSFontService, sans-serif"
+           font-weight="400"
+           font-size="24px"
+           transform="translate(832.162,324)"
+           id="text107">Counter</text>
+        <text
+           font-family="Calibri, Calibri_MSFontService, sans-serif"
+           font-weight="400"
+           font-size="24px"
+           transform="translate(832.162,353)"
+           id="text108">electrode</text>
+        <text
+           font-family="Calibri, Calibri_MSFontService, sans-serif"
+           font-weight="400"
+           font-size="24px"
+           transform="translate(403.547,526)"
+           id="text109">Electrolyte</text>
+        <rect
+           x="651"
+           y="425"
+           width="40"
+           height="68"
+           fill="url(#fill5)"
+           id="rect109"
+           style="fill:url(#fill5-6)" />
+        <rect
+           x="663"
+           y="281"
+           width="12"
+           height="163"
+           fill="url(#fill6)"
+           id="rect110"
+           style="fill:url(#fill6)" />
+        <rect
+           x="591.5"
+           y="304.5"
+           width="158"
+           height="27"
+           stroke="#7f7f7f"
+           stroke-width="1.33333"
+           stroke-miterlimit="8"
+           fill="url(#fill7)"
+           id="rect111"
+           style="fill:url(#fill7)" />
+      </g>
+    </g>
+  </g>
+</svg>

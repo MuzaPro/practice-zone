@@ -13,14 +13,14 @@ header {
     text-align: center; /* Centers the content inside the header */
     margin-bottom: 30px; /* Adds space below the header */
     padding: 10px; /* Adds space inside the header */
-    background-color: #005792; /* Blue background for header */
+    background-color: #042338; /* Blue background for header */
     color: white; /* White text color */
     border-radius: 5px; /* Rounds the corners of the header */
 }
 
 /* SECTION STYLES */
 section {
-    background-color: white; /* White background for content sections */
+    background-color: rgb(3, 50, 58); /* White background for content sections */
     padding: 20px; /* Adds space inside sections */
     margin-bottom: 20px; /* Adds space between sections */
     border-radius: 5px; /* Rounds corners of sections */
@@ -29,11 +29,11 @@ section {
 
 /* HEADING STYLES */
 h1, h2 {
-    color: #005792; /* Blue color for headings */
+    color: #ffffff; /* Blue color for headings */
 }
 
 h1 {
-    font-size: 28px; /* Sets size of main heading */
+    font-size: 2rem; /* Sets size of main heading */
 }
 
 h2 {

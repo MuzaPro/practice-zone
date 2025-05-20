@@ -1,0 +1,438 @@
+/* Font Awesome Demo Styles */
+
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --dark-color: #2c3e50;
+    --light-color: #ecf0f1;
+    --danger-color: #e74c3c;
+    --warning-color: #f39c12;
+    --text-color: #333333;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: #f5f7fa;
+    padding-bottom: 2rem;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+    text-align: center;
+    box-shadow: var(--box-shadow);
+}
+
+header h1 {
+    margin-bottom: 0.5rem;
+    font-size: 2.5rem;
+}
+
+header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+footer {
+    background-color: var(--dark-color);
+    color: white;
+    text-align: center;
+    padding: 1.5rem 0;
+    margin-top: 3rem;
+}
+
+footer a {
+    color: var(--light-color);
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+.social-icons {
+    margin-top: 1rem;
+}
+
+.social-icons a {
+    display: inline-block;
+    margin: 0 0.5rem;
+    font-size: 1.5rem;
+    transition: var(--transition);
+}
+
+.social-icons a:hover {
+    transform: translateY(-3px);
+    color: var(--primary-color);
+}
+
+.card {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.card h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--light-color);
+    padding-bottom: 0.5rem;
+}
+
+.card p {
+    margin-bottom: 1.5rem;
+}
+
+/* Icon Grid */
+.icon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1.5rem;
+    text-align: center;
+}
+
+.icon-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.icon-item:hover {
+    background-color: var(--light-color);
+}
+
+.icon-item i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+    transition: var(--transition);
+}
+
+.icon-item code {
+    font-size: 0.8rem;
+    color: var(--dark-color);
+    background-color: rgba(236, 240, 241, 0.6);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+}
+
+/* Icon Sizes */
+.icon-sizes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-sizes > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.icon-sizes code {
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--dark-color);
+    background-color: rgba(236, 240, 241, 0.6);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+}
+
+/* Icon Colors */
+.icon-colors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    text-align: center;
+}
+
+.icon-colors > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.icon-colors > div:hover {
+    transform: scale(1.1);
+}
+
+.gradient-icon i {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Animation */
+.icon-animations {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    justify-content: center;
+    text-align: center;
+}
+
+.icon-animations > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.icon-animations code {
+    font-size: 0.8rem;
+    color: var(--dark-color);
+    background-color: rgba(236, 240, 241, 0.6);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+}
+
+/* Transforms */
+.icon-transforms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    text-align: center;
+}
+
+.icon-transforms > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.icon-transforms i {
+    color: var(--primary-color);
+}
+
+.icon-transforms code {
+    font-size: 0.8rem;
+    color: var(--dark-color);
+    background-color: rgba(236, 240, 241, 0.6);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+}
+
+/* Stacking */
+.icon-stacking {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    justify-content: center;
+    text-align: center;
+}
+
+.icon-stacking > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.icon-stacking > div:hover {
+    transform: scale(1.1);
+}
+
+.icon-stacking .fa-stack {
+    color: var(--primary-color);
+}
+
+.icon-stacking code {
+    font-size: 0.8rem;
+    color: var(--dark-color);
+    background-color: rgba(236, 240, 241, 0.6);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+}
+
+/* Brand Icons */
+.icon-brands {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    text-align: center;
+}
+
+.icon-brands > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.icon-brands > div:hover {
+    transform: translateY(-5px);
+}
+
+.icon-brands > div:nth-child(1) i { color: #3b5998; }
+.icon-brands > div:nth-child(2) i { color: #1da1f2; }
+.icon-brands > div:nth-child(3) i { color: #e1306c; }
+.icon-brands > div:nth-child(4) i { color: #ff0000; }
+.icon-brands > div:nth-child(5) i { color: #333333; }
+.icon-brands > div:nth-child(6) i { color: #ff9900; }
+.icon-brands > div:nth-child(7) i { color: #a6b1b7; }
+.icon-brands > div:nth-child(8) i { color: #a4c639; }
+
+.icon-brands code {
+    font-size: 0.8rem;
+    color: var(--dark-color);
+    background-color: rgba(236, 240, 241, 0.6);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+}
+
+/* Power Transforms */
+.power-transforms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    justify-content: center;
+    text-align: center;
+}
+
+.power-transforms > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.power-transforms i {
+    color: var(--primary-color);
+}
+
+.power-transforms code {
+    font-size: 0.8rem;
+    color: var(--dark-color);
+    background-color: rgba(236, 240, 241, 0.6);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+}
+
+/* List Icons */
+.list-icons {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.fa-ul {
+    margin-left: 1.5em;
+}
+
+.fa-li {
+    color: var(--primary-color);
+}
+
+/* Code Block */
+.code-block {
+    background-color: var(--dark-color);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    overflow-x: auto;
+}
+
+.code-block pre {
+    margin: 0;
+}
+
+.code-block code {
+    font-family: 'Courier New', monospace;
+    color: #ecf0f1;
+    line-height: 1.6;
+}
+
+/* Animation Classes */
+.icon-pop {
+    animation: icon-pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes icon-pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .icon-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 1rem;
+    }
+    
+    .icon-sizes, 
+    .icon-colors, 
+    .icon-animations, 
+    .icon-transforms, 
+    .icon-stacking,
+    .icon-brands,
+    .power-transforms {
+        gap: 1.5rem;
+    }
+    
+    .card {
+        padding: 1.5rem;
+    }
+    
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    header p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .icon-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .icon-item i {
+        font-size: 1.5rem;
+    }
+    
+    .card h2 {
+        font-size: 1.5rem;
+    }
+    
+    .container {
+        width: 95%;
+    }
+}

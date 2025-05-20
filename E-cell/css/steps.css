@@ -1,0 +1,116 @@
+/* Basic page setup */
+body {
+    background-color: #b8d1e5; /* Light blue background */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+/* ---------- LEARNING ABOUT LAYOUTS ---------- */
+/* In CSS, there are several ways to position elements side by side: */
+
+/* 1. FLEXBOX (modern, recommended approach) */
+/* Flexbox is designed specifically for creating layouts in one dimension 
+   (either rows OR columns). It's perfect for our card layout. */
+
+.container {
+    /* This is the key line that enables flexbox layout: */
+    display: flex; 
+    
+    /* By default, flex items are displayed in a row (side by side).
+       Other options include:
+       - flex-direction: column; (stacks vertically)
+       - flex-direction: row-reverse; (side by side, right to left)
+       - flex-direction: column-reverse; (stacked bottom to top) */
+    
+    /* This controls spacing between flex items: */
+    gap: 20px; /* Modern way to add space between items */
+    
+    /* These control how items are aligned within the container: */
+    justify-content: center; /* Centers items horizontally */
+    /* Other justify-content options:
+       - flex-start (aligns to left)
+       - flex-end (aligns to right)
+       - space-between (maximizes space between items)
+       - space-around (equal space around items) */
+    
+    /* This limits how wide our container gets on large screens: */
+    max-width: 1200px;
+    
+    /* Centers the container itself on the page: */
+    margin: 0 auto;
+}
+
+/* 2. CSS GRID (for more complex layouts) */
+/* Uncomment this to see how the same layout works with Grid:
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+*/
+
+/* 3. FLOAT (older method) */
+/* Uncomment this to see float-based layout:
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: hidden; /* Needed to contain floated elements */
+}
+.card {
+    float: left; /* Makes elements float side by side */
+    width: calc(50% - 10px); /* 50% width minus half the gap */
+}
+.card:first-child {
+    margin-right: 20px; /* Creates space between cards */
+}
+*/
+
+/* ---------- CARD STYLING ---------- */
+.card {
+    background-color: white;
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    padding: 30px;
+    
+    /* With flexbox, items will naturally share the available width.
+       We can control their width like this: */
+    flex: 1; /* This makes each card take up equal space */
+    
+    /* Or set specific widths: */
+    /* width: 48%; */ /* Making each slightly less than 50% to account for gap */
+    
+    /* Minimum width prevents cards from getting too narrow: */
+    min-width: 300px;
+}
+
+/* Styling for elements inside cards */
+h2 {
+    margin-top: 0;
+    font-size: 24px;
+}
+
+ul {
+    padding-left: 20px;
+    line-height: 1.6;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ---------- RESPONSIVE DESIGN ---------- */
+/* This makes our layout stack vertically on small screens */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Changes direction to vertical */
+    }
+    
+    .card {
+        width: 100%; /* Full width on small screens */
+    }
+}
