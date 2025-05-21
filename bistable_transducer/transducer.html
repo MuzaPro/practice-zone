@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Electrochemical Configurations</title>
+    <title>Transducer Introduction</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
     <!-- Inknut Antiqua Font and Assistant Font -->
@@ -211,86 +211,26 @@
                 <!-- Text Content -->
                 <div class="text-column mb-6 md:mb-0">
                     <div class="title-container">
-                        <i class="fas fa-flask title-icon"></i>
-                        <h2 class="inknut-antiqua text-2xl">3 Electrode Configuration</h2>
+                        <i class="fas fa-hand-sparkles title-icon"></i>
+                        <h2 class="inknut-antiqua text-2xl">Haptic Transducer Unit</h2>
                     </div>
                     <hr class="title-divider">
                     <p class="text-sm">
-                        This setup has become the gold standard for accurate electrochemical measurements. 
-                        This arrangement allows precise control of the potential at the working electrode 
-                        while accurately measuring the resulting current. The separation of potential control 
-                        and current measurement functions is what makes this system so powerful for investigating 
-                        catalytic processes, reaction mechanisms, and material properties.
+                        Here we will have some text about the transducer unit. The transducer unit is a marvel of engineering, designed to stimulate sensory feedback while using a miniscule amount of power and only using electricity when switching between states - similarly to how e-ink only uses electricity when refreshing the screen.
                     </p>
+                    <button> 
+                      Explore Design 
+                    </button>
+                    <button> Explore functionality </button>
                 </div>
                 <!-- Image Content -->
                 <div class="image-column">
                     <div class="image-container">
-                        <img src="../../assets/3d_cell_3-electrode_fto.png" alt="3 Electrode Configuration">
+                        <img src="../../assets/bistable_transducer/Transducer-on-hand.webp" alt="3 Electrode Configuration">
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Section 2: Electrode Introduction -->
-        <div class="content-section">
-            <div class="section-container">
-                <!-- Text Content -->
-                <div class="text-column mb-6 md:mb-0">
-                    <div class="title-container">
-                        <i class="fas fa-bolt title-icon"></i>
-                        <h2 class="inknut-antiqua text-2xl">Electrode Introduction</h2>
-                    </div>
-                    <hr class="title-divider">
-                    <div class="electrode-info">
-                        <span class="electrode-name">The working electrode (WE)</span> 
-                        <p class="text-sm mt-1">is where the electrochemical event of interest occurs.</p>
-                    </div>
-                    
-                    <div class="electrode-info">
-                        <span class="electrode-name">The reference electrode (RE)</span> 
-                        <p class="text-sm mt-1">has a well-defined and stable equilibrium potential. It functions as a reference point against which the potential of the working electrode is measured, without passing any significant current itself.</p>
-                    </div>
-                    
-                    <div class="electrode-info">
-                        <span class="electrode-name">The counter electrode (CE)</span> 
-                        <p class="text-sm mt-1">completes the electrical circuit, allowing current to flow. When reduction occurs at the working electrode, oxidation happens at the counter electrode (and vice versa).</p>
-                    </div>
-                </div>
-                <!-- Image Content -->
-                <div class="image-column">
-                    <div class="image-container">
-                        <img src="../../assets/2D_cell_FTO.svg" alt="Electrode Configuration Diagram">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Section 3: Dynamic Example -->
-        <div class="content-section">
-            <div class="section-container">
-                <!-- Text Content -->
-                <div class="text-column mb-6 md:mb-0">
-                    <div class="title-container">
-                        <i class="fas fa-atom title-icon"></i>
-                        <h2 class="inknut-antiqua text-2xl">Dynamic Section Example</h2>
-                    </div>
-                    <hr class="title-divider">
-                    <p class="text-sm">
-                        This section was created dynamically using JavaScript. You can add as many sections 
-                        as needed by adding objects to the sectionData array. Each section maintains the same 
-                        consistent styling and responsive behavior.
-                    </p>
-                </div>
-                <!-- Image Content -->
-                <div class="image-column">
-                    <div class="image-container">
-                        <img src="/api/placeholder/600/400" alt="Dynamic Section Example">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <script>
         // Dark mode toggle functionality
@@ -320,48 +260,7 @@
             }
         });
         
-        // JavaScript for adding more sections dynamically
-        const sectionData = [
-            {
-                title: "Additional Dynamic Section",
-                icon: "fa-microscope",
-                description: "This additional section shows how you can extend your page with more content using the same template. The consistent design ensures a professional appearance throughout the page.",
-                imageSrc: "/api/placeholder/600/400",
-                imageAlt: "Additional Section"
-            }
-        ];
-
-        function createSections(data) {
-            const container = document.querySelector('.page-container');
-            
-            data.forEach(section => {
-                const sectionEl = document.createElement('div');
-                sectionEl.className = 'content-section';
-                
-                sectionEl.innerHTML = `
-                    <div class="section-container">
-                        <div class="text-column mb-6 md:mb-0">
-                            <div class="title-container">
-                                <i class="fas ${section.icon || 'fa-flask'} title-icon"></i>
-                                <h2 class="inknut-antiqua text-2xl">${section.title}</h2>
-                            </div>
-                            <hr class="title-divider">
-                            <p class="text-sm">${section.description}</p>
-                        </div>
-                        <div class="image-column">
-                            <div class="image-container">
-                                <img src="${section.imageSrc}" alt="${section.imageAlt}">
-                            </div>
-                        </div>
-                    </div>
-                `;
-                
-                container.appendChild(sectionEl);
-            });
-        }
-
-        // Create the dynamic sections
-        createSections(sectionData);
+      
     </script>
 </body>
 </html>

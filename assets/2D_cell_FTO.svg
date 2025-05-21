@@ -24,9 +24,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     inkscape:zoom="1.0469406"
-     inkscape:cx="406.42228"
-     inkscape:cy="478.05958"
+     inkscape:zoom="0.52347032"
+     inkscape:cx="52.53402"
+     inkscape:cy="717.32816"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="1912"
@@ -35,6 +35,11 @@
      inkscape:current-layer="g111" />
   <defs
      id="defs1">
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#pattern4"
+       id="pattern2"
+       patternTransform="matrix(0.12131086,0,0,0.12131086,611.74122,461.94904)" />
     <radialGradient
        cx="1504950"
        cy="1752600"
@@ -42,7 +47,7 @@
        gradientUnits="userSpaceOnUse"
        spreadMethod="pad"
        id="fill0-7"
-       gradientTransform="matrix(1.04987e-4,0,0,1.04987e-4,591,353)">
+       gradientTransform="matrix(1.0188851e-4,0,0,1.0188851e-4,595.24294,346.46111)">
       <stop
          offset="0"
          stop-color="#DCE9F5"
@@ -63,7 +68,8 @@
        y2="390.96399"
        gradientUnits="userSpaceOnUse"
        spreadMethod="reflect"
-       id="fill1-2">
+       id="fill1-2"
+       gradientTransform="matrix(0.97048687,0,0,0.97048687,21.685205,3.879237)">
       <stop
          offset="0"
          stop-color="#7A7A7A"
@@ -84,7 +90,8 @@
        y2="373.36899"
        gradientUnits="userSpaceOnUse"
        spreadMethod="reflect"
-       id="fill2-7">
+       id="fill2-7"
+       gradientTransform="matrix(0.97048687,0,0,0.97048687,21.685205,3.879237)">
       <stop
          offset="0"
          stop-color="#7F7F7F"
@@ -121,7 +128,8 @@
        y2="493.16"
        gradientUnits="userSpaceOnUse"
        spreadMethod="reflect"
-       id="fill5-6">
+       id="fill5-6"
+       gradientTransform="matrix(0.97048687,0,0,0.97048687,21.685205,3.879237)">
       <stop
          offset="0"
          stop-color="#ADB9CA"
@@ -146,7 +154,8 @@
        y2="365.98401"
        gradientUnits="userSpaceOnUse"
        spreadMethod="reflect"
-       id="fill6">
+       id="fill6"
+       gradientTransform="matrix(0.97048687,0,0,0.97048687,21.685205,3.879237)">
       <stop
          offset="0"
          stop-color="#A6A6A6"
@@ -459,7 +468,8 @@
        y2="291.397"
        gradientUnits="userSpaceOnUse"
        spreadMethod="reflect"
-       id="fill7">
+       id="fill7"
+       gradientTransform="matrix(0.97048687,0,0,0.97048687,21.685205,3.879237)">
       <stop
          offset="0"
          stop-color="#99A8BD"
@@ -482,43 +492,43 @@
        transform="matrix(0.36285409,0,0,0.36285409,-145.72934,-24.115708)"
        id="g111">
       <path
-         d="m 619.783,280.8 v -24 H 542 V 128 H 797 V 256.8 H 716.811 V 288"
+         d="M 623.17647,276.39195 V 253.10027 H 547.68908 V 128.10156 h 247.47416 v 124.99871 h -77.82237 v 30.27919"
          stroke="#000000"
-         stroke-width="2"
+         stroke-width="1.94097"
          stroke-miterlimit="8"
          fill="none"
          fill-rule="evenodd"
          id="path92" />
       <path
-         d="M 670,287 V 218 H 543"
+         d="M 671.9114,282.40897 V 215.44538 H 548.65957"
          stroke="#000000"
-         stroke-width="2"
+         stroke-width="1.94097"
          stroke-miterlimit="8"
          fill="none"
          fill-rule="evenodd"
          id="path93" />
       <rect
-         x="591"
-         y="353"
-         width="158"
-         height="184"
+         x="595.24298"
+         y="346.46112"
+         width="153.33693"
+         height="178.56958"
          fill="url(#fill0)"
          id="rect93"
-         style="fill:url(#fill0-7)" />
+         style="fill:url(#fill0-7);stroke-width:0.970487" />
       <rect
-         x="591.5"
-         y="304.5"
-         width="158"
-         height="233"
+         x="595.72821"
+         y="299.39249"
+         width="153.33693"
+         height="226.12344"
          stroke="#404040"
-         stroke-width="1.33333"
+         stroke-width="1.29398"
          stroke-miterlimit="8"
          fill="none"
          id="rect94" />
       <path
-         d="m 599.5,217.5 c 0,-10.493 8.507,-19 19,-19 10.493,0 19,8.507 19,19 0,10.493 -8.507,19 -19,19 -10.493,0 -19,-8.507 -19,-19 z"
+         d="m 603.49208,214.96013 c 0,-10.18331 8.25593,-18.43925 18.43925,-18.43925 10.18332,0 18.43925,8.25594 18.43925,18.43925 0,10.18332 -8.25593,18.43926 -18.43925,18.43926 -10.18332,0 -18.43925,-8.25594 -18.43925,-18.43926 z"
          stroke="#000000"
-         stroke-width="1.33333"
+         stroke-width="1.29398"
          stroke-miterlimit="8"
          fill="#ffffff"
          fill-rule="evenodd"
@@ -526,13 +536,15 @@
       <text
          font-family="Calibri, Calibri_MSFontService, sans-serif"
          font-weight="400"
-         font-size="24px"
-         transform="translate(611.033,225)"
-         id="text94">V</text>
+         font-size="23.2917px"
+         id="text94"
+         x="614.68475"
+         y="222.23878"
+         style="stroke-width:0.970487">V</text>
       <path
-         d="m 777.5,217.5 c 0,-10.493 8.507,-19 19,-19 10.493,0 19,8.507 19,19 0,10.493 -8.507,19 -19,19 -10.493,0 -19,-8.507 -19,-19 z"
+         d="m 776.23874,214.96013 c 0,-10.18331 8.25594,-18.43925 18.43925,-18.43925 10.18332,0 18.43925,8.25594 18.43925,18.43925 0,10.18332 -8.25593,18.43926 -18.43925,18.43926 -10.18331,0 -18.43925,-8.25594 -18.43925,-18.43926 z"
          stroke="#000000"
-         stroke-width="1.33333"
+         stroke-width="1.29398"
          stroke-miterlimit="8"
          fill="#ffffff"
          fill-rule="evenodd"
@@ -540,101 +552,107 @@
       <text
          font-family="Calibri, Calibri_MSFontService, sans-serif"
          font-weight="400"
-         font-size="24px"
-         transform="translate(789.246,225)"
-         id="text95">A</text>
+         font-size="23.2917px"
+         id="text95"
+         x="787.63812"
+         y="222.23878"
+         style="stroke-width:0.970487">A</text>
       <rect
-         x="607.5"
-         y="107.5"
-         width="142"
-         height="37"
+         x="611.25598"
+         y="108.20657"
+         width="137.80914"
+         height="35.908016"
          stroke="#000000"
-         stroke-width="1.33333"
+         stroke-width="1.29398"
          stroke-miterlimit="8"
          fill="#ffffff"
          id="rect95" />
       <text
          font-family="Calibri, Calibri_MSFontService, sans-serif"
          font-weight="400"
-         font-size="21px"
-         transform="translate(624.793,133)"
-         id="text96">Potentiostat</text>
+         font-size="20.3802px"
+         id="text96"
+         x="628.03864"
+         y="132.95399"
+         style="stroke-width:0.970487">Potentiostat</text>
       <rect
-         x="709"
-         y="281"
-         width="15"
-         height="211"
+         x="709.76044"
+         y="276.58606"
+         width="14.557303"
+         height="204.77274"
          fill="url(#fill1)"
          id="rect96"
-         style="fill:url(#fill1-2)" />
+         style="fill:url(#fill1-2);stroke-width:0.970487" />
       <rect
-         x="613.5"
-         y="289.5"
-         width="15"
-         height="203"
+         x="617.07892"
+         y="284.83521"
+         width="14.557303"
+         height="197.00883"
          stroke="#7f7f7f"
-         stroke-width="1.33333"
+         stroke-width="1.29398"
          stroke-miterlimit="8"
          fill="none"
          id="rect97" />
       <rect
-         x="618"
-         y="278"
-         width="5"
-         height="191"
+         x="621.44611"
+         y="273.67459"
+         width="4.8524342"
+         height="185.36299"
          fill="url(#fill2)"
          id="rect98"
-         style="fill:url(#fill2-7)" />
+         style="fill:url(#fill2-7);stroke-width:0.970487" />
       <rect
-         x="613"
-         y="345"
-         width="15"
-         height="146"
+         x="616.59369"
+         y="338.69724"
+         width="14.557303"
+         height="141.69109"
          fill="#8bbcd5"
          fill-opacity="0.580392"
-         id="rect99" />
+         id="rect99"
+         style="stroke-width:0.970487" />
       <rect
-         x="613"
-         y="478"
-         width="15"
-         height="14"
+         x="616.59369"
+         y="467.77197"
+         width="14.557303"
+         height="13.586816"
          fill="url(#pattern4)"
-         id="rect100" />
+         id="rect100"
+         style="fill:url(#pattern2);stroke-width:0.970487" />
       <path
-         d="M 518,520 H 620.533"
+         d="m 524.3974,508.53241 h 99.50693"
          stroke="#8bbcd5"
-         stroke-width="2"
+         stroke-width="1.94097"
          stroke-linecap="square"
          stroke-miterlimit="8"
          stroke-dasharray="6, 2"
          fill="none"
          fill-rule="evenodd"
          id="path100"
-         style="stroke-dasharray:12,12;stroke-dashoffset:0.60000002" />
+         style="stroke-dasharray:11.6458, 11.6458;stroke-dashoffset:0.582292" />
       <path
-         d="m 724,343 h 92.525"
+         d="m 724.3177,336.75624 h 89.79429"
          stroke="#8bbcd5"
-         stroke-width="2"
+         stroke-width="1.94097"
          stroke-linecap="square"
          stroke-miterlimit="8"
          stroke-dasharray="6, 2"
          fill="none"
          fill-rule="evenodd"
          id="path101"
-         style="stroke-dasharray:12,12;stroke-dashoffset:0.60000002" />
+         style="stroke-dasharray:11.6458, 11.6458;stroke-dashoffset:0.582292" />
       <path
-         d="m 520,370 h 92.817"
+         d="m 526.33837,362.95938 h 90.07768"
          stroke="#8bbcd5"
-         stroke-width="2"
+         stroke-width="1.94097"
          stroke-linecap="square"
          stroke-miterlimit="8"
          stroke-dasharray="6, 2"
          fill="none"
          fill-rule="evenodd"
          id="path102"
-         style="stroke-dasharray:12,12;stroke-dashoffset:0.60000002" />
+         style="stroke-dasharray:11.6458, 11.6458;stroke-dashoffset:0.582292" />
       <path
-         d="m 874,445 v 64 H 668 v -14.222"
+         d="m 869.89073,435.7459 v 62.11116 h -199.9203 v -13.80227"
          stroke="#8bbcd5"
          stroke-width="2"
          stroke-linecap="square"
@@ -643,80 +661,96 @@
          fill="none"
          fill-rule="evenodd"
          id="path103"
-         style="stroke-dasharray:12.00482511,12.00482511;stroke-dashoffset:0.40016085;stroke-width:2.00080424" />
+         style="stroke-width:1.94175;stroke-dasharray:11.6505, 11.6505;stroke-dashoffset:0.388351" />
       <text
          font-family="Calibri, Calibri_MSFontService, sans-serif"
          font-weight="400"
-         font-size="24px"
-         transform="translate(832.162,410)"
-         id="text103">Working</text>
+         font-size="23.2917px"
+         id="text103"
+         x="829.28754"
+         y="401.77887"
+         style="stroke-width:0.970487">Working</text>
       <text
          font-family="Calibri, Calibri_MSFontService, sans-serif"
          font-weight="400"
-         font-size="24px"
-         transform="translate(832.162,439)"
-         id="text104">Electrode</text>
+         font-size="23.2917px"
+         id="text104"
+         x="829.28754"
+         y="429.92297"
+         style="stroke-width:0.970487">Electrode</text>
       <text
          font-family="Calibri, Calibri_MSFontService, sans-serif"
          font-weight="400"
-         font-size="24px"
-         transform="translate(410.275,363)"
-         id="text105">Reference</text>
+         font-size="23.2917px"
+         id="text105"
+         x="419.85168"
+         y="356.16599"
+         style="stroke-width:0.970487">Reference</text>
       <text
          font-family="Calibri, Calibri_MSFontService, sans-serif"
          font-weight="400"
-         font-size="24px"
-         transform="translate(410.275,392)"
-         id="text106">Electrode</text>
+         font-size="23.2917px"
+         id="text106"
+         x="419.85168"
+         y="384.31009"
+         style="stroke-width:0.970487">Electrode</text>
       <text
          font-family="Calibri, Calibri_MSFontService, sans-serif"
          font-weight="400"
-         font-size="24px"
-         transform="translate(832.162,324)"
-         id="text107">Counter</text>
+         font-size="23.2917px"
+         id="text107"
+         x="829.28754"
+         y="318.31699"
+         style="stroke-width:0.970487">Counter</text>
       <text
          font-family="Calibri, Calibri_MSFontService, sans-serif"
          font-weight="400"
-         font-size="24px"
-         transform="translate(832.162,353)"
-         id="text108">Electrode</text>
+         font-size="23.2917px"
+         id="text108"
+         x="829.28754"
+         y="346.46112"
+         style="stroke-width:0.970487">Electrode</text>
       <text
          font-family="Calibri, Calibri_MSFontService, sans-serif"
          font-weight="400"
-         font-size="24px"
-         transform="translate(403.547,526)"
-         id="text109"><tspan
+         font-size="23.2917px"
+         id="text109"
+         x="413.32227"
+         y="514.35535"
+         style="stroke-width:0.970487"><tspan
            sodipodi:role="line"
            id="tspan1"
-           x="0"
-           y="0">Electrolyte</tspan><tspan
+           x="413.32227"
+           y="514.35535"
+           style="stroke-width:0.970487">Electrolyte</tspan><tspan
            sodipodi:role="line"
            id="tspan2"
-           x="0"
-           y="30">Solution</tspan></text>
+           x="413.32227"
+           y="543.46997"
+           style="stroke-width:0.970487">Solution</tspan></text>
       <rect
-         x="651"
-         y="425"
-         width="40"
-         height="68"
+         x="653.47217"
+         y="416.33618"
+         width="38.819473"
+         height="65.993111"
          fill="url(#fill5)"
          id="rect109"
-         style="fill:url(#fill5-6)" />
+         style="fill:url(#fill5-6);stroke-width:0.970487" />
       <rect
-         x="663"
-         y="281"
-         width="12"
-         height="163"
+         x="665.11804"
+         y="276.58606"
+         width="11.645843"
+         height="158.18936"
          fill="url(#fill6)"
          id="rect110"
-         style="fill:url(#fill6)" />
+         style="fill:url(#fill6);stroke-width:0.970487" />
       <rect
-         x="591.5"
-         y="304.5"
-         width="158"
-         height="27"
+         x="595.72821"
+         y="299.39249"
+         width="153.33693"
+         height="26.203146"
          stroke="#7f7f7f"
-         stroke-width="1.33333"
+         stroke-width="1.29398"
          stroke-miterlimit="8"
          fill="url(#fill7)"
          id="rect111"
