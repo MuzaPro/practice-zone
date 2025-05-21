@@ -42,7 +42,8 @@ body {
 }
 
 /* 2. CSS GRID (for more complex layouts) */
-/* Uncomment this to see how the same layout works with Grid:
+/* Uncomment this to see how the same layout works with Grid: */
+
 .container {
     display: grid;
     grid-template-columns: 1fr 1fr; /* Two equal columns */
@@ -50,10 +51,11 @@ body {
     max-width: 1200px;
     margin: 0 auto;
 }
-*/
+
 
 /* 3. FLOAT (older method) */
-/* Uncomment this to see float-based layout:
+/* Uncomment this to see float-based layout: */
+/*
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -66,7 +68,7 @@ body {
 .card:first-child {
     margin-right: 20px; /* Creates space between cards */
 }
-*/
+
 
 /* ---------- CARD STYLING ---------- */
 .card {

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electrochemical Configurations</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
+    <!-- Inknut Antiqua Font and Assistant Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@400;500;600&family=Assistant:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #b8d5f0;
+            font-family: 'Assistant', sans-serif;
+            padding: 2rem 1rem;
+        }
+        .inknut-antiqua {
+            font-family: 'Inknut Antiqua', serif;
+        }
+        .page-container {
+            max-width: 900px; /* Narrower max-width to prevent excessive stretching */
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .content-section {
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2.5rem; /* Increased spacing between sections */
+            overflow: hidden;
+        }
+        .section-container {
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+        }
+        @media (min-width: 768px) {
+            .section-container {
+                flex-direction: row;
+                padding: 2.5rem;
+                align-items: center;
+            }
+            .text-column {
+                width: 50%;
+                padding-right: 3rem;
+            }
+            .image-column {
+                width: 50%;
+            }
+        }
+        .image-container {
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem;
+        }
+        .image-container img,
+        .image-container svg {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+        h2 {
+            color: #1e3a5f;
+            margin-bottom: 1.25rem;
+            font-weight: 600;
+            line-height: 1.2; /* Tighter line spacing for titles */
+        }
+        p {
+            line-height: 1.6;
+            color: #333;
+        }
+        .electrode-info {
+            margin-bottom: 0.75rem;
+        }
+        .electrode-name {
+            font-weight: 600;
+            color: #1e3a5f;
+        }
+        /* Add subtle hover effect to sections */
+        .content-section:hover {
+            transform: translateY(-5px);
+            transition: transform 0.3s ease;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <!-- Section 1: 3 Electrode Configuration -->
+        <div class="content-section">
+            <div class="section-container">
+                <!-- Text Content -->
+                <div class="text-column mb-6 md:mb-0">
+                    <h2 class="inknut-antiqua text-2xl">3 Electrode Configuration</h2>
+                    <p class="text-sm">
+                        This setup has become the gold standard for accurate electrochemical measurements. 
+                        This arrangement allows precise control of the potential at the working electrode 
+                        while accurately measuring the resulting current. The separation of potential control 
+                        and current measurement functions is what makes this system so powerful for investigating 
+                        catalytic processes, reaction mechanisms, and material properties.
+                    </p>
+                </div>
+                <!-- Image Content -->
+                <div class="image-column">
+                    <div class="image-container">
+                        <img src="../../assets/3d_cell_3-electrode_fto.png" alt="3 Electrode Configuration">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Electrode Introduction -->
+        <div class="content-section">
+            <div class="section-container">
+                <!-- Text Content -->
+                <div class="text-column mb-6 md:mb-0">
+                    <h2 class="inknut-antiqua text-2xl">Electrode Introduction</h2>
+                    <div class="electrode-info">
+                        <span class="electrode-name">The working electrode (WE)</span> 
+                        <p class="text-sm mt-1">is where the electrochemical event of interest occurs.</p>
+                    </div>
+                    
+                    <div class="electrode-info">
+                        <span class="electrode-name">The reference electrode (RE)</span> 
+                        <p class="text-sm mt-1">has a well-defined and stable equilibrium potential. It functions as a reference point against which the potential of the working electrode is measured, without passing any significant current itself.</p>
+                    </div>
+                    
+                    <div class="electrode-info">
+                        <span class="electrode-name">The counter electrode (CE)</span> 
+                        <p class="text-sm mt-1">completes the electrical circuit, allowing current to flow. When reduction occurs at the working electrode, oxidation happens at the counter electrode (and vice versa).</p>
+                    </div>
+                </div>
+                <!-- Image Content -->
+                <div class="image-column">
+                    <div class="image-container">
+                        <img src="../../assets/2D_cell_FTO.svg" alt="Electrode Configuration Diagram">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Dynamic Example -->
+        <div class="content-section">
+            <div class="section-container">
+                <!-- Text Content -->
+                <div class="text-column mb-6 md:mb-0">
+                    <h2 class="inknut-antiqua text-2xl">Dynamic Section Example</h2>
+                    <p class="text-sm">
+                        This section was created dynamically using JavaScript. You can add as many sections 
+                        as needed by adding objects to the sectionData array. Each section maintains the same 
+                        consistent styling and responsive behavior.
+                    </p>
+                </div>
+                <!-- Image Content -->
+                <div class="image-column">
+                    <div class="image-container">
+                        <img src="/api/placeholder/600/400" alt="Dynamic Section Example">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for adding more sections dynamically
+        const sectionData = [
+            {
+                title: "Additional Dynamic Section",
+                description: "This additional section shows how you can extend your page with more content using the same template. The consistent design ensures a professional appearance throughout the page.",
+                imageSrc: "/api/placeholder/600/400",
+                imageAlt: "Additional Section"
+            }
+        ];
+
+        function createSections(data) {
+            const container = document.querySelector('.page-container');
+            
+            data.forEach(section => {
+                const sectionEl = document.createElement('div');
+                sectionEl.className = 'content-section';
+                
+                sectionEl.innerHTML = `
+                    <div class="section-container">
+                        <div class="text-column mb-6 md:mb-0">
+                            <h2 class="inknut-antiqua text-2xl">${section.title}</h2>
+                            <p class="text-sm">${section.description}</p>
+                        </div>
+                        <div class="image-column">
+                            <div class="image-container">
+                                <img src="${section.imageSrc}" alt="${section.imageAlt}">
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(sectionEl);
+            });
+        }
+
+        // Create the dynamic sections
+        createSections(sectionData);
+    </script>
+</body>
+</html>
