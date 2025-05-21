@@ -24,15 +24,15 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     inkscape:zoom="0.74029882"
-     inkscape:cx="397.13693"
-     inkscape:cy="559.90904"
+     inkscape:zoom="1.0469406"
+     inkscape:cx="406.42228"
+     inkscape:cy="478.05958"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1" />
+     inkscape:current-layer="g111" />
   <defs
      id="defs1">
     <radialGradient
@@ -609,7 +609,8 @@
          stroke-dasharray="6, 2"
          fill="none"
          fill-rule="evenodd"
-         id="path100" />
+         id="path100"
+         style="stroke-dasharray:12,12;stroke-dashoffset:0.60000002" />
       <path
          d="m 724,343 h 92.525"
          stroke="#8bbcd5"
@@ -619,7 +620,8 @@
          stroke-dasharray="6, 2"
          fill="none"
          fill-rule="evenodd"
-         id="path101" />
+         id="path101"
+         style="stroke-dasharray:12,12;stroke-dashoffset:0.60000002" />
       <path
          d="m 520,370 h 92.817"
          stroke="#8bbcd5"
@@ -629,7 +631,8 @@
          stroke-dasharray="6, 2"
          fill="none"
          fill-rule="evenodd"
-         id="path102" />
+         id="path102"
+         style="stroke-dasharray:12,12;stroke-dashoffset:0.60000002" />
       <path
          d="m 874,445 v 64 H 668 v -14.222"
          stroke="#8bbcd5"
@@ -639,7 +642,8 @@
          stroke-dasharray="6, 2"
          fill="none"
          fill-rule="evenodd"
-         id="path103" />
+         id="path103"
+         style="stroke-dasharray:12.00482511,12.00482511;stroke-dashoffset:0.40016085;stroke-width:2.00080424" />
       <text
          font-family="Calibri, Calibri_MSFontService, sans-serif"
          font-weight="400"
@@ -651,7 +655,7 @@
          font-weight="400"
          font-size="24px"
          transform="translate(832.162,439)"
-         id="text104">electrode</text>
+         id="text104">Electrode</text>
       <text
          font-family="Calibri, Calibri_MSFontService, sans-serif"
          font-weight="400"
@@ -663,7 +667,7 @@
          font-weight="400"
          font-size="24px"
          transform="translate(410.275,392)"
-         id="text106">electrode</text>
+         id="text106">Electrode</text>
       <text
          font-family="Calibri, Calibri_MSFontService, sans-serif"
          font-weight="400"
@@ -675,13 +679,21 @@
          font-weight="400"
          font-size="24px"
          transform="translate(832.162,353)"
-         id="text108">electrode</text>
+         id="text108">Electrode</text>
       <text
          font-family="Calibri, Calibri_MSFontService, sans-serif"
          font-weight="400"
          font-size="24px"
          transform="translate(403.547,526)"
-         id="text109">Electrolyte</text>
+         id="text109"><tspan
+           sodipodi:role="line"
+           id="tspan1"
+           x="0"
+           y="0">Electrolyte</tspan><tspan
+           sodipodi:role="line"
+           id="tspan2"
+           x="0"
+           y="30">Solution</tspan></text>
       <rect
          x="651"
          y="425"
