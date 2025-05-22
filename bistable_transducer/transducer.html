@@ -188,6 +188,56 @@
         .home-button:hover {
             transform: translateY(-5px);
         }
+        
+        /* Custom button styles to ensure they work regardless of Tailwind */
+        .custom-btn {
+            font-family: 'Assistant', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 20px;
+            margin-top: 16px;
+            border-radius: 8px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+        
+        .custom-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .custom-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .design-btn {
+            background: linear-gradient(to right, #3b82f6, #1d4ed8);
+            margin-right: 8px;
+        }
+        
+        .design-btn:hover {
+            background: linear-gradient(to right, #2563eb, #1e40af);
+        }
+        
+        .functionality-btn {
+            background: linear-gradient(to right, #6366f1, #4338ca);
+        }
+        
+        .functionality-btn:hover {
+            background: linear-gradient(to right, #4f46e5, #3730a3);
+        }
+        
+        .btn-icon {
+            font-size: 1rem;
+        }
     </style>
 </head>
 <body>
@@ -218,10 +268,14 @@
                     <p class="text-sm">
                         Here we will have some text about the transducer unit. The transducer unit is a marvel of engineering, designed to stimulate sensory feedback while using a miniscule amount of power and only using electricity when switching between states - similarly to how e-ink only uses electricity when refreshing the screen.
                     </p>
-                    <button> 
+                    <button id="design-btn" class="custom-btn design-btn"> 
+                      <i class="fa-solid fa-wrench btn-icon"></i>
                       Explore Design 
                     </button>
-                    <button> Explore functionality </button>
+                    <button id="functionality-btn" class="custom-btn functionality-btn">
+                      <i class="fa-brands fa-uncharted btn-icon"></i>
+                      Explore Functionality
+                    </button>
                 </div>
                 <!-- Image Content -->
                 <div class="image-column">
@@ -260,7 +314,93 @@
             }
         });
         
-      
+        // Function to play transducer image sequence forward (from 00 to 24)
+        function playForwardSequence() {
+            const img = document.querySelector('.image-container img');
+            const startFrame = 90000;
+            const endFrame = 90024;
+            const fps = 25;
+            let currentFrame = startFrame;
+            
+            // Disable buttons during animation
+            const designBtn = document.getElementById('design-btn');
+            const functionalityBtn = document.getElementById('functionality-btn');
+            designBtn.disabled = true;
+            functionalityBtn.disabled = true;
+            
+            // Calculate interval (1000ms / 25fps = 40ms per frame)
+            const interval = 1000 / fps;
+            
+            // Create animation interval
+            const animation = setInterval(() => {
+                // Format frame number with leading zeros (total 8 digits)
+                const frameNumber = currentFrame.toString().padStart(8, '0');
+                
+                // Update image source
+                img.src = `Assets\\transducer-seq-webp\\transducer-seq${frameNumber}.webp`;
+                
+                // Move to next frame
+                currentFrame++;
+                
+                // Stop when we reach the end
+                if (currentFrame > endFrame) {
+                    clearInterval(animation);
+                    designBtn.disabled = false;
+                    functionalityBtn.disabled = false;
+                }
+            }, interval);
+        }
+        
+        // Function to play transducer image sequence in reverse (from 24 to 00)
+        function playReverseSequence() {
+            const img = document.querySelector('.image-container img');
+            const startFrame = 90024;
+            const endFrame = 90000;
+            const fps = 25;
+            let currentFrame = startFrame;
+            
+            // Disable buttons during animation
+            const designBtn = document.getElementById('design-btn');
+            const functionalityBtn = document.getElementById('functionality-btn');
+            designBtn.disabled = true;
+            functionalityBtn.disabled = true;
+            
+            // Calculate interval (1000ms / 25fps = 40ms per frame)
+            const interval = 1000 / fps;
+            
+            // Create animation interval
+            const animation = setInterval(() => {
+                // Format frame number with leading zeros (total 8 digits)
+                const frameNumber = currentFrame.toString().padStart(8, '0');
+                
+                // Update image source
+                img.src = `Assets\\transducer-seq-webp\\transducer-seq${frameNumber}.webp`;
+                
+                // Move to previous frame
+                currentFrame--;
+                
+                // Stop when we reach the beginning
+                if (currentFrame < endFrame) {
+                    clearInterval(animation);
+                    designBtn.disabled = false;
+                    functionalityBtn.disabled = false;
+                }
+            }, interval);
+        }
+        
+        // Add event listeners when document is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            const designBtn = document.getElementById('design-btn');
+            const functionalityBtn = document.getElementById('functionality-btn');
+            
+            if (designBtn) {
+                designBtn.addEventListener('click', playForwardSequence);
+            }
+            
+            if (functionalityBtn) {
+                functionalityBtn.addEventListener('click', playReverseSequence);
+            }
+        });
     </script>
 </body>
 </html>
