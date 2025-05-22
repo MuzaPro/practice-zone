@@ -241,6 +241,85 @@
       font-size: 0.9rem;
     }
     
+    /* Resources section styling */
+    .resources-container {
+      margin: 2rem 0;
+    }
+    
+    .resources-intro {
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+      color: var(--text-color);
+      max-width: 700px;
+    }
+    
+    .resource-category {
+      margin-bottom: 2.5rem;
+    }
+    
+    .resource-category h3 {
+      font-size: 1.4rem;
+      margin-bottom: 1.2rem;
+      color: var(--text-color);
+      font-weight: 500;
+    }
+    
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .resource-card {
+      display: flex;
+      background-color: #f8f8f8;
+      border-radius: 8px;
+      padding: 1.2rem;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+    
+    .resource-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      border-color: rgba(0,0,0,0);
+    }
+    
+    .resource-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      background-color: var(--dark-bg);
+      border-radius: 10px;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+    
+    .resource-icon i {
+      color: white;
+      font-size: 1.5rem;
+    }
+    
+    .resource-details {
+      flex: 1;
+    }
+    
+    .resource-details h4 {
+      margin: 0 0 0.3rem 0;
+      font-size: 1.1rem;
+      color: var(--dark-bg);
+    }
+    
+    .resource-details p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #666;
+    }
+    
     /* Responsive adjustments */
     @media (max-width: 768px) {
       .menu-toggle {
@@ -267,6 +346,10 @@
       .lhs, .rhs {
         margin-bottom: 20px;
       }
+      
+      .resource-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -278,7 +361,7 @@
         <nav id="site-nav" class="greedy-nav">
           <ul class="visible-links">
             <li>
-              <a href="https:/flavinlab.io/" target="_blank"><img src="assets//flavin_lab_site/logo_darkbg.png" class="logo" alt="Flavin Lab Logo"></a>
+              <a href="#"><img src="assets//flavin_lab_site/logo_darkbg.png" class="logo" alt="Flavin Lab Logo"></a>
             </li>
             <li class="masthead__menu-item"><a href="#">PEOPLE</a></li>
             <li class="masthead__menu-item"><a href="#">RESEARCH</a></li>
@@ -332,24 +415,122 @@
           
           
           <h2>Intelligent systems for wearable therapeutics</h2>
-          <div class="section-divider"></div>
           <div class="bio-container">
             <div class="bio-item1">
-              <img src="assets//flavin_lab_site/Transducer-on-hand.webp" alt="Research Image">
+              <img src="assets//flavin_lab_site/Transducer-exploded.webp" alt="Research Image">
             </div>
             <div class="bio-item2">
               <p>Pain control and management in humans is an unresolved problem with significant medical, societal, and economical implications. Targeted drug therapies, such as opioid painkillers, are highly effective in pain control—however, repeated, long-term, systemic administration poses many long-term risks, including addiction and de-sensitization. This research direction will aim to develop non-invasive, non-addictive interventions for pain management. This will focus on targeting specific sources of pain emanating from muscle tightness in the neck and back using an intelligent system of sensors and actuators.</p>
             </div>
           </div>
           
-          <h2>Section Title Three</h2>
           <div class="section-divider"></div>
-          <div class="bio-container">
-            <div class="bio-item1">
-              <img src="assets//flavin_lab_site/Transducer-exploded.webp" alt="Research Image">
+          
+          <h2>Resources Library</h2>
+          <div class="resources-container">
+            <p class="resources-intro">A curated collection of valuable tools and educational content for web development and design.</p>
+            
+            <div class="resource-category">
+              <h3>Design & Development Tools</h3>
+              <div class="resource-grid">
+                <a href="https://html5up.net/" class="resource-card" target="_blank">
+                  <div class="resource-icon"><i class="fas fa-file-code"></i></div>
+                  <div class="resource-details">
+                    <h4>HTML5 UP</h4>
+                    <p>Cool website templates with just HTML+CSS</p>
+                  </div>
+                </a>
+                
+                <a href="https://www.w3schools.com/" class="resource-card" target="_blank">
+                  <div class="resource-icon"><i class="fas fa-graduation-cap"></i></div>
+                  <div class="resource-details">
+                    <h4>W3Schools</h4>
+                    <p>Complete educational site for web development</p>
+                  </div>
+                </a>
+                
+                <a href="https://neumorphism.io/#e0e0e0" class="resource-card" target="_blank">
+                  <div class="resource-icon"><i class="fas fa-palette"></i></div>
+                  <div class="resource-details">
+                    <h4>Neumorphism.io</h4>
+                    <p>Beautiful free design elements</p>
+                  </div>
+                </a>
+                
+                <a href="https://uiverse.io/" class="resource-card" target="_blank">
+                  <div class="resource-icon"><i class="fas fa-object-group"></i></div>
+                  <div class="resource-details">
+                    <h4>UIverse</h4>
+                    <p>More resources for free UI components</p>
+                  </div>
+                </a>
+                
+                <a href="https://animista.net/" class="resource-card" target="_blank">
+                  <div class="resource-icon"><i class="fas fa-film"></i></div>
+                  <div class="resource-details">
+                    <h4>Animista</h4>
+                    <p>Create stunning CSS animations without writing code</p>
+                  </div>
+                </a>
+              </div>
             </div>
-            <div class="bio-item2">
-              <p>Add as many sections as needed following this pattern. The template maintains the dark background theme with light text that matches the original site's design aesthetic. You can adjust the content and images while maintaining the consistent structure.</p>
+            
+            <div class="resource-category">
+              <h3>Educational YouTube Channels</h3>
+              <div class="resource-grid">
+                <a href="https://www.youtube.com/@TheCoderCoder" class="resource-card" target="_blank">
+                  <div class="resource-icon"><i class="fab fa-youtube"></i></div>
+                  <div class="resource-details">
+                    <h4>Coder Coder</h4>
+                    <p>Frontend development tutorials and insights</p>
+                  </div>
+                </a>
+                
+                <a href="https://www.youtube.com/@slayingthedragon" class="resource-card" target="_blank">
+                  <div class="resource-icon"><i class="fab fa-youtube"></i></div>
+                  <div class="resource-details">
+                    <h4>Slaying The Dragon</h4>
+                    <p>Web development tutorials and guides</p>
+                  </div>
+                </a>
+                
+                <a href="https://www.youtube.com/@whosajid" class="resource-card" target="_blank">
+                  <div class="resource-icon"><i class="fab fa-youtube"></i></div>
+                  <div class="resource-details">
+                    <h4>Sajid</h4>
+                    <p>Practical projects and coding tutorials</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+            
+            <div class="resource-category">
+              <h3>Recommended Tutorials</h3>
+              <div class="resource-grid">
+                <a href="https://youtu.be/ezP4kbOvs_E?si=oVKLVs82GhNM-6kX" class="resource-card" target="_blank">
+                  <div class="resource-icon"><i class="fas fa-play-circle"></i></div>
+                  <div class="resource-details">
+                    <h4>CSS Responsive Layout Tutorial</h4>
+                    <p>Learn to build responsive layouts with CSS</p>
+                  </div>
+                </a>
+                
+                <a href="https://www.youtube.com/watch?v=NWnBxQjssvQ" class="resource-card" target="_blank">
+                  <div class="resource-icon"><i class="fas fa-play-circle"></i></div>
+                  <div class="resource-details">
+                    <h4>Web Design Masterclass</h4>
+                    <p>Comprehensive guide to modern web design</p>
+                  </div>
+                </a>
+                
+                <a href="https://youtu.be/180KJQryGwc?si=tOM8hxGDxziukR9f" class="resource-card" target="_blank">
+                  <div class="resource-icon"><i class="fas fa-play-circle"></i></div>
+                  <div class="resource-details">
+                    <h4>JavaScript Fundamentals</h4>
+                    <p>Essential JavaScript concepts for web developers</p>
+                  </div>
+                </a>
+              </div>
             </div>
           </div>
         </section>
@@ -363,8 +544,8 @@
     <footer>
       <div>
         <div class="lhs">
-          <a href="#"><img src="assets//flavin_lab_site/logo_full_darkbg.png" alt="Flavin Lab Logo"></a>
-          <div class="page__footer-copyright">© 2025 Template User.</div>
+          <a href="#"><img src="assets//flavin_lab_site/logo_darkbg.png" alt="Flavin Lab Logo"></a>
+          <div class="page__footer-copyright">© 2024 Template User.</div>
         </div>
         <div class="rhs">
           <div class="social-icons">
