@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en" class="js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Flavin Lab Template</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <style>
+    /* CSS Variables for consistent theming */
+    :root {
+      --dark-bg: #252526;
+      --light-bg: #ffffff;
+      --text-color: #333;
+      --light-text: #fff;
+      --accent-color: #2c6eb6;
+      --header-height: 70px;
+    }
+    
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Open Sans', sans-serif;
+      line-height: 1.6;
+      color: var(--text-color);
+      background-color: var(--light-bg);
+    }
+    
+    /* Masthead/Navigation styling */
+    .masthead {
+      position: fixed;
+      width: 100%;
+      background-color: var(--dark-bg);
+      z-index: 100;
+      top: 0;
+    }
+    
+    .masthead__inner-wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 20px;
+      height: var(--header-height);
+      display: flex;
+      align-items: center;
+    }
+    
+    .masthead__menu {
+      width: 100%;
+    }
+    
+    .greedy-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .visible-links {
+      display: flex;
+      list-style: none;
+      align-items: center;
+      margin: 0 auto; /* Center the menu items */
+    }
+    
+    .masthead__menu-item {
+      margin-left: 30px;
+    }
+    
+    .masthead__menu-item a {
+      color: var(--light-text);
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+    }
+    
+    .masthead__menu-item a:hover {
+      color: var(--accent-color);
+    }
+    
+    .logo {
+      height: 40px;
+    }
+    
+    .social-icons {
+      display: flex;
+      align-items: center;
+    }
+    
+    .social-icons a {
+      margin-left: 15px;
+    }
+    
+    .social-icons i {
+      color: white;
+      font-size: 1.2rem;
+    }
+    
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+    
+    /* Mobile menu */
+    .hidden-links2 {
+      display: none;
+      position: absolute;
+      top: var(--header-height);
+      right: 0;
+      background-color: var(--dark-bg);
+      width: 100%;
+      list-style: none;
+    }
+    
+    .hidden-links2.hidden {
+      display: none;
+    }
+    
+    .masthead__menu-item2 {
+      padding: 15px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .masthead__menu-item2 a {
+      color: white;
+      text-decoration: none;
+      display: block;
+    }
+    
+    /* Main content area */
+    #main {
+      margin-top: var(--header-height);
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 20px;
+      background-color: var(--light-bg);
+    }
+    
+    .page2 {
+      color: var(--text-color);
+    }
+    
+    .page__inner-wrap {
+      padding: 2rem 0;
+    }
+    
+    .page__title {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: var(--text-color);
+    }
+    
+    h2 {
+      font-size: 1.5rem;
+      margin: 2rem 0 1rem;
+      color: var(--text-color);
+    }
+    
+    .bio-container {
+      display: flex;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .bio-item1 {
+      flex: 0 0 300px;
+      padding-right: 2rem;
+    }
+    
+    .bio-item1 img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    
+    .bio-item2 {
+      flex: 1;
+      min-width: 300px;
+    }
+    
+    .bio-item2 p {
+      color: var(--text-color);
+    }
+    
+    /* Section divider styling */
+    .section-divider {
+      height: 1px;
+      background-color: rgba(0, 0, 0, 0.1);
+      margin: 1rem 0;
+      width: 100%;
+    }
+    
+    /* Footer */
+    .page__footer {
+      background-color: var(--dark-bg);
+      width: 100%;
+    }
+    
+    footer {
+      padding: 2rem 0;
+      background-color: var(--dark-bg);
+    }
+    
+    footer > div {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .lhs img {
+      height: 50px;
+      margin-bottom: 10px;
+    }
+    
+    .page__footer-copyright {
+      font-size: 0.8rem;
+      color: #ccc;
+    }
+    
+    .page__footer-sitemap {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+      
+      .visible-links li:not(:first-child) {
+        display: none;
+      }
+      
+      .bio-container {
+        flex-direction: column;
+      }
+      
+      .bio-item1 {
+        margin-bottom: 1.5rem;
+      }
+      
+      footer > div {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .lhs, .rhs {
+        margin-bottom: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Masthead/Navigation -->
+  <div class="masthead">
+    <div class="masthead__inner-wrap">
+      <div class="masthead__menu">
+        <nav id="site-nav" class="greedy-nav">
+          <ul class="visible-links">
+            <li>
+              <a href="#"><img src="assets//flavin_lab_site/logo_darkbg.png" class="logo" alt="Flavin Lab Logo"></a>
+            </li>
+            <li class="masthead__menu-item"><a href="#">PEOPLE</a></li>
+            <li class="masthead__menu-item"><a href="#">RESEARCH</a></li>
+            <li class="masthead__menu-item"><a href="#">PUBLICATIONS</a></li>
+            <li class="masthead__menu-item"><a href="#">CONTACT</a></li>
+            <li>
+              <button class="menu-toggle" aria-controls="top-menu" aria-expanded="false">
+                <i class="fas fa-fw fa-x selector-x hidden" aria-hidden="true"></i>
+                <i class="fas fa-fw fa-bars selector-y" aria-hidden="true"></i>
+                MENU
+              </button>
+            </li>
+          </ul>
+          <div class="social-icons">
+            <a href="#">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <ul class="hidden-links2 hidden">
+      <li class="masthead__menu-item2"><a href="#">PEOPLE</a></li>
+      <li class="masthead__menu-item2"><a href="#">RESEARCH</a></li>
+      <li class="masthead__menu-item2"><a href="#">PUBLICATIONS</a></li>
+      <li class="masthead__menu-item2"><a href="#">CONTACT</a></li>
+    </ul>
+  </div>
+
+  <!-- Main Content Area -->
+  <div id="main" role="main">
+    <article class="page2" itemscope itemtype="http://schema.org/CreativeWork">
+      <div class="page__inner-wrap">
+        <header>
+          <h1 class="page__title" itemprop="headline">Neural Mechatronics and Extended Reality for Patient Care</h1>
+        </header>
+        <section class="page__content" itemprop="text">
+          <h2>Distributed haptic systems</h2><div class="section-divider"></div>
+          <div class="bio-container">
+            <div class="bio-item1">
+              <img src="assets//flavin_lab_site/Device on neck.jpeg" alt="Research Image">
+            </div>
+            <div class="bio-item2">
+              <p>Capabilities for fast, programmable manipulation of human sensory perception have wide-ranging applications in therapeutic biomedical systems, including somatosensory interfaces that substitute or augment missing sensory capabilities. Compared with most wearable electronic devices, haptics interfaces can benefit from wider coverage across the surface of the skin. This research direction will address significant untapped potential in these areas of research by introducing a more expansive concept of somatosensory interfaces, developing a distributed system of textile-encapsulated actuators.</p>
+            </div>
+          </div>
+          
+          
+          
+          <h2>Intelligent systems for wearable therapeutics</h2>
+          <div class="bio-container">
+            <div class="bio-item1">
+              <img src="assets//flavin_lab_site/Transducer-exploded.webp" alt="Research Image">
+            </div>
+            <div class="bio-item2">
+              <p>Pain control and management in humans is an unresolved problem with significant medical, societal, and economical implications. Targeted drug therapies, such as opioid painkillers, are highly effective in pain control—however, repeated, long-term, systemic administration poses many long-term risks, including addiction and de-sensitization. This research direction will aim to develop non-invasive, non-addictive interventions for pain management. This will focus on targeting specific sources of pain emanating from muscle tightness in the neck and back using an intelligent system of sensors and actuators.</p>
+            </div>
+          </div>
+          
+          <div class="section-divider"></div>
+          
+          <h2>Section Title Three</h2>
+          <div class="bio-container">
+            <div class="bio-item1">
+              <img src="assets//flavin_lab_site/Transducer-exploded.webp" alt="Research Image">
+            </div>
+            <div class="bio-item2">
+              <p>Add as many sections as needed following this pattern. The template maintains the dark background theme with light text that matches the original site's design aesthetic. You can adjust the content and images while maintaining the consistent structure.</p>
+            </div>
+          </div>
+        </section>
+        <footer class="page__meta"></footer>
+      </div>
+    </article>
+  </div>
+
+  <!-- Footer -->
+  <div class="page__footer">
+    <footer>
+      <div>
+        <div class="lhs">
+          <a href="#"><img src="assets//flavin_lab_site/logo_darkbg.png" alt="Flavin Lab Logo"></a>
+          <div class="page__footer-copyright">© 2024 Template User.</div>
+        </div>
+        <div class="rhs">
+          <div class="social-icons">
+            <a href="#">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+          </div>
+          <a class="page__footer-sitemap" href="#">Sitemap</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+  
+  <!-- JavaScript for Menu Toggle -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuToggle = document.querySelector('.menu-toggle');
+      const hiddenLinks = document.querySelector('.hidden-links2');
+      const xIcon = document.querySelector('.selector-x');
+      const yIcon = document.querySelector('.selector-y');
+      
+      menuToggle.addEventListener('click', function() {
+        hiddenLinks.classList.toggle('hidden');
+        
+        if (hiddenLinks.classList.contains('hidden')) {
+          xIcon.classList.add('hidden');
+          yIcon.classList.remove('hidden');
+        } else {
+          xIcon.classList.remove('hidden');
+          yIcon.classList.add('hidden');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
