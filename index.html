@@ -6,11 +6,17 @@
     <title>Muza School of Code</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Add favicon links with correct relative path -->
+    <link rel="icon" href="assets/muza_code_logo_circle540px.png" type="image/png">
+    <link rel="apple-touch-icon" href="assets/muza_code_logo_circle540px.png">
 </head>
 <body>
     <header class="main-header">
         <div class="header-content">
-            <h1>Muza School of Code</h1>
+            <div class="title-container">
+                <img src="assets/muza_code_logo_circle540px.png" alt="Muza School of Code Logo" class="header-logo">
+                <h1>Muza School of Code</h1>
+            </div>
             <p class="tagline">Hands-on learning for web development</p>
         </div>
     </header>
@@ -376,6 +382,18 @@
     </footer>
 
     <style>
+        /* Header logo styling */
+        .title-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .header-logo {
+            width: 48px;
+            height: 48px;
+        }
+        
         /* Resource section styling */
         .resources {
             margin-top: 4rem;
