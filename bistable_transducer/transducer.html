@@ -314,41 +314,83 @@
             }
         });
         
+        // Function to preload all frames before animation
+        function preloadFrames(startFrame, endFrame, callback) {
+            let loadedCount = 0;
+            const totalFrames = Math.abs(endFrame - startFrame) + 1;
+            const img = document.querySelector('.image-container img');
+            
+            // Subtle loading indicator without text (just slight opacity change)
+            img.style.transition = 'opacity 0.3s ease';
+            img.style.opacity = '0.9';
+            
+            // Start preloading each frame
+            for (let frame = Math.min(startFrame, endFrame); frame <= Math.max(startFrame, endFrame); frame++) {
+                const preloadImg = new Image();
+                const frameNumber = frame.toString().padStart(8, '0');
+                preloadImg.src = `Assets/transducer-seq-webp/transducer-seq${frameNumber}.webp`;
+                
+                preloadImg.onload = () => {
+                    loadedCount++;
+                    
+                    if (loadedCount === totalFrames) {
+                        // Restore image opacity
+                        img.style.opacity = '1';
+                        // Start animation
+                        callback();
+                    }
+                };
+                
+                preloadImg.onerror = () => {
+                    console.error(`Failed to load frame: ${frameNumber}`);
+                    loadedCount++;
+                    if (loadedCount === totalFrames) {
+                        img.style.opacity = '1';
+                        callback();
+                    }
+                };
+            }
+        }
+        
         // Function to play transducer image sequence forward (from 00 to 24)
         function playForwardSequence() {
             const img = document.querySelector('.image-container img');
             const startFrame = 90000;
             const endFrame = 90024;
             const fps = 25;
-            let currentFrame = startFrame;
             
-            // Disable buttons during animation
+            // Disable buttons during preloading and animation
             const designBtn = document.getElementById('design-btn');
             const functionalityBtn = document.getElementById('functionality-btn');
             designBtn.disabled = true;
             functionalityBtn.disabled = true;
             
-            // Calculate interval (1000ms / 25fps = 40ms per frame)
-            const interval = 1000 / fps;
-            
-            // Create animation interval
-            const animation = setInterval(() => {
-                // Format frame number with leading zeros (total 8 digits)
-                const frameNumber = currentFrame.toString().padStart(8, '0');
+            // First preload all frames, then start animation
+            preloadFrames(startFrame, endFrame, () => {
+                let currentFrame = startFrame;
                 
-                // Update image source
-                img.src = `Assets\\transducer-seq-webp\\transducer-seq${frameNumber}.webp`;
+                // Calculate interval (1000ms / 25fps = 40ms per frame)
+                const interval = 1000 / fps;
                 
-                // Move to next frame
-                currentFrame++;
-                
-                // Stop when we reach the end
-                if (currentFrame > endFrame) {
-                    clearInterval(animation);
-                    designBtn.disabled = false;
-                    functionalityBtn.disabled = false;
-                }
-            }, interval);
+                // Create animation interval
+                const animation = setInterval(() => {
+                    // Format frame number with leading zeros (total 8 digits)
+                    const frameNumber = currentFrame.toString().padStart(8, '0');
+                    
+                    // Update image source with forward slashes for GitHub Pages compatibility
+                    img.src = `Assets/transducer-seq-webp/transducer-seq${frameNumber}.webp`;
+                    
+                    // Move to next frame
+                    currentFrame++;
+                    
+                    // Stop when we reach the end
+                    if (currentFrame > endFrame) {
+                        clearInterval(animation);
+                        designBtn.disabled = false;
+                        functionalityBtn.disabled = false;
+                    }
+                }, interval);
+            });
         }
         
         // Function to play transducer image sequence in reverse (from 24 to 00)
@@ -357,35 +399,39 @@
             const startFrame = 90024;
             const endFrame = 90000;
             const fps = 25;
-            let currentFrame = startFrame;
             
-            // Disable buttons during animation
+            // Disable buttons during preloading and animation
             const designBtn = document.getElementById('design-btn');
             const functionalityBtn = document.getElementById('functionality-btn');
             designBtn.disabled = true;
             functionalityBtn.disabled = true;
             
-            // Calculate interval (1000ms / 25fps = 40ms per frame)
-            const interval = 1000 / fps;
-            
-            // Create animation interval
-            const animation = setInterval(() => {
-                // Format frame number with leading zeros (total 8 digits)
-                const frameNumber = currentFrame.toString().padStart(8, '0');
+            // First preload all frames, then start animation
+            preloadFrames(endFrame, startFrame, () => {
+                let currentFrame = startFrame;
                 
-                // Update image source
-                img.src = `Assets\\transducer-seq-webp\\transducer-seq${frameNumber}.webp`;
+                // Calculate interval (1000ms / 25fps = 40ms per frame)
+                const interval = 1000 / fps;
                 
-                // Move to previous frame
-                currentFrame--;
-                
-                // Stop when we reach the beginning
-                if (currentFrame < endFrame) {
-                    clearInterval(animation);
-                    designBtn.disabled = false;
-                    functionalityBtn.disabled = false;
-                }
-            }, interval);
+                // Create animation interval
+                const animation = setInterval(() => {
+                    // Format frame number with leading zeros (total 8 digits)
+                    const frameNumber = currentFrame.toString().padStart(8, '0');
+                    
+                    // Update image source with forward slashes for GitHub Pages compatibility
+                    img.src = `Assets/transducer-seq-webp/transducer-seq${frameNumber}.webp`;
+                    
+                    // Move to previous frame
+                    currentFrame--;
+                    
+                    // Stop when we reach the beginning
+                    if (currentFrame < endFrame) {
+                        clearInterval(animation);
+                        designBtn.disabled = false;
+                        functionalityBtn.disabled = false;
+                    }
+                }, interval);
+            });
         }
         
         // Add event listeners when document is loaded
