@@ -1,3 +1,151 @@
+/* Header logo styling */
+        .title-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .header-logo {
+            width: 48px;
+            height: 48px;
+        }
+        
+        /* Resource section styling */
+        .resources {
+            margin-top: 4rem;
+            padding-top: 2rem;
+        }
+
+        .section-divider {
+            position: relative;
+            height: 2px;
+            background-color: #e5e5e5;
+            margin: 0 auto 3rem;
+            text-align: center;
+        }
+        
+        .section-divider span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 0 1.5rem;
+            font-size: 1.1rem;
+            color: #777;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        .resource-category {
+            margin-top: 2.5rem;
+        }
+
+        .resource-category h3 {
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #333;
+            font-size: 1.25rem;
+            font-family: 'Montserrat', sans-serif;
+            border-left: 5px solid #4361ee;
+            padding-left: 1rem;
+        }
+
+        .section-intro {
+            max-width: 800px;
+            margin-bottom: 2rem;
+            color: #555;
+        }
+        
+        .resource-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .resource-card {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid #eaeaea;
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .resource-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-color: #ddd;
+        }
+        
+        .resource-icon {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            margin-right: 1.25rem;
+            background-color: rgba(51, 102, 204, 0.1);
+        }
+        
+        .youtube-icon {
+            background-color: rgba(255, 0, 0, 0.1);
+        }
+        
+        .tutorial-icon {
+            background-color: rgba(255, 193, 7, 0.1);
+        }
+        
+        .resource-content {
+            flex: 1;
+        }
+        
+        .resource-content h4 {
+            margin: 0;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 0.25rem;
+        }
+        
+        .resource-content p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+        
+        .resource-tags {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .resource-tags .tag {
+            font-size: 0.75rem;
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        @media (max-width: 768px) {
+            .resource-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .resource-icon {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+            
+            .resource-tags {
+                margin-top: 0.5rem;
+            }
+        }
 /* Base Reset */
 * {
     margin: 0;
@@ -87,7 +235,7 @@ p {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0 1rem 4rem;
 }
 
 .main-header {
@@ -124,7 +272,7 @@ p {
 .main-footer {
     background-color: var(--footer-bg);
     color: white;
-    padding: 2rem 1rem;
+    padding: 3rem 1rem 2rem;
     margin-top: auto;
     text-align: center;
 }
@@ -230,4 +378,147 @@ p {
     .cards-grid {
         grid-template-columns: 1fr;
     }
+}
+
+
+/* Base Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Main color scheme */
+    --primary: #4361ee;
+    --secondary: #3a0ca3;
+    --accent: #7209b7;
+    --light: #f8f9fa;
+    --dark: #212529;
+    
+    /* Theme colors - Light Mode Defaults */
+    --background: #f8f9fa;
+    --card-bg: #ffffff;
+    --text: #333333;
+    --muted-text: #6c757d;
+    --section-divider-bg: #e5e5e5;
+    --section-divider-text: #777;
+    --card-border: #eaeaea;
+    --resource-card-bg: #f8f9fa;
+    --tag-bg: rgba(0, 0, 0, 0.05);
+    --icon-bg: rgba(51, 102, 204, 0.1);
+    
+    /* Component colors */
+    --header-bg: linear-gradient(135deg, var(--primary), var(--secondary));
+    --footer-bg: #212529;
+    --border: #e9ecef;
+    
+    /* UI elements */
+    --radius: 8px;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --hover-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+/* Dark Mode Colors */
+.dark {
+    --background: #121212;
+    --card-bg: #1e1e1e;
+    --text: #e0e0e0;
+    --muted-text: #aaaaaa;
+    --section-divider-bg: #333333;
+    --section-divider-text: #999999;
+    --card-border: #333333;
+    --resource-card-bg: #252525;
+    --tag-bg: rgba(255, 255, 255, 0.1);
+    --icon-bg: rgba(100, 130, 200, 0.2);
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --hover-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: var(--text);
+    background-color: var(--background);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark mode toggle button */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+}
+
+.theme-toggle button {
+    background: var(--card-bg);
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease;
+    color: var(--text);
+}
+
+.theme-toggle button:hover {
+    transform: rotate(15deg);
+}
+
+.moon-icon, .sun-icon {
+    color: var(--text);
+    width: 24px;
+    height: 24px;
+}
+
+/* Additional Dark Mode Styles */
+.dark .section-divider {
+    background-color: var(--section-divider-bg);
+}
+
+.dark .section-divider span {
+    background-color: var(--background);
+    color: var(--section-divider-text);
+}
+
+.dark .card,
+.dark .resource-card {
+    background-color: var(--card-bg);
+    border-color: var(--card-border);
+}
+
+.dark .resource-card {
+    background-color: var(--resource-card-bg);
+}
+
+.dark .card-icon,
+.dark .resource-icon {
+    background-color: var(--icon-bg);
+}
+
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+    color: var(--text);
+}
+
+.dark .tag {
+    background-color: var(--tag-bg);
+    color: var(--primary);
+}
+
+.dark .resource-content p {
+    color: var(--muted-text);
+}
+
+/* Ensure smooth transitions */
+.card, .resource-card, h1, h2, h3, h4, h5, h6, p, .tag {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }

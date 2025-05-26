@@ -11,6 +11,24 @@
     <link rel="apple-touch-icon" href="assets/muza_code_logo_circle540px.png">
 </head>
 <body>
+    <div class="theme-toggle">
+        <button id="themeToggle" aria-label="Toggle dark mode">
+            <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </button>
+    </div>
     <header class="main-header">
         <div class="header-content">
             <div class="title-container">
@@ -327,8 +345,8 @@
                             </svg>
                         </div>
                         <div class="resource-content">
-                            <h4>CSS Responsive Layout</h4>
-                            <p>Learn to build responsive layouts with CSS</p>
+                            <h4>CSS Disco Border</h4>
+                            <p>Learn CSS Border Animations in 6 Minutes</p>
                             <div class="resource-tags">
                                 <span class="tag">Tutorial</span>
                                 <span class="tag">CSS</span>
@@ -336,7 +354,7 @@
                         </div>
                     </a>
 
-                    <a href="https://www.youtube.com/watch?v=NWnBxQjssvQ" class="resource-card" target="_blank">
+                    <a href="https://youtu.be/G3e-cpL7ofc?si=LFKj2XikNs0bD5Q7&t=5170" class="resource-card" target="_blank">
                         <div class="resource-icon tutorial-icon">
                             <svg viewBox="0 0 24 24" width="28" height="28" stroke="#FFC107" stroke-width="2" fill="none">
                                 <circle cx="12" cy="12" r="10"></circle>
@@ -344,8 +362,8 @@
                             </svg>
                         </div>
                         <div class="resource-content">
-                            <h4>Web Design Masterclass</h4>
-                            <p>Comprehensive guide to modern web design</p>
+                            <h4>The intro course I'm doing</h4>
+                            <p>HTML & CSS Full Course - Beginner to Pro</p>
                             <div class="resource-tags">
                                 <span class="tag">Design</span>
                                 <span class="tag">Tutorial</span>
@@ -381,155 +399,52 @@
         </div>
     </footer>
 
-    <style>
-        /* Header logo styling */
-        .title-container {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .header-logo {
-            width: 48px;
-            height: 48px;
-        }
-        
-        /* Resource section styling */
-        .resources {
-            margin-top: 4rem;
-            padding-top: 2rem;
-        }
+    <script>
+    // Dark Mode Toggle Functionality
+    const themeToggle = document.getElementById('themeToggle');
+    const htmlElement = document.documentElement;
 
-        .section-divider {
-            position: relative;
-            height: 2px;
-            background-color: #e5e5e5;
-            margin: 0 auto 3rem;
-            text-align: center;
+    // Check for saved theme preference or use device preference
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    // Apply initial theme based on saved preference or device setting
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        htmlElement.classList.add('dark');
+    }
+    
+    // Update button appearance based on current theme
+    updateThemeToggleButton();
+    
+    // Toggle theme when button is clicked
+    themeToggle.addEventListener('click', () => {
+        htmlElement.classList.toggle('dark');
+        
+        // Save preference to localStorage
+        if (htmlElement.classList.contains('dark')) {
+            localStorage.setItem('theme', 'dark');
+        } else {
+            localStorage.setItem('theme', 'light');
         }
         
-        .section-divider span {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #fff;
-            padding: 0 1.5rem;
-            font-size: 1.1rem;
-            color: #777;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 600;
-        }
-
-        .resource-category {
-            margin-top: 2.5rem;
-        }
-
-        .resource-category h3 {
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            color: #333;
-            font-size: 1.25rem;
-            font-family: 'Montserrat', sans-serif;
-            border-left: 5px solid #4361ee;
-            padding-left: 1rem;
-        }
-
-        .section-intro {
-            max-width: 800px;
-            margin-bottom: 2rem;
-            color: #555;
-        }
+        // Update button appearance
+        updateThemeToggleButton();
+    });
+    
+    // Update button icon based on current theme
+    function updateThemeToggleButton() {
+        const isDarkMode = htmlElement.classList.contains('dark');
+        const moonIcon = document.querySelector('.moon-icon');
+        const sunIcon = document.querySelector('.sun-icon');
         
-        .resource-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
+        if (isDarkMode) {
+            moonIcon.style.display = 'none';
+            sunIcon.style.display = 'block';
+        } else {
+            moonIcon.style.display = 'block';
+            sunIcon.style.display = 'none';
         }
-        
-        .resource-card {
-            display: flex;
-            align-items: center;
-            padding: 1rem;
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            text-decoration: none;
-            color: inherit;
-            border: 1px solid #eaeaea;
-            transition: all 0.2s ease-in-out;
-        }
-        
-        .resource-card:hover {
-            transform: translateX(5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            border-color: #ddd;
-        }
-        
-        .resource-icon {
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 60px;
-            height: 60px;
-            border-radius: 12px;
-            margin-right: 1.25rem;
-            background-color: rgba(51, 102, 204, 0.1);
-        }
-        
-        .youtube-icon {
-            background-color: rgba(255, 0, 0, 0.1);
-        }
-        
-        .tutorial-icon {
-            background-color: rgba(255, 193, 7, 0.1);
-        }
-        
-        .resource-content {
-            flex: 1;
-        }
-        
-        .resource-content h4 {
-            margin: 0;
-            font-weight: 600;
-            font-size: 1.1rem;
-            color: #333;
-            margin-bottom: 0.25rem;
-        }
-        
-        .resource-content p {
-            margin: 0;
-            font-size: 0.95rem;
-            color: #666;
-            margin-bottom: 0.5rem;
-        }
-        
-        .resource-tags {
-            display: flex;
-            gap: 0.5rem;
-        }
-        
-        .resource-tags .tag {
-            font-size: 0.75rem;
-            background-color: rgba(0, 0, 0, 0.05);
-        }
-
-        @media (max-width: 768px) {
-            .resource-card {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .resource-icon {
-                margin-right: 0;
-                margin-bottom: 1rem;
-            }
-            
-            .resource-tags {
-                margin-top: 0.5rem;
-            }
-        }
-    </style>
+    }
+</script>
 </body>
 </html>
