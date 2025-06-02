@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excalibur.js Bouncing Balls Playground</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .instructions {
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 16px;
+            max-width: 600px;
+        }
+        
+        #game-container {
+            border: 3px solid white;
+            border-radius: 10px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .controls {
+            margin-top: 15px;
+            color: white;
+            text-align: center;
+        }
+        
+        button {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid white;
+            color: white;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+        
+        .stats {
+            color: white;
+            margin-top: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎮 Excalibur.js Bouncing Balls Playground</h1>
+    <div class="instructions">
+        <p><strong>Click anywhere in the game area to spawn colorful bouncing balls!</strong></p>
+        <p>Watch them bounce around with realistic physics. Each ball has random colors, sizes, and velocities.</p>
+    </div>
+    
+    <div id="game-container">
+        <canvas id="game"></canvas>
+    </div>
+    
+    <div class="controls">
+        <button onclick="clearAllBalls()">Clear All Balls</button>
+        <button onclick="addRandomBall()">Add Random Ball</button>
+        <button onclick="toggleGravity()">Toggle Gravity</button>
+    </div>
+    
+    <div class="stats">
+        <div>Balls: <span id="ball-count">0</span></div>
+    </div>
+
+    <!-- Include Excalibur.js from CDN -->
+    <script src="https://unpkg.com/excalibur@latest/build/dist/excalibur.min.js"></script>
+    
+    <script>
+        // Wait for Excalibur to load before initializing
+        window.addEventListener('load', function() {
+            // Check if Excalibur loaded properly
+            if (typeof ex === 'undefined') {
+                console.error('❌ Excalibur.js failed to load!');
+                document.body.innerHTML = '<h1>Error: Excalibur.js failed to load. Please refresh the page.</h1>';
+                return;
+            }
+            
+            console.log('✅ Excalibur.js loaded successfully!');
+            initGame();
+        });
+        
+        // Global game variables
+        let game;
+        let balls = [];
+        let gravityEnabled = false;
+        
+        // Ball class extending Excalibur's Actor
+        class BouncingBall extends ex.Actor {
+            constructor(x, y) {
+                // Call parent constructor with position
+                super({
+                    pos: new ex.Vector(x, y),
+                    width: 20 + Math.random() * 40, // Random size between 20-60px  
+                    height: 20 + Math.random() * 40,
+                    color: ex.Color.fromHSL(Math.random() * 360, 0.8, 0.6) // Random bright color
+                });
+                
+                // Set random velocity for bouncing movement
+                this.vel = new ex.Vector(
+                    (Math.random() - 0.5) * 400, // Random X velocity between -200 and 200
+                    (Math.random() - 0.5) * 400  // Random Y velocity between -200 and 200
+                );
+                
+                // Add collision group for ball-to-ball physics
+                this.body.collisionType = ex.CollisionType.Active;
+                
+                // Make it a circle for better physics
+                this.graphics.use(new ex.Circle({
+                    radius: this.width / 2,
+                    color: this.color
+                }));
+                
+                // Add some bounce factor
+                this.bounciness = 0.8 + Math.random() * 0.2; // Between 0.8 and 1.0
+            }
+            
+            // Update method called every frame
+            onPreUpdate(engine, delta) {
+                super.onPreUpdate(engine, delta);
+                
+                // Apply gravity if enabled
+                if (gravityEnabled) {
+                    this.vel.y += 500 * (delta / 1000); // Add downward acceleration
+                }
+                
+                // Bounce off screen edges
+                if (this.pos.x <= this.width/2 || this.pos.x >= engine.drawWidth - this.width/2) {
+                    this.vel.x *= -this.bounciness;
+                    // Keep ball within bounds
+                    this.pos.x = Math.max(this.width/2, Math.min(engine.drawWidth - this.width/2, this.pos.x));
+                }
+                
+                // Keep ball bouncing smoothly within bounds
+                if (this.pos.y <= this.height/2 || this.pos.y >= engine.drawHeight - this.height/2) {
+                    this.vel.y *= -this.bounciness;
+                    // Keep ball within bounds
+                    this.pos.y = Math.max(this.height/2, Math.min(engine.drawHeight - this.height/2, this.pos.y));
+                }
+            }
+        }
+        
+        function initGame() {
+            // Create the Excalibur game engine instance
+            game = new ex.Engine({
+            width: 800,
+            height: 600,
+            canvasElementId: 'game',
+                width: 800,
+                height: 600,
+                canvasElementId: 'game',
+                backgroundColor: ex.Color.fromHex('#2c3e50')
+            });
+            
+            // Handle mouse clicks to spawn balls
+            game.input.pointers.primary.on('down', (event) => {
+                createBallAt(event.worldPos.x, event.worldPos.y);
+            });
+            
+            // Add some keyboard shortcuts for extra interactivity
+            game.input.keyboard.on('press', (event) => {
+                switch(event.key) {
+                    case ex.Keys.Space:
+                        addRandomBall();
+                        break;
+                    case ex.Keys.C:
+                        clearAllBalls();
+                        break;
+                    case ex.Keys.G:
+                        toggleGravity();
+                        break;
+                }
+            });
+            
+            // Start the game engine
+            game.start().then(() => {
+                console.log('🎮 Excalibur.js game started successfully!');
+                console.log('📚 Learning concepts demonstrated:');
+                console.log('  • Game engine initialization');
+                console.log('  • Actor creation and management');
+                console.log('  • Physics and collision detection');
+                console.log('  • Input handling (mouse clicks)');
+                console.log('  • Game loop and updates');
+                console.log('  • Graphics and visual effects');
+                
+                // Display keyboard shortcuts info
+                console.log('⌨️  Keyboard shortcuts:');
+                console.log('  • SPACE: Add random ball');
+                console.log('  • C: Clear all balls');
+                console.log('  • G: Toggle gravity');
+                
+                // Add initial demonstration balls
+                setTimeout(addInitialBalls, 500);
+            });
+        }
+        
+        // Global functions that can be called from HTML buttons
+        
+        
+        // Function to create a ball at specific coordinates
+        function createBallAt(x, y) {
+            if (!game) return; // Safety check
+            
+            const ball = new BouncingBall(x, y);
+            game.add(ball);
+            balls.push(ball);
+            updateBallCount();
+            
+            // Add a subtle spawn effect
+            const spawnEffect = new ex.Actor({
+                pos: new ex.Vector(x, y),
+                width: 60,
+                height: 60
+            });
+            
+            spawnEffect.graphics.use(new ex.Circle({
+                radius: 30,
+                color: ex.Color.White.clone(),
+                strokeColor: ex.Color.Yellow,
+                lineWidth: 3
+            }));
+            
+            game.add(spawnEffect);
+            
+            // Fade out the spawn effect
+            spawnEffect.actions.fade(0, 300).callMethod(() => {
+                spawnEffect.kill();
+            });
+        }
+        
+        // Control functions (global so HTML buttons can access them)
+        function clearAllBalls() {
+            if (!game) return;
+            balls.forEach(ball => ball.kill());
+            balls = [];
+            updateBallCount();
+        }
+        
+        function addRandomBall() {
+            if (!game) return;
+            const x = Math.random() * (game.drawWidth - 100) + 50;
+            const y = Math.random() * (game.drawHeight - 100) + 50;
+            createBallAt(x, y);
+        }
+        
+        function toggleGravity() {
+            gravityEnabled = !gravityEnabled;
+            const button = event.target;
+            button.textContent = gravityEnabled ? 'Disable Gravity' : 'Enable Gravity';
+            button.style.background = gravityEnabled ? 'rgba(255,100,100,0.3)' : 'rgba(255,255,255,0.2)';
+        }
+        
+        function updateBallCount() {
+            document.getElementById('ball-count').textContent = balls.length;
+        }
+        
+        // Add some initial balls for demonstration
+        function addInitialBalls() {
+            if (!game) return;
+            // Add 3 balls in different positions
+            createBallAt(200, 150);
+            createBallAt(400, 300);
+            createBallAt(600, 200);
+        }
+    </script>
+</body>
+</html>
