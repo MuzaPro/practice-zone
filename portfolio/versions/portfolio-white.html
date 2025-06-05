@@ -105,28 +105,63 @@
             color: var(--gray-600);
         }
 
-        /* Data grid decoration */
+        /* Data grid decorations */
         .data-grid {
             position: absolute;
-            top: 2rem;
-            right: 2rem;
-            width: 120px;
-            height: 120px;
-            border: 2px solid var(--gray-200);
+            border: 1px solid var(--gray-200);
             background: repeating-linear-gradient(
                 0deg,
                 transparent,
-                transparent 8px,
-                var(--gray-200) 8px,
-                var(--gray-200) 9px
+                transparent 6px,
+                var(--gray-200) 6px,
+                var(--gray-200) 7px
             ),
             repeating-linear-gradient(
                 90deg,
                 transparent,
-                transparent 8px,
-                var(--gray-200) 8px,
-                var(--gray-200) 9px
+                transparent 6px,
+                var(--gray-200) 6px,
+                var(--gray-200) 7px
             );
+            opacity: 0.3;
+        }
+
+        .data-grid-1 {
+            top: 2rem;
+            right: 2rem;
+            width: 80px;
+            height: 80px;
+        }
+
+        .data-grid-2 {
+            top: 50%;
+            left: 3%;
+            width: 60px;
+            height: 60px;
+            transform: rotate(15deg);
+        }
+
+        .data-grid-3 {
+            bottom: 30%;
+            right: 8%;
+            width: 100px;
+            height: 40px;
+        }
+
+        .data-grid-4 {
+            top: 70%;
+            left: 15%;
+            width: 50px;
+            height: 80px;
+            transform: rotate(-10deg);
+        }
+
+        .data-grid-5 {
+            top: 20%;
+            left: 50%;
+            width: 70px;
+            height: 30px;
+            transform: rotate(25deg);
         }
 
         /* Intro section */
@@ -439,7 +474,11 @@
                 font-size: 2.5rem;
             }
 
-            .data-grid {
+            .data-grid-1,
+            .data-grid-2,
+            .data-grid-3,
+            .data-grid-4,
+            .data-grid-5 {
                 display: none;
             }
 
@@ -474,7 +513,11 @@
     
     <div class="container">
         <header>
-            <div class="data-grid"></div>
+            <div class="data-grid data-grid-1"></div>
+            <div class="data-grid data-grid-2"></div>
+            <div class="data-grid data-grid-3"></div>
+            <div class="data-grid data-grid-4"></div>
+            <div class="data-grid data-grid-5"></div>
             
             <div class="header-content">
                 <div class="logo">
@@ -551,7 +594,7 @@
                     </div>
                 </article>
 
-                <article class="project-card" onclick="openDemo('https://muzapro.github.io/Organic-Chemistry-Quiz-JS/')">
+                <article class="project-card" onclick="openDemo('https://www.muzascience.com/organic-chem-quiz')">
                     <div class="project-number">04</div>
                     <div class="project-image">
                         <img src="portfolio-content/Organic-chem-quiz-logo.jpg" alt="Organic Chemistry Quiz">

@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../../assets/brand/muza-favicon.png">
+    <title>Muza Design System - Computational Brutalism</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --white: #ffffff;
+            --gray-50: #fafafa;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-300: #d4d4d4;
+            --gray-400: #a3a3a3;
+            --gray-500: #737373;
+            --gray-600: #525252;
+            --gray-700: #404040;
+            --gray-800: #262626;
+            --gray-900: #171717;
+            --black: #000000;
+            --accent: #ef4444;
+            
+            /* Theme Variables - Light Mode */
+            --bg-primary: var(--white);
+            --bg-secondary: var(--gray-50);
+            --bg-card: var(--white);
+            --text-primary: var(--gray-900);
+            --text-secondary: var(--gray-700);
+            --text-muted: var(--gray-600);
+            --border-primary: var(--black);
+            --border-secondary: var(--gray-300);
+            --shadow-color: var(--gray-900);
+            --shadow-opacity: 1;
+            --mesh-opacity: 0.3;
+            --mesh-color: rgba(0, 0, 0, 0.2);
+            --code-bg: var(--gray-900);
+            --code-text: var(--white);
+        }
+
+        /* Dark Mode Theme */
+        [data-theme="dark"] {
+            --bg-primary: var(--gray-900);
+            --bg-secondary: var(--black);
+            --bg-card: var(--gray-800);
+            --text-primary: var(--gray-100);
+            --text-secondary: var(--gray-300);
+            --text-muted: var(--gray-400);
+            --border-primary: var(--gray-100);
+            --border-secondary: var(--gray-600);
+            --shadow-color: var(--gray-100);
+            --shadow-opacity: 0.3;
+            --mesh-opacity: 0.12;
+            --mesh-color: rgba(255, 255, 255, 0.25);
+            --code-bg: var(--black);
+            --code-text: var(--gray-100);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.4;
+            overflow-x: hidden;
+            position: relative;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .mesh-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: var(--mesh-opacity);
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            background: var(--bg-card);
+            border: 2px solid var(--border-primary);
+            color: var(--text-primary);
+            padding: 8px 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle:hover {
+            background: var(--border-primary);
+            color: var(--bg-primary);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        header {
+            padding: 4rem 0 2rem;
+            border-bottom: 3px solid var(--border-primary);
+            margin-bottom: 4rem;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            border: 3px solid var(--border-primary);
+            background: var(--border-primary);
+            padding: 8px;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        [data-theme="dark"] .logo img {
+            filter: invert(1);
+        }
+
+        .header-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            line-height: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-text p {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+        }
+
+        /* Navigation */
+        .nav-pills {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-pill {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            text-decoration: none;
+            border: 2px solid var(--border-secondary);
+            padding: 8px 16px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-pill:hover {
+            background: var(--border-primary);
+            color: var(--bg-primary);
+            border-color: var(--border-primary);
+        }
+
+        /* Intro Section */
+        .intro {
+            border-left: 6px solid var(--border-primary);
+            padding-left: 2rem;
+            margin-bottom: 6rem;
+            max-width: 900px;
+        }
+
+        .intro h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .intro p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .highlight {
+            background: var(--border-primary);
+            color: var(--bg-primary);
+            padding: 2px 6px;
+            font-weight: 700;
+        }
+
+        /* Section Styles */
+        .section {
+            margin-bottom: 6rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .section-subtitle {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+        }
+
+        /* Component Examples */
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .example-card {
+            background: var(--bg-card);
+            border: 3px solid var(--border-primary);
+            position: relative;
+            box-shadow: 8px 8px 0px rgba(var(--shadow-color), var(--shadow-opacity));
+            transition: all 0.2s ease;
+        }
+
+        [data-theme="dark"] .example-card {
+            box-shadow: 8px 8px 0px rgba(229, 229, 229, 0.3);
+        }
+
+        .example-card:hover {
+            transform: translate(-8px, -8px);
+        }
+
+        [data-theme="dark"] .example-card:hover {
+            box-shadow: 12px 12px 0px rgba(229, 229, 229, 0.3);
+        }
+
+        [data-theme="light"] .example-card:hover {
+            box-shadow: 12px 12px 0px var(--gray-900);
+        }
+
+        .card-number {
+            position: absolute;
+            top: -3px;
+            right: -3px;
+            background: var(--accent);
+            color: var(--white);
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: 0.8rem;
+            padding: 8px 12px;
+            border: 3px solid var(--border-primary);
+            z-index: 2;
+        }
+
+        .card-content {
+            padding: 2rem;
+        }
+
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .card-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Color Palette */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .color-swatch {
+            aspect-ratio: 1;
+            border: 3px solid var(--border-primary);
+            position: relative;
+            display: flex;
+            align-items: end;
+            padding: 1rem;
+        }
+
+        .color-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        /* Color swatches maintain their actual colors */
+        .swatch-white { 
+            background: #ffffff !important; 
+            color: #000000;
+        }
+        .swatch-gray-100 { 
+            background: #f5f5f5 !important; 
+            color: #000000;
+        }
+        .swatch-gray-300 { 
+            background: #d4d4d4 !important; 
+            color: #000000;
+        }
+        .swatch-gray-500 { 
+            background: #737373 !important; 
+            color: #ffffff;
+        }
+        .swatch-gray-700 { 
+            background: #404040 !important; 
+            color: #ffffff;
+        }
+        .swatch-gray-900 { 
+            background: #171717 !important; 
+            color: #ffffff;
+        }
+        .swatch-black { 
+            background: #000000 !important; 
+            color: #ffffff;
+        }
+        .swatch-accent { 
+            background: #ef4444 !important; 
+            color: #ffffff;
+        }
+
+        /* Typography Examples */
+        .type-example {
+            border: 2px solid var(--border-secondary);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            background: var(--bg-secondary);
+        }
+
+        .type-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .display-example {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            line-height: 0.9;
+        }
+
+        .h1-example {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .technical-example {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .body-example {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Button Examples */
+        .button-showcase {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .btn-primary {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-primary);
+            text-decoration: none;
+            border: 2px solid var(--border-primary);
+            padding: 8px 16px;
+            transition: all 0.2s ease;
+            background: var(--bg-card);
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background: var(--border-primary);
+            color: var(--bg-primary);
+        }
+
+        .btn-cta {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: var(--border-primary);
+            color: var(--bg-primary);
+            border: 3px solid var(--border-primary);
+            padding: 1rem 2rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            display: inline-block;
+        }
+
+        .btn-cta:hover {
+            background: var(--bg-primary);
+            color: var(--border-primary);
+            transform: translate(-2px, -2px);
+        }
+
+        [data-theme="dark"] .btn-cta:hover {
+            box-shadow: 4px 4px 0px rgba(229, 229, 229, 0.3);
+        }
+
+        [data-theme="light"] .btn-cta:hover {
+            box-shadow: 4px 4px 0px var(--black);
+        }
+
+        /* Code Block */
+        .code-block {
+            background: var(--code-bg);
+            color: var(--code-text);
+            padding: 2rem;
+            border: 3px solid var(--border-primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            line-height: 1.6;
+            overflow-x: auto;
+            margin-bottom: 2rem;
+        }
+
+        .code-comment {
+            color: var(--gray-400);
+        }
+
+        /* Stats Section */
+        .stats-grid {
+            background: var(--border-primary);
+            color: var(--bg-primary);
+            padding: 4rem;
+            border: 6px solid var(--border-primary);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--accent);
+            display: block;
+        }
+
+        .stat-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 0.5rem;
+        }
+
+        /* Philosophy Section */
+        .philosophy {
+            background: var(--bg-secondary);
+            border-top: 6px solid var(--border-primary);
+            border-bottom: 6px solid var(--border-primary);
+            padding: 6rem 0;
+            margin: 6rem 0;
+        }
+
+        .philosophy-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .philosophy h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+        }
+
+        .philosophy-quote {
+            font-size: 1.5rem;
+            font-style: italic;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .header-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .intro {
+                border-left: 4px solid var(--border-primary);
+                padding-left: 1rem;
+            }
+
+            .component-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .color-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats-grid {
+                padding: 2rem;
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .nav-pills {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas class="mesh-background" id="meshCanvas"></canvas>
+    <button class="theme-toggle" id="themeToggle">◐ DARK</button>
+    
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="logo">
+                    <img src="../../assets/brand/muza-logo-white.png" alt="Muza Productions Logo">
+                </div>
+                <div class="header-text">
+                    <h1>Design System</h1>
+                    <p>Computational Brutalism</p>
+                </div>
+            </div>
+        </header>
+
+        <nav class="nav-pills">
+            <a href="#overview" class="nav-pill">Overview</a>
+            <a href="#colors" class="nav-pill">Colors</a>
+            <a href="#typography" class="nav-pill">Typography</a>
+            <a href="#components" class="nav-pill">Components</a>
+            <a href="#dark-mode" class="nav-pill">Dark Mode</a>
+            <a href="#philosophy" class="nav-pill">Philosophy</a>
+        </nav>
+
+        <div class="intro" id="overview">
+            <h2>Behind the Design</h2>
+            <p>
+                This design system represents our approach to <span class="highlight">Computational Brutalism</span> - 
+                where scientific precision meets radical digital design. Built for researchers, scientists, and deep-tech innovators 
+                who refuse to compromise between authority and visual innovation.
+            </p>
+            <p>
+                Every element is designed to suggest computational activity, data processing, and the methodical precision 
+                of advanced research facilities while maintaining uncompromising readability and accessibility.
+            </p>
+        </div>
+
+        <section class="section" id="colors">
+            <h2 class="section-title">Color System</h2>
+            <p class="section-subtitle">Monochromatic Foundation</p>
+            
+            <div class="color-grid">
+                <div class="color-swatch swatch-white">
+                    <span class="color-label">White<br>#ffffff</span>
+                </div>
+                <div class="color-swatch swatch-gray-100">
+                    <span class="color-label">Gray 100<br>#f5f5f5</span>
+                </div>
+                <div class="color-swatch swatch-gray-300">
+                    <span class="color-label">Gray 300<br>#d4d4d4</span>
+                </div>
+                <div class="color-swatch swatch-gray-500">
+                    <span class="color-label">Gray 500<br>#737373</span>
+                </div>
+                <div class="color-swatch swatch-gray-700">
+                    <span class="color-label">Gray 700<br>#404040</span>
+                </div>
+                <div class="color-swatch swatch-gray-900">
+                    <span class="color-label">Gray 900<br>#171717</span>
+                </div>
+                <div class="color-swatch swatch-black">
+                    <span class="color-label">Black<br>#000000</span>
+                </div>
+                <div class="color-swatch swatch-accent">
+                    <span class="color-label">Accent Red<br>#ef4444</span>
+                </div>
+            </div>
+
+            <p style="color: var(--text-secondary); line-height: 1.6;">
+                The monochromatic foundation creates maximum contrast and clarity while the strategic use of red 
+                for accents and status indicators adds scientific authority without distraction.
+            </p>
+        </section>
+
+        <section class="section" id="typography">
+            <h2 class="section-title">Typography</h2>
+            <p class="section-subtitle">Three Font System</p>
+
+            <div class="type-example">
+                <div class="type-label">Display / Playfair Display 900</div>
+                <div class="display-example">Quantum Computing</div>
+            </div>
+
+            <div class="type-example">
+                <div class="type-label">Heading / Playfair Display 700</div>
+                <div class="h1-example">Featured Projects</div>
+            </div>
+
+            <div class="type-example">
+                <div class="type-label">Technical / JetBrains Mono 600</div>
+                <div class="technical-example">Interactive Scientific Experiences</div>
+            </div>
+
+            <div class="type-example">
+                <div class="type-label">Body / Inter 400</div>
+                <div class="body-example">
+                    Interactive Experiences transform static research into engaging, explorable narratives. 
+                    Designed for scientists, researchers, and deep-tech innovators who want to showcase their 
+                    breakthroughs with both scientific rigor and visual impact.
+                </div>
+            </div>
+        </section>
+
+        <div class="stats-grid">
+            <div>
+                <span class="stat-number">3</span>
+                <div class="stat-label">Font Families</div>
+            </div>
+            <div>
+                <span class="stat-number">8</span>
+                <div class="stat-label">Grayscale Values</div>
+            </div>
+            <div>
+                <span class="stat-number">100%</span>
+                <div class="stat-label">Accessibility Compliant</div>
+            </div>
+            <div>
+                <span class="stat-number">∞</span>
+                <div class="stat-label">Scientific Authority</div>
+            </div>
+        </div>
+
+        <section class="section" id="components">
+            <h2 class="section-title">Components</h2>
+            <p class="section-subtitle">Brutalist Building Blocks</p>
+
+            <div class="component-grid">
+                <div class="example-card">
+                    <div class="card-number">01</div>
+                    <div class="card-content">
+                        <h3 class="card-title">Brutalist Cards</h3>
+                        <p class="card-description">
+                            Sharp edges, hard shadows, and numbered indicators create a lab specimen aesthetic. 
+                            Perfect for showcasing research projects or technical documentation.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="card-number">02</div>
+                    <div class="card-content">
+                        <h3 class="card-title">Status Indicators</h3>
+                        <p class="card-description">
+                            Technical labels and status bars provide clear system feedback. 
+                            Uses monospace typography for that computational precision feeling.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="example-card">
+                    <div class="card-number">03</div>
+                    <div class="card-content">
+                        <h3 class="card-title">Interactive Elements</h3>
+                        <p class="card-description">
+                            Hover effects and transforms that maintain the geometric aesthetic while 
+                            providing clear user feedback through movement and shadow changes.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 2rem; text-transform: uppercase; color: var(--text-primary);">Button System</h3>
+            
+            <div class="button-showcase">
+                <a href="#" class="btn-primary">Primary Action</a>
+                <a href="#" class="btn-cta">Main CTA</a>
+            </div>
+
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 2rem; text-transform: uppercase; color: var(--text-primary);">Code Implementation</h3>
+            
+            <div class="code-block">
+<span class="code-comment">/* Brutalist Card Component */</span>
+.brutalist-card {
+    background: var(--bg-card);
+    border: 3px solid var(--border-primary);
+    box-shadow: 8px 8px 0px rgba(var(--shadow-color), var(--shadow-opacity));
+    transition: all 0.2s ease;
+}
+
+.brutalist-card:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 12px 12px 0px rgba(var(--shadow-color), var(--shadow-opacity));
+}
+            </div>
+        </section>
+
+        <section class="section" id="dark-mode">
+            <h2 class="section-title">Dark Mode</h2>
+            <p class="section-subtitle">Computational Terminal Aesthetic</p>
+            
+            <div style="border-left: 6px solid var(--border-primary); padding-left: 2rem; margin-bottom: 3rem;">
+                <p style="font-size: 1.2rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 1rem;">
+                    Dark mode transforms the design into a <span class="highlight">computational terminal</span> experience - 
+                    perfect for researchers working late nights or presenting in dark conference rooms.
+                </p>
+                <p style="font-size: 1.2rem; line-height: 1.6; color: var(--text-secondary);">
+                    The brutalist aesthetic becomes even more striking with inverted contrast, 
+                    creating that authentic "working inside a quantum computer" feeling.
+                </p>
+            </div>
+
+            <div class="example-card" style="margin-bottom: 2rem;">
+                <div class="card-number">◐</div>
+                <div class="card-content">
+                    <h3 class="card-title">Adaptive Mesh Background</h3>
+                    <p class="card-description">
+                        The animated mesh network automatically adapts to the theme - subtle dark connections in light mode, 
+                        bright connections in dark mode. Perfect for that data-processing laboratory aesthetic.
+                    </p>
+                </div>
+            </div>
+
+            <div class="code-block">
+<span class="code-comment">/* CSS Custom Properties for Theme Switching */</span>
+:root {
+    --bg-primary: var(--white);
+    --text-primary: var(--gray-900);
+    --border-primary: var(--black);
+}
+
+[data-theme="dark"] {
+    --bg-primary: var(--gray-900);
+    --text-primary: var(--gray-100);
+    --border-primary: var(--gray-100);
+}
+            </div>
+
+            <p style="color: var(--text-secondary); line-height: 1.6;">
+                <strong>Try it now!</strong> Click the theme toggle in the top-right corner to experience 
+                how the entire design system adapts while maintaining its brutalist authority.
+            </p>
+        </section>
+
+        <section class="philosophy" id="philosophy">
+            <div class="philosophy-content">
+                <h3>Design Philosophy</h3>
+                <blockquote class="philosophy-quote">
+                    "Where scientific precision meets radical digital design. Every pixel serves both function and authority."
+                </blockquote>
+                <p style="color: var(--text-secondary); line-height: 1.7;">
+                    Computational Brutalism isn't just an aesthetic choice—it's a statement about how scientific content should be presented. 
+                    Bold, unapologetic, precise, and beautiful. Perfect for organizations that refuse to choose between credibility and innovation.
+                </p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Implementation</h2>
+            <p class="section-subtitle">Ready for Production</p>
+            
+            <div style="border-left: 6px solid var(--border-primary); padding-left: 2rem; margin-bottom: 3rem;">
+                <p style="font-size: 1.1rem; line-height: 1.6; color: var(--text-secondary); margin-bottom: 1rem;">
+                    This design system is production-ready and optimized for performance. 
+                    All components are built with accessibility in mind, ensuring your scientific content reaches every audience.
+                </p>
+                <p style="font-size: 1.1rem; line-height: 1.6; color: var(--text-secondary);">
+                    From interactive research portfolios to technical documentation, this system provides the tools to create 
+                    digital experiences that match the sophistication of your research.
+                </p>
+            </div>
+
+            <div style="text-align: center; margin-top: 4rem;">
+                <a href="https://www.muzascience.com/" target="_blank" class="btn-cta">Explore Muza Productions</a>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Animated mesh background
+        const canvas = document.getElementById('meshCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let nodes = [];
+        let mouseX = 0;
+        let mouseY = 0;
+
+        function initCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            // Create nodes
+            nodes = [];
+            for (let i = 0; i < 50; i++) {
+                nodes.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5,
+                    radius: Math.random() * 2 + 1
+                });
+            }
+        }
+
+        function updateNodes() {
+            nodes.forEach(node => {
+                // Move nodes
+                node.x += node.vx;
+                node.y += node.vy;
+                
+                // Bounce off edges
+                if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
+                if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
+                
+                // Mouse interaction
+                const dx = mouseX - node.x;
+                const dy = mouseY - node.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < 100) {
+                    node.vx += dx * 0.00005;
+                    node.vy += dy * 0.00005;
+                }
+            });
+        }
+
+        function drawConnections() {
+            const meshColor = getComputedStyle(document.documentElement)
+                .getPropertyValue('--mesh-color').trim();
+            ctx.strokeStyle = meshColor;
+            ctx.lineWidth = 0.8;
+            
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const dx = nodes[i].x - nodes[j].x;
+                    const dy = nodes[i].y - nodes[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 180) {
+                        const opacity = 1 - (distance / 180);
+                        const currentColor = getComputedStyle(document.documentElement)
+                            .getPropertyValue('--mesh-color').trim();
+                        
+                        ctx.strokeStyle = currentColor.replace(/[\d\.]+\)$/g, (opacity * 0.6) + ')');
+                        
+                        ctx.beginPath();
+                        ctx.moveTo(nodes[i].x, nodes[i].y);
+                        ctx.lineTo(nodes[j].x, nodes[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function drawNodes() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            ctx.fillStyle = isDark ? 'rgba(255, 255, 255, 0.9)' : 'rgba(0, 0, 0, 0.8)';
+            
+            nodes.forEach(node => {
+                ctx.shadowColor = isDark ? 'rgba(255, 255, 255, 0.3)' : 'rgba(0, 0, 0, 0.2)';
+                ctx.shadowBlur = 4;
+                
+                ctx.beginPath();
+                ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.shadowBlur = 0;
+            });
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            updateNodes();
+            drawConnections();
+            drawNodes();
+            
+            requestAnimationFrame(animate);
+        }
+
+        // Mouse tracking
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        // Resize handling
+        window.addEventListener('resize', initCanvas);
+
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
+
+        // Apply saved theme
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        themeToggle.textContent = currentTheme === 'dark' ? '☀ LIGHT' : '◐ DARK';
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            themeToggle.textContent = newTheme === 'dark' ? '☀ LIGHT' : '◐ DARK';
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('.nav-pill').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Initialize
+        initCanvas();
+        animate();
+
+        // Card entrance animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.example-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
