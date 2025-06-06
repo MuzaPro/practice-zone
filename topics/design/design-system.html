@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../../assets/brand/muza-favicon.png">
+    <title>Muza Design System Template</title>
+    
+    <!-- Required Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Design System Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Required Elements for Design System -->
+    <canvas class="mesh-background" id="meshCanvas"></canvas>
+    <button class="theme-toggle" id="themeToggle">◐ DARK</button>
+    
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="logo">
+                    <img src="../../assets/brand/muza-logo-white.png" alt="Muza Productions Logo">
+                </div>
+                <div class="header-text">
+                    <h1>Page Title</h1>
+                    <p>Page Subtitle</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav-pills">
+            <a href="#section1" class="nav-pill">Section 1</a>
+            <a href="#section2" class="nav-pill">Section 2</a>
+            <a href="#section3" class="nav-pill">Section 3</a>
+        </nav>
+
+        <!-- Introduction Section -->
+        <div class="intro" id="section1">
+            <h2>Introduction Heading</h2>
+            <p>
+                This is an introduction paragraph with a <span class="highlight">highlighted term</span>. 
+                Replace this content with your own introduction text.
+            </p>
+            <p>
+                Add multiple paragraphs as needed for your content. The design system will maintain
+                consistent typography and spacing.
+            </p>
+        </div>
+
+        <!-- Main Content Section -->
+        <section class="section" id="section2">
+            <h2 class="section-title">Main Section Title</h2>
+            <p class="section-subtitle">Supporting Subtitle Text</p>
+            
+            <!-- Project/Component Grid Example -->
+            <div class="projects-grid">
+                <!-- Card Example 1 -->
+                <div class="project-card">
+                    <div class="project-number">01</div>
+                    <div class="project-image">
+                        <img src="https://placehold.co/600x400" alt="Project Image">
+                        <div class="status-bar">Active Project</div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Card Title</h3>
+                        <p class="project-subtitle">Card description text goes here. Replace with your own content.</p>
+                        <div class="project-meta">
+                            <a href="#" class="btn-primary">View Details</a>
+                            <span class="status">Status: Active</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Card Example 2 -->
+                <div class="project-card">
+                    <div class="project-number">02</div>
+                    <div class="project-image">
+                        <img src="https://placehold.co/600x400" alt="Project Image">
+                        <div class="status-bar">New Project</div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Another Title</h3>
+                        <p class="project-subtitle">Another description goes here. The design system maintains consistent spacing and typography.</p>
+                        <div class="project-meta">
+                            <a href="#" class="btn-primary">View Details</a>
+                            <span class="status">Status: New</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section Example -->
+        <div class="stats-grid">
+            <div>
+                <span class="stat-number">75+</span>
+                <div class="stat-label">Projects</div>
+            </div>
+            <div>
+                <span class="stat-number">12</span>
+                <div class="stat-label">Team Members</div>
+            </div>
+            <div>
+                <span class="stat-number">24/7</span>
+                <div class="stat-label">Support</div>
+            </div>
+        </div>
+
+        <!-- Additional Content Section -->
+        <section class="section" id="section3">
+            <h2 class="section-title">Another Section</h2>
+            <p class="section-subtitle">More Content Here</p>
+            
+            <!-- Content goes here -->
+            <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 2rem;">
+                Add your content here. The design system provides consistent typography, spacing, and colors.
+            </p>
+            
+            <!-- CTA Button Example -->
+            <div style="text-align: center; margin-top: 4rem;">
+                <a href="#" class="btn-cta">Call To Action</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Design System Script -->
+    <script src="muza-script.js"></script>
+</body>
+</html>
