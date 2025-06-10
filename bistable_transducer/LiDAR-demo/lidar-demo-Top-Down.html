@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiDAR Haptic Navigation System Demo</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #2a2a2a;
+            color: white;
+            touch-action: none;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .demo-area {
+            position: relative;
+            border: 2px solid #555;
+            border-radius: 8px;
+            background: #1a1a1a;
+            margin: 20px 0;
+        }
+        
+        #gameCanvas {
+            display: block;
+            cursor: grab;
+            width: 100%;
+            height: auto;
+        }
+        
+        #gameCanvas:active {
+            cursor: grabbing;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+        
+        .haptic-display {
+            background: #333;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        
+        .hexagon-array {
+            display: inline-block;
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+        }
+        
+        .transducer {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #444;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            border: 2px solid #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            font-weight: bold;
+        }
+        
+        .transducer.active {
+            background: #ff4444;
+            border-color: #ff6666;
+            box-shadow: 0 0 15px rgba(255, 68, 68, 0.6);
+            transform: scale(1.2);
+        }
+        
+        .detection-info {
+            background: #444;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .zone-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            max-width: 300px;
+            margin: 15px auto;
+        }
+        
+        .zone-indicator {
+            background: #555;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .zone-indicator.detected {
+            background: #ff4444;
+            box-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
+        }
+        
+        .info-panel {
+            background: #333;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background: #45a049;
+        }
+        
+        .controls input[type="range"] {
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>LiDAR Haptic Navigation System</h1>
+        <p>Drag the character to experience how the forward-facing LiDAR detection system triggers haptic feedback patterns</p>
+        
+        <div class="demo-area">
+            <canvas id="gameCanvas" width="700" height="500"></canvas>
+        </div>
+        
+        <div class="controls">
+            <button onclick="demo.resetPosition()">Reset Position</button>
+            <button onclick="demo.toggleDetectionVisualization()">Toggle Detection Zones</button>
+            <span>Detection Distance: <input type="range" id="distanceSlider" min="50" max="200" value="120" onchange="demo.setDetectionDistance(this.value)"> <span id="distanceValue">120px</span></span>
+            <span>Cone Angle: <input type="range" id="angleSlider" min="30" max="120" value="60" onchange="demo.setConeAngle(this.value)"> <span id="angleValue">60°</span></span>
+        </div>
+        
+        <div class="detection-info">
+            <h3>Detection Zones (2×3 Grid)</h3>
+            <div class="zone-grid" id="zoneGrid">
+                <div class="zone-indicator" data-zone="0">Upper Left</div>
+                <div class="zone-indicator" data-zone="1">Upper Center</div>
+                <div class="zone-indicator" data-zone="2">Upper Right</div>
+                <div class="zone-indicator" data-zone="3">Lower Left</div>
+                <div class="zone-indicator" data-zone="4">Lower Center</div>
+                <div class="zone-indicator" data-zone="5">Lower Right</div>
+            </div>
+        </div>
+        
+        <div class="haptic-display">
+            <h3>19-Transducer Hexagonal Array</h3>
+            <div class="hexagon-array" id="hapticArray">
+                <!-- Transducers will be positioned by JavaScript -->
+            </div>
+            <p id="feedbackInfo">Move close to obstacles in the detection cone to trigger haptic feedback</p>
+        </div>
+        
+        <div class="info-panel">
+            <h3>How the System Works:</h3>
+            <p><strong>Forward LiDAR Cone:</strong> Scans a configurable cone area in front of the user (mimicking smartphone LiDAR)</p>
+            <p><strong>6 Detection Zones:</strong> The cone is divided into a 2×3 grid of virtual "windows"</p>
+            <p><strong>Spatial Mapping:</strong> Left/center/right columns map to corresponding transducer columns</p>
+            <p><strong>Wave Patterns:</strong> Top row detection triggers bottom-to-top waves, bottom row triggers top-to-bottom</p>
+        </div>
+    </div>
+
+    <script>
+        class LiDARHapticDemo {
+            constructor() {
+                this.canvas = document.getElementById('gameCanvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.hapticArray = document.getElementById('hapticArray');
+                this.zoneGrid = document.getElementById('zoneGrid');
+                this.feedbackInfo = document.getElementById('feedbackInfo');
+                
+                // Demo state
+                this.player = { 
+                    x: 100, 
+                    y: 250, 
+                    radius: 15,
+                    angle: 0 // facing direction
+                };
+                this.obstacles = this.generateObstacles();
+                this.isDragging = false;
+                this.dragOffset = { x: 0, y: 0 };
+                this.showDetectionZones = true;
+                this.detectionDistance = 120;
+                this.coneAngle = Math.PI / 3; // 60 degrees
+                
+                // Detection system
+                this.detectionZones = Array(6).fill(false);
+                this.activeTransducers = new Set();
+                
+                this.setupEventListeners();
+                this.createHapticArray();
+                this.gameLoop();
+            }
+            
+            generateObstacles() {
+                return [
+                    // Walls
+                    { x: 0, y: 0, width: 700, height: 20, type: 'wall' },
+                    { x: 0, y: 480, width: 700, height: 20, type: 'wall' },
+                    { x: 0, y: 0, width: 20, height: 500, type: 'wall' },
+                    { x: 680, y: 0, width: 20, height: 500, type: 'wall' },
+                    
+                    // Furniture/obstacles in different areas
+                    { x: 200, y: 100, width: 60, height: 80, type: 'furniture' },
+                    { x: 350, y: 150, width: 80, height: 60, type: 'furniture' },
+                    { x: 500, y: 200, width: 70, height: 70, type: 'furniture' },
+                    { x: 250, y: 350, width: 90, height: 50, type: 'furniture' },
+                    { x: 450, y: 300, width: 60, height: 90, type: 'furniture' },
+                    { x: 550, y: 100, width: 50, height: 120, type: 'furniture' }
+                ];
+            }
+            
+            setupEventListeners() {
+                // Mouse events
+                this.canvas.addEventListener('mousedown', (e) => this.startDrag(e));
+                this.canvas.addEventListener('mousemove', (e) => this.drag(e));
+                this.canvas.addEventListener('mouseup', () => this.endDrag());
+                
+                // Touch events for mobile
+                this.canvas.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    this.startDrag(e.touches[0]);
+                });
+                this.canvas.addEventListener('touchmove', (e) => {
+                    e.preventDefault();
+                    this.drag(e.touches[0]);
+                });
+                this.canvas.addEventListener('touchend', (e) => {
+                    e.preventDefault();
+                    this.endDrag();
+                });
+            }
+            
+            getEventPos(e) {
+                const rect = this.canvas.getBoundingClientRect();
+                const scaleX = this.canvas.width / rect.width;
+                const scaleY = this.canvas.height / rect.height;
+                
+                return {
+                    x: (e.clientX - rect.left) * scaleX,
+                    y: (e.clientY - rect.top) * scaleY
+                };
+            }
+            
+            startDrag(e) {
+                const pos = this.getEventPos(e);
+                const dx = pos.x - this.player.x;
+                const dy = pos.y - this.player.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance <= this.player.radius) {
+                    this.isDragging = true;
+                    this.dragOffset = { x: dx, y: dy };
+                }
+            }
+            
+            drag(e) {
+                if (this.isDragging) {
+                    const pos = this.getEventPos(e);
+                    const newX = pos.x - this.dragOffset.x;
+                    const newY = pos.y - this.dragOffset.y;
+                    
+                    // Keep player within bounds
+                    this.player.x = Math.max(this.player.radius + 20, 
+                                   Math.min(this.canvas.width - this.player.radius - 20, newX));
+                    this.player.y = Math.max(this.player.radius + 20, 
+                                   Math.min(this.canvas.height - this.player.radius - 20, newY));
+                }
+            }
+            
+            endDrag() {
+                this.isDragging = false;
+            }
+            
+            detectObstaclesInCone() {
+                // Reset detection zones
+                this.detectionZones.fill(false);
+                
+                // Define the 6 detection zones within the cone
+                const halfAngle = this.coneAngle / 2;
+                const startAngle = this.player.angle - halfAngle;
+                const endAngle = this.player.angle + halfAngle;
+                
+                // Zone boundaries (2×3 grid)
+                const zones = [];
+                for (let row = 0; row < 2; row++) {
+                    for (let col = 0; col < 3; col++) {
+                        const zoneStartAngle = startAngle + (col * this.coneAngle / 3);
+                        const zoneEndAngle = startAngle + ((col + 1) * this.coneAngle / 3);
+                        const zoneStartDist = row * this.detectionDistance / 2;
+                        const zoneEndDist = (row + 1) * this.detectionDistance / 2;
+                        
+                        zones.push({
+                            index: row * 3 + col,
+                            startAngle: zoneStartAngle,
+                            endAngle: zoneEndAngle,
+                            startDist: zoneStartDist,
+                            endDist: zoneEndDist
+                        });
+                    }
+                }
+                
+                // Check each obstacle against each zone
+                for (let obstacle of this.obstacles) {
+                    if (obstacle.type === 'wall') continue; // Skip walls for cleaner demo
+                    
+                    // Check obstacle corners and center
+                    const checkPoints = [
+                        { x: obstacle.x, y: obstacle.y },
+                        { x: obstacle.x + obstacle.width, y: obstacle.y },
+                        { x: obstacle.x, y: obstacle.y + obstacle.height },
+                        { x: obstacle.x + obstacle.width, y: obstacle.y + obstacle.height },
+                        { x: obstacle.x + obstacle.width/2, y: obstacle.y + obstacle.height/2 }
+                    ];
+                    
+                    for (let point of checkPoints) {
+                        const dx = point.x - this.player.x;
+                        const dy = point.y - this.player.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        const angle = Math.atan2(dy, dx);
+                        
+                        // Check if point is within detection range and cone
+                        if (distance <= this.detectionDistance && distance > 20) {
+                            const normalizedAngle = this.normalizeAngle(angle - this.player.angle);
+                            
+                            if (Math.abs(normalizedAngle) <= halfAngle) {
+                                // Determine which zone this point belongs to
+                                for (let zone of zones) {
+                                    const zoneAngle = this.normalizeAngle(angle - this.player.angle + halfAngle);
+                                    const relativeAngle = zoneAngle / this.coneAngle * 3; // 0-3 for column
+                                    const relativeDistance = distance / this.detectionDistance * 2; // 0-2 for row
+                                    
+                                    const col = Math.floor(relativeAngle);
+                                    const row = Math.floor(relativeDistance);
+                                    
+                                    if (col >= 0 && col < 3 && row >= 0 && row < 2) {
+                                        const zoneIndex = row * 3 + col;
+                                        this.detectionZones[zoneIndex] = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                this.updateHapticFeedback();
+            }
+            
+            normalizeAngle(angle) {
+                while (angle > Math.PI) angle -= 2 * Math.PI;
+                while (angle < -Math.PI) angle += 2 * Math.PI;
+                return angle;
+            }
+            
+            updateHapticFeedback() {
+                // Clear active transducers
+                this.activeTransducers.clear();
+                
+                // Map detection zones to transducer groups
+                const transducerMapping = {
+                    // Left column (zones 0,3) -> left transducers
+                    0: [0, 1, 5, 6, 11, 12], // Upper left
+                    3: [5, 6, 11, 12, 16, 17], // Lower left
+                    
+                    // Center column (zones 1,4) -> center transducers  
+                    1: [1, 2, 6, 7, 12, 13], // Upper center
+                    4: [6, 7, 12, 13, 17, 18], // Lower center
+                    
+                    // Right column (zones 2,5) -> right transducers
+                    2: [2, 3, 7, 8, 13, 14], // Upper right
+                    5: [7, 8, 13, 14, 18, 9] // Lower right
+                };
+                
+                // Activate transducers based on detected zones
+                for (let zoneIndex = 0; zoneIndex < 6; zoneIndex++) {
+                    if (this.detectionZones[zoneIndex]) {
+                        const transducers = transducerMapping[zoneIndex] || [];
+                        transducers.forEach(t => this.activeTransducers.add(t));
+                    }
+                }
+                
+                this.updateHapticDisplay();
+                this.updateZoneDisplay();
+            }
+            
+            createHapticArray() {
+                // 19-transducer hexagonal arrangement (based on the paper)
+                const transducerPositions = [
+                    // Center ring
+                    { x: 100, y: 100 }, // 0 - center
+                    
+                    // Inner ring (6 transducers)
+                    { x: 100, y: 70 },  // 1 - top
+                    { x: 125, y: 85 },  // 2 - top-right
+                    { x: 125, y: 115 }, // 3 - bottom-right
+                    { x: 100, y: 130 }, // 4 - bottom
+                    { x: 75, y: 115 },  // 5 - bottom-left
+                    { x: 75, y: 85 },   // 6 - top-left
+                    
+                    // Outer ring (12 transducers)
+                    { x: 100, y: 40 },  // 7 - top
+                    { x: 122, y: 55 },  // 8 - top-right-1
+                    { x: 140, y: 85 },  // 9 - right-1
+                    { x: 140, y: 115 }, // 10 - right-2
+                    { x: 122, y: 145 }, // 11 - bottom-right-1
+                    { x: 100, y: 160 }, // 12 - bottom
+                    { x: 78, y: 145 },  // 13 - bottom-left-1
+                    { x: 60, y: 115 },  // 14 - left-1
+                    { x: 60, y: 85 },   // 15 - left-2
+                    { x: 78, y: 55 },   // 16 - top-left-1
+                    { x: 150, y: 100 }, // 17 - far right
+                    { x: 50, y: 100 },  // 18 - far left
+                ];
+                
+                this.hapticArray.innerHTML = '';
+                this.transducerElements = [];
+                
+                transducerPositions.forEach((pos, index) => {
+                    const transducer = document.createElement('div');
+                    transducer.className = 'transducer';
+                    transducer.style.left = pos.x + 'px';
+                    transducer.style.top = pos.y + 'px';
+                    transducer.textContent = index;
+                    this.hapticArray.appendChild(transducer);
+                    this.transducerElements.push(transducer);
+                });
+            }
+            
+            updateHapticDisplay() {
+                // Reset all transducers
+                this.transducerElements.forEach(el => {
+                    el.classList.remove('active');
+                });
+                
+                // Activate detected transducers
+                this.activeTransducers.forEach(index => {
+                    if (this.transducerElements[index]) {
+                        this.transducerElements[index].classList.add('active');
+                    }
+                });
+                
+                // Update feedback info
+                const activeCount = this.activeTransducers.size;
+                if (activeCount > 0) {
+                    this.feedbackInfo.textContent = `Obstacle detected! ${activeCount} transducers active`;
+                } else {
+                    this.feedbackInfo.textContent = 'No obstacles in detection cone - haptic feedback inactive';
+                }
+            }
+            
+            updateZoneDisplay() {
+                const zoneElements = this.zoneGrid.querySelectorAll('.zone-indicator');
+                zoneElements.forEach((el, index) => {
+                    if (this.detectionZones[index]) {
+                        el.classList.add('detected');
+                    } else {
+                        el.classList.remove('detected');
+                    }
+                });
+            }
+            
+            drawDetectionCone() {
+                if (!this.showDetectionZones) return;
+                
+                const halfAngle = this.coneAngle / 2;
+                const startAngle = this.player.angle - halfAngle;
+                const endAngle = this.player.angle + halfAngle;
+                
+                // Draw main cone outline
+                this.ctx.strokeStyle = '#4CAF50';
+                this.ctx.lineWidth = 2;
+                this.ctx.globalAlpha = 0.3;
+                
+                this.ctx.beginPath();
+                this.ctx.moveTo(this.player.x, this.player.y);
+                this.ctx.arc(this.player.x, this.player.y, this.detectionDistance, startAngle, endAngle);
+                this.ctx.closePath();
+                this.ctx.stroke();
+                
+                // Draw zone grid lines
+                this.ctx.strokeStyle = '#FFC107';
+                this.ctx.lineWidth = 1;
+                this.ctx.globalAlpha = 0.4;
+                
+                // Vertical dividers (columns)
+                for (let i = 1; i < 3; i++) {
+                    const angle = startAngle + (i * this.coneAngle / 3);
+                    const endX = this.player.x + Math.cos(angle) * this.detectionDistance;
+                    const endY = this.player.y + Math.sin(angle) * this.detectionDistance;
+                    
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(this.player.x, this.player.y);
+                    this.ctx.lineTo(endX, endY);
+                    this.ctx.stroke();
+                }
+                
+                // Horizontal divider (rows)
+                this.ctx.beginPath();
+                this.ctx.arc(this.player.x, this.player.y, this.detectionDistance / 2, startAngle, endAngle);
+                this.ctx.stroke();
+                
+                this.ctx.globalAlpha = 1;
+            }
+            
+            render() {
+                // Clear canvas
+                this.ctx.fillStyle = '#1a1a1a';
+                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                // Draw obstacles
+                this.obstacles.forEach(obstacle => {
+                    if (obstacle.type === 'wall') {
+                        this.ctx.fillStyle = '#8BC34A'; // Green walls
+                    } else {
+                        this.ctx.fillStyle = '#FF9800'; // Orange furniture
+                    }
+                    this.ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+                });
+                
+                // Draw detection cone and perform detection
+                this.drawDetectionCone();
+                this.detectObstaclesInCone();
+                
+                // Draw player
+                this.ctx.fillStyle = '#2196F3';
+                this.ctx.beginPath();
+                this.ctx.arc(this.player.x, this.player.y, this.player.radius, 0, Math.PI * 2);
+                this.ctx.fill();
+                
+                // Draw player direction indicator
+                const dirX = this.player.x + Math.cos(this.player.angle) * this.player.radius * 0.7;
+                const dirY = this.player.y + Math.sin(this.player.angle) * this.player.radius * 0.7;
+                this.ctx.fillStyle = '#FFF';
+                this.ctx.beginPath();
+                this.ctx.arc(dirX, dirY, 3, 0, Math.PI * 2);
+                this.ctx.fill();
+            }
+            
+            gameLoop() {
+                this.render();
+                requestAnimationFrame(() => this.gameLoop());
+            }
+            
+            // Control methods
+            resetPosition() {
+                this.player.x = 100;
+                this.player.y = 250;
+                this.player.angle = 0;
+            }
+            
+            toggleDetectionVisualization() {
+                this.showDetectionZones = !this.showDetectionZones;
+            }
+            
+            setDetectionDistance(value) {
+                this.detectionDistance = parseInt(value);
+                document.getElementById('distanceValue').textContent = value + 'px';
+            }
+            
+            setConeAngle(value) {
+                this.coneAngle = parseInt(value) * Math.PI / 180; // Convert to radians
+                document.getElementById('angleValue').textContent = value + '°';
+            }
+        }
+        
+        // Initialize the demo
+        const demo = new LiDARHapticDemo();
+    </script>
+</body>
+</html>

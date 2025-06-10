@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiDAR Haptic Navigation System - 2.5D Demo</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #2a2a2a;
+            color: white;
+            overflow-x: auto;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .scene-container {
+            position: relative;
+            width: 800px;
+            height: 600px;
+            margin: 20px auto;
+            background: #1a1a1a;
+            border: 2px solid #555;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: grab;
+        }
+        
+        .scene-container:active {
+            cursor: grabbing;
+        }
+        
+        .scene-floor {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #333 0%, #222 50%, #333 100%);
+            /* Placeholder for floor texture */
+        }
+        
+        .furniture {
+            position: absolute;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        
+        .shelves {
+            width: 120px;
+            height: 200px;
+            left: 100px;
+            top: 150px;
+            background-color: #8B4513;
+            border: 2px solid #654321;
+            /* Placeholder styling until we get the sprite */
+        }
+        
+        .chair-desk {
+            width: 150px;
+            height: 120px;
+            right: 120px;
+            bottom: 200px;
+            background-color: #4A4A4A;
+            border: 2px solid #333;
+            /* Placeholder styling until we get the sprite */
+        }
+        
+        .wet-floor-sign {
+            width: 60px;
+            height: 80px;
+            left: 350px;
+            bottom: 250px;
+            background-color: #FFD700;
+            border: 2px solid #FFA500;
+            /* Placeholder styling until we get the sprite */
+        }
+        
+        .player-container {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            transform-origin: center center;
+            transition: all 0.1s ease-out;
+        }
+        
+        .player-sprite {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background-color: #2196F3;
+            border-radius: 50%;
+            top: 10px;
+            left: 10px;
+            z-index: 10;
+            /* Placeholder styling until we get the sprite */
+        }
+        
+        .detection-grid {
+            position: absolute;
+            width: 180px;
+            height: 120px;
+            top: 40px;
+            left: -50px;
+            border: 2px solid #4CAF50;
+            background: rgba(76, 175, 80, 0.1);
+            z-index: 5;
+        }
+        
+        .grid-zone {
+            position: absolute;
+            border: 1px solid #4CAF50;
+            background: rgba(76, 175, 80, 0.05);
+            transition: background-color 0.3s ease;
+        }
+        
+        .grid-zone.active {
+            background: rgba(255, 68, 68, 0.4);
+            border-color: #ff4444;
+        }
+        
+        /* Grid zones layout (2x3) */
+        .zone-0 { top: 0; left: 0; width: 33.33%; height: 50%; } /* Top Left */
+        .zone-1 { top: 0; left: 33.33%; width: 33.33%; height: 50%; } /* Top Center */
+        .zone-2 { top: 0; left: 66.66%; width: 33.33%; height: 50%; } /* Top Right */
+        .zone-3 { top: 50%; left: 0; width: 33.33%; height: 50%; } /* Bottom Left */
+        .zone-4 { top: 50%; left: 33.33%; width: 33.33%; height: 50%; } /* Bottom Center */
+        .zone-5 { top: 50%; left: 66.66%; width: 33.33%; height: 50%; } /* Bottom Right */
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 15px 0;
+            justify-content: center;
+        }
+        
+        .haptic-display {
+            background: #333;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        
+        .hexagon-array {
+            display: inline-block;
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+        }
+        
+        .transducer {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: #444;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            border: 2px solid #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 7px;
+            font-weight: bold;
+        }
+        
+        .transducer.active {
+            background: #ff4444;
+            border-color: #ff6666;
+            box-shadow: 0 0 15px rgba(255, 68, 68, 0.6);
+            transform: scale(1.3);
+        }
+        
+        .detection-info {
+            background: #444;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .zone-status {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            max-width: 300px;
+            margin: 15px auto;
+        }
+        
+        .zone-indicator {
+            background: #555;
+            padding: 12px 8px;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 11px;
+            transition: all 0.3s ease;
+        }
+        
+        .zone-indicator.active {
+            background: #ff4444;
+            box-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
+        }
+        
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        button:hover {
+            background: #45a049;
+        }
+        
+        .info-panel {
+            background: #333;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .debug-info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.7);
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>LiDAR Haptic Navigation System - 2.5D Demo</h1>
+        <p>Drag the character around the scene. When the detection grid overlaps furniture, the corresponding haptic transducers activate.</p>
+        
+        <div class="scene-container" id="sceneContainer">
+            <div class="scene-floor"></div>
+            
+            <!-- Furniture Elements -->
+            <div class="furniture shelves" id="shelves" title="Shelves - triggers left column"></div>
+            <div class="furniture chair-desk" id="chairDesk" title="Chair & Desk - triggers bottom right"></div>
+            <div class="furniture wet-floor-sign" id="wetFloorSign" title="Wet Floor Sign - triggers bottom left/center"></div>
+            
+            <!-- Player and Detection Grid -->
+            <div class="player-container" id="playerContainer">
+                <div class="player-sprite" id="playerSprite"></div>
+                <div class="detection-grid" id="detectionGrid">
+                    <div class="grid-zone zone-0" data-zone="0"></div>
+                    <div class="grid-zone zone-1" data-zone="1"></div>
+                    <div class="grid-zone zone-2" data-zone="2"></div>
+                    <div class="grid-zone zone-3" data-zone="3"></div>
+                    <div class="grid-zone zone-4" data-zone="4"></div>
+                    <div class="grid-zone zone-5" data-zone="5"></div>
+                </div>
+            </div>
+            
+            <!-- Debug info -->
+            <div class="debug-info" id="debugInfo">
+                Position: (0, 0)<br>
+                Active Zones: None
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button onclick="demo.resetPosition()">Reset Position</button>
+            <button onclick="demo.toggleGridVisibility()">Toggle Grid</button>
+            <button onclick="demo.toggleDebugInfo()">Toggle Debug</button>
+        </div>
+        
+        <div class="detection-info">
+            <h3>Detection Zones Status</h3>
+            <div class="zone-status" id="zoneStatus">
+                <div class="zone-indicator" data-zone="0">Top Left</div>
+                <div class="zone-indicator" data-zone="1">Top Center</div>
+                <div class="zone-indicator" data-zone="2">Top Right</div>
+                <div class="zone-indicator" data-zone="3">Bottom Left</div>
+                <div class="zone-indicator" data-zone="4">Bottom Center</div>
+                <div class="zone-indicator" data-zone="5">Bottom Right</div>
+            </div>
+        </div>
+        
+        <div class="haptic-display">
+            <h3>19-Transducer Hexagonal Array</h3>
+            <div class="hexagon-array" id="hapticArray"></div>
+            <p id="feedbackInfo">Move the detection grid over furniture to trigger haptic feedback</p>
+        </div>
+        
+        <div class="info-panel">
+            <h3>How it works:</h3>
+            <p><strong>2.5D Perspective:</strong> Navigate the character through the scene using drag controls</p>
+            <p><strong>Detection Grid:</strong> The 6-zone grid moves with the character and detects overlaps with furniture</p>
+            <p><strong>Spatial Mapping:</strong> Different furniture pieces trigger specific transducer patterns:</p>
+            <ul>
+                <li><strong>Shelves (left):</strong> Activates left column transducers (top + bottom)</li>
+                <li><strong>Chair & Desk (right):</strong> Activates bottom-right transducers</li>
+                <li><strong>Wet Floor Sign (center):</strong> Activates bottom-left and bottom-center</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        class HapticNavigationDemo {
+            constructor() {
+                this.sceneContainer = document.getElementById('sceneContainer');
+                this.playerContainer = document.getElementById('playerContainer');
+                this.detectionGrid = document.getElementById('detectionGrid');
+                this.hapticArray = document.getElementById('hapticArray');
+                this.zoneStatus = document.getElementById('zoneStatus');
+                this.feedbackInfo = document.getElementById('feedbackInfo');
+                this.debugInfo = document.getElementById('debugInfo');
+                
+                // State
+                this.isDragging = false;
+                this.dragOffset = { x: 0, y: 0 };
+                this.playerPosition = { x: 200, y: 300 };
+                this.activeZones = new Set();
+                this.activeTransducers = new Set();
+                this.showGrid = true;
+                this.showDebug = true;
+                
+                // Furniture collision areas (relative to furniture position)
+                this.furnitureZones = {
+                    shelves: {
+                        element: document.getElementById('shelves'),
+                        triggerZones: [0, 3], // Top left, Bottom left (left column)
+                        transducers: [6, 11, 12, 15, 16, 18] // Left side transducers
+                    },
+                    chairDesk: {
+                        element: document.getElementById('chairDesk'),
+                        triggerZones: [5], // Bottom right
+                        transducers: [3, 8, 9, 10, 14, 17] // Right side transducers
+                    },
+                    wetFloorSign: {
+                        element: document.getElementById('wetFloorSign'),
+                        triggerZones: [3, 4], // Bottom left, Bottom center
+                        transducers: [4, 5, 12, 13] // Bottom center transducers
+                    }
+                };
+                
+                this.setupEventListeners();
+                this.createHapticArray();
+                this.updatePlayerPosition();
+                this.gameLoop();
+            }
+            
+            setupEventListeners() {
+                // Mouse events
+                this.sceneContainer.addEventListener('mousedown', (e) => this.startDrag(e));
+                document.addEventListener('mousemove', (e) => this.drag(e));
+                document.addEventListener('mouseup', () => this.endDrag());
+                
+                // Touch events for mobile
+                this.sceneContainer.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    this.startDrag(e.touches[0]);
+                });
+                document.addEventListener('touchmove', (e) => {
+                    if (this.isDragging) {
+                        e.preventDefault();
+                        this.drag(e.touches[0]);
+                    }
+                });
+                document.addEventListener('touchend', (e) => {
+                    e.preventDefault();
+                    this.endDrag();
+                });
+            }
+            
+            getEventPosition(e) {
+                const rect = this.sceneContainer.getBoundingClientRect();
+                return {
+                    x: e.clientX - rect.left,
+                    y: e.clientY - rect.top
+                };
+            }
+            
+            startDrag(e) {
+                const pos = this.getEventPosition(e);
+                const playerRect = this.playerContainer.getBoundingClientRect();
+                const sceneRect = this.sceneContainer.getBoundingClientRect();
+                
+                const playerX = playerRect.left - sceneRect.left + playerRect.width / 2;
+                const playerY = playerRect.top - sceneRect.top + playerRect.height / 2;
+                
+                const distance = Math.sqrt(Math.pow(pos.x - playerX, 2) + Math.pow(pos.y - playerY, 2));
+                
+                if (distance <= 50) { // Click within player area
+                    this.isDragging = true;
+                    this.dragOffset = {
+                        x: pos.x - this.playerPosition.x,
+                        y: pos.y - this.playerPosition.y
+                    };
+                    this.sceneContainer.style.cursor = 'grabbing';
+                }
+            }
+            
+            drag(e) {
+                if (this.isDragging) {
+                    const pos = this.getEventPosition(e);
+                    this.playerPosition.x = pos.x - this.dragOffset.x;
+                    this.playerPosition.y = pos.y - this.dragOffset.y;
+                    
+                    // Keep player within scene bounds
+                    this.playerPosition.x = Math.max(40, Math.min(760, this.playerPosition.x));
+                    this.playerPosition.y = Math.max(40, Math.min(560, this.playerPosition.y));
+                    
+                    this.updatePlayerPosition();
+                }
+            }
+            
+            endDrag() {
+                this.isDragging = false;
+                this.sceneContainer.style.cursor = 'grab';
+            }
+            
+            updatePlayerPosition() {
+                this.playerContainer.style.left = this.playerPosition.x + 'px';
+                this.playerContainer.style.top = this.playerPosition.y + 'px';
+                
+                this.detectCollisions();
+                this.updateDebugInfo();
+            }
+            
+            detectCollisions() {
+                this.activeZones.clear();
+                
+                // Get detection grid bounds
+                const gridRect = this.detectionGrid.getBoundingClientRect();
+                const sceneRect = this.sceneContainer.getBoundingClientRect();
+                
+                const gridBounds = {
+                    left: gridRect.left - sceneRect.left,
+                    top: gridRect.top - sceneRect.top,
+                    right: gridRect.right - sceneRect.left,
+                    bottom: gridRect.bottom - sceneRect.top
+                };
+                
+                // Check each furniture piece
+                Object.entries(this.furnitureZones).forEach(([name, furniture]) => {
+                    const furnitureRect = furniture.element.getBoundingClientRect();
+                    const furnitureBounds = {
+                        left: furnitureRect.left - sceneRect.left,
+                        top: furnitureRect.top - sceneRect.top,
+                        right: furnitureRect.right - sceneRect.left,
+                        bottom: furnitureRect.bottom - sceneRect.top
+                    };
+                    
+                    // Check if grid overlaps with furniture
+                    if (this.rectsOverlap(gridBounds, furnitureBounds)) {
+                        furniture.triggerZones.forEach(zone => {
+                            this.activeZones.add(zone);
+                        });
+                    }
+                });
+                
+                this.updateHapticFeedback();
+                this.updateZoneDisplay();
+            }
+            
+            rectsOverlap(rect1, rect2) {
+                return !(rect1.right < rect2.left || 
+                        rect2.right < rect1.left || 
+                        rect1.bottom < rect2.top || 
+                        rect2.bottom < rect1.top);
+            }
+            
+            updateHapticFeedback() {
+                this.activeTransducers.clear();
+                
+                // Map active zones to transducers
+                Object.values(this.furnitureZones).forEach(furniture => {
+                    const hasActiveZone = furniture.triggerZones.some(zone => this.activeZones.has(zone));
+                    if (hasActiveZone) {
+                        furniture.transducers.forEach(t => this.activeTransducers.add(t));
+                    }
+                });
+                
+                this.updateHapticDisplay();
+            }
+            
+            createHapticArray() {
+                // 19-transducer hexagonal pattern (matching your scientific paper)
+                const positions = [
+                    // Center
+                    { x: 100, y: 100 }, // 0
+                    
+                    // Inner ring
+                    { x: 100, y: 70 },  // 1
+                    { x: 125, y: 82 },  // 2
+                    { x: 125, y: 118 }, // 3
+                    { x: 100, y: 130 }, // 4
+                    { x: 75, y: 118 },  // 5
+                    { x: 75, y: 82 },   // 6
+                    
+                    // Outer ring
+                    { x: 100, y: 40 },  // 7
+                    { x: 130, y: 55 },  // 8
+                    { x: 145, y: 85 },  // 9
+                    { x: 145, y: 115 }, // 10
+                    { x: 130, y: 145 }, // 11
+                    { x: 100, y: 160 }, // 12
+                    { x: 70, y: 145 },  // 13
+                    { x: 55, y: 115 },  // 14
+                    { x: 55, y: 85 },   // 15
+                    { x: 70, y: 55 },   // 16
+                    { x: 160, y: 100 }, // 17
+                    { x: 40, y: 100 },  // 18
+                ];
+                
+                this.hapticArray.innerHTML = '';
+                this.transducerElements = [];
+                
+                positions.forEach((pos, index) => {
+                    const transducer = document.createElement('div');
+                    transducer.className = 'transducer';
+                    transducer.style.left = pos.x + 'px';
+                    transducer.style.top = pos.y + 'px';
+                    transducer.textContent = index;
+                    this.hapticArray.appendChild(transducer);
+                    this.transducerElements.push(transducer);
+                });
+            }
+            
+            updateHapticDisplay() {
+                // Reset all transducers
+                this.transducerElements.forEach(el => el.classList.remove('active'));
+                
+                // Activate relevant transducers
+                this.activeTransducers.forEach(index => {
+                    if (this.transducerElements[index]) {
+                        this.transducerElements[index].classList.add('active');
+                    }
+                });
+                
+                // Update feedback text
+                const activeCount = this.activeTransducers.size;
+                if (activeCount > 0) {
+                    this.feedbackInfo.textContent = `Obstacle detected! ${activeCount} transducers active`;
+                } else {
+                    this.feedbackInfo.textContent = 'No obstacles detected - haptic feedback inactive';
+                }
+            }
+            
+            updateZoneDisplay() {
+                const zoneElements = this.zoneStatus.querySelectorAll('.zone-indicator');
+                zoneElements.forEach((el, index) => {
+                    if (this.activeZones.has(index)) {
+                        el.classList.add('active');
+                    } else {
+                        el.classList.remove('active');
+                    }
+                });
+                
+                // Update grid zone visualization
+                const gridZones = this.detectionGrid.querySelectorAll('.grid-zone');
+                gridZones.forEach((zone, index) => {
+                    if (this.activeZones.has(index)) {
+                        zone.classList.add('active');
+                    } else {
+                        zone.classList.remove('active');
+                    }
+                });
+            }
+            
+            updateDebugInfo() {
+                if (this.showDebug) {
+                    const activeZonesList = Array.from(this.activeZones).join(', ') || 'None';
+                    this.debugInfo.innerHTML = `
+                        Position: (${Math.round(this.playerPosition.x)}, ${Math.round(this.playerPosition.y)})<br>
+                        Active Zones: ${activeZonesList}<br>
+                        Active Transducers: ${this.activeTransducers.size}
+                    `;
+                }
+            }
+            
+            gameLoop() {
+                // Continuous update loop for smooth interaction
+                requestAnimationFrame(() => this.gameLoop());
+            }
+            
+            // Control methods
+            resetPosition() {
+                this.playerPosition = { x: 200, y: 300 };
+                this.updatePlayerPosition();
+            }
+            
+            toggleGridVisibility() {
+                this.showGrid = !this.showGrid;
+                this.detectionGrid.style.opacity = this.showGrid ? '1' : '0';
+            }
+            
+            toggleDebugInfo() {
+                this.showDebug = !this.showDebug;
+                this.debugInfo.style.display = this.showDebug ? 'block' : 'none';
+            }
+        }
+        
+        // Initialize the demo
+        const demo = new HapticNavigationDemo();
+    </script>
+</body>
+</html>
