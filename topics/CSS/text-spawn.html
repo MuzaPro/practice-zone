@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Text Spawning Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900;slnt@-10..0&family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@100..800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #0a0a0a;
+            --accent: #00ff88;
+            --accent-2: #ff0088;
+            --accent-3: #0088ff;
+            --text-primary: #ffffff;
+            --audio-level: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            cursor: none;
+            height: 100vh;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+            box-shadow: 0 0 20px var(--accent);
+        }
+
+        .cursor.clicked {
+            transform: scale(2);
+        }
+
+        /* Main Grid Layout */
+        .container {
+            height: 100vh;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 2rem;
+            padding: 2rem;
+            position: relative;
+        }
+
+        /* Trigger Typography */
+        .trigger-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            border-radius: 1rem;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        .trigger-title::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+
+        .trigger-title:hover::before {
+            transform: translateX(100%);
+        }
+
+        .trigger-title:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .trigger-title:active {
+            transform: scale(0.98);
+        }
+
+        /* Different Typography Styles */
+        .trigger-1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 4vw, 4rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent), var(--accent-3));
+            color: black;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+        }
+
+        .trigger-2 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(1.5rem, 3vw, 3rem);
+            font-weight: 400;
+            background: linear-gradient(135deg, var(--accent-2), var(--accent));
+            color: white;
+            font-variation-settings: "wght" calc(300 + var(--audio-level) * 5);
+        }
+
+        .trigger-3 {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 5rem);
+            font-weight: 100;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+            border: 2px solid var(--accent-3);
+            font-variation-settings: "wght" 100, "slnt" -5;
+        }
+
+        .trigger-4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(1.8rem, 3.5vw, 3.5rem);
+            font-weight: 600;
+            background: radial-gradient(circle, var(--accent-2), transparent);
+            color: var(--text-primary);
+            text-shadow: 0 0 20px var(--accent-2);
+        }
+
+        .trigger-5 {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(3rem, 6vw, 6rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--accent), var(--accent-2), var(--accent-3));
+            background-size: 200% 200%;
+            animation: gradientShift 3s ease infinite;
+            color: transparent;
+            background-clip: text;
+            -webkit-background-clip: text;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .trigger-6 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(1.2rem, 2.5vw, 2.5rem);
+            font-weight: 300;
+            background: transparent;
+            color: var(--accent);
+            border: 1px dashed var(--accent);
+            text-transform: lowercase;
+        }
+
+        .trigger-7 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 4vw, 4rem);
+            font-weight: 500;
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 136, 255, 0.2));
+            color: var(--text-primary);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .trigger-8 {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(1.5rem, 3vw, 3rem);
+            font-weight: 800;
+            background: var(--accent-3);
+            color: black;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .trigger-9 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(1.8rem, 3.5vw, 3.5rem);
+            font-weight: 200;
+            background: transparent;
+            color: var(--accent-2);
+            border: 3px solid var(--accent-2);
+            text-decoration: line-through;
+        }
+
+        /* Spawned Text Styles */
+        .spawned-text {
+            position: fixed;
+            pointer-events: none;
+            z-index: 100;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            white-space: nowrap;
+        }
+
+        .spawned-text.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .spawned-text.fade-out {
+            opacity: 0;
+            transform: scale(0) rotate(180deg);
+        }
+
+        /* Different spawn animation types */
+        .spawn-type-1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(1rem, 2vw, 2rem);
+            color: var(--accent);
+            font-weight: 700;
+            text-shadow: 0 0 10px var(--accent);
+        }
+
+        .spawn-type-2 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(0.8rem, 1.5vw, 1.5rem);
+            color: var(--accent-2);
+            font-weight: 400;
+            letter-spacing: 0.2em;
+        }
+
+        .spawn-type-3 {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(1.2rem, 2.5vw, 2.5rem);
+            color: var(--accent-3);
+            font-weight: 300;
+            font-style: italic;
+        }
+
+        .spawn-type-4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(0.9rem, 1.8vw, 1.8rem);
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .spawn-type-5 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(0.7rem, 1.2vw, 1.2rem);
+            color: var(--accent);
+            font-weight: 100;
+            text-decoration: underline;
+        }
+
+        /* Audio indicator */
+        .audio-indicator {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 0.5rem;
+            border: 1px solid var(--accent);
+            z-index: 1000;
+        }
+
+        .audio-btn {
+            background: var(--accent);
+            color: black;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.3rem;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .audio-status {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(5, 1fr);
+                gap: 1rem;
+                padding: 1rem;
+            }
+            
+            .cursor {
+                display: none;
+            }
+            
+            body {
+                cursor: default;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+    
+    <div class="audio-indicator">
+        <button class="audio-btn" id="audioBtn">Enable Audio</button>
+        <div class="audio-status" id="audioStatus">Audio: Off</div>
+    </div>
+
+    <div class="container">
+        <div class="trigger-title trigger-1" data-spawn="creativity">
+            CREATE
+        </div>
+        
+        <div class="trigger-title trigger-2" data-spawn="technology">
+            &lt;CODE/&gt;
+        </div>
+        
+        <div class="trigger-title trigger-3" data-spawn="emotion">
+            feel
+        </div>
+        
+        <div class="trigger-title trigger-4" data-spawn="motion">
+            MOVE
+        </div>
+        
+        <div class="trigger-title trigger-5" data-spawn="color">
+            SPECTRUM
+        </div>
+        
+        <div class="trigger-title trigger-6" data-spawn="minimal">
+            less.is.more
+        </div>
+        
+        <div class="trigger-title trigger-7" data-spawn="future">
+            Tomorrow
+        </div>
+        
+        <div class="trigger-title trigger-8" data-spawn="bold">
+            IMPACT
+        </div>
+        
+        <div class="trigger-title trigger-9" data-spawn="glitch">
+            ~~ERROR~~
+        </div>
+    </div>
+
+    <script>
+        // Text content for each trigger
+        const spawnContent = {
+            creativity: [
+                "imagination flows like water",
+                "bold ideas take flight",
+                "innovation sparks change",
+                "artistic vision unfolds",
+                "creative minds unite",
+                "inspiration strikes suddenly",
+                "beauty emerges from chaos"
+            ],
+            technology: [
+                "algorithms dream in binary",
+                "data flows through silicon veins", 
+                "machines learn to think",
+                "code writes itself",
+                "digital worlds collide",
+                "bytes become thoughts",
+                "the future compiles now"
+            ],
+            emotion: [
+                "hearts beat in rhythm",
+                "feelings cascade freely",
+                "empathy bridges all gaps",
+                "joy radiates outward",
+                "tears carry wisdom",
+                "love transcends boundaries",
+                "hope illuminates darkness"
+            ],
+            motion: [
+                "kinetic energy unleashed",
+                "bodies flow like liquid",
+                "momentum builds rapidly",
+                "dance defies gravity",
+                "movement tells stories",
+                "rhythm guides the soul",
+                "motion becomes music"
+            ],
+            color: [
+                "rainbows paint the sky",
+                "hues blend seamlessly",
+                "chromatic symphonies play",
+                "colors speak without words",
+                "spectrums reveal truth",
+                "pigments hold memories",
+                "light fractures into beauty"
+            ],
+            minimal: [
+                "silence speaks volumes",
+                "empty spaces breathe",
+                "simplicity finds elegance",
+                "less reveals more",
+                "clean lines guide eyes",
+                "whitespace tells stories",
+                "reduction creates focus"
+            ],
+            future: [
+                "tomorrow arrives today",
+                "possibilities expand infinitely",
+                "time bends forward",
+                "dreams become reality",
+                "innovation accelerates",
+                "boundaries dissolve completely",
+                "evolution never stops"
+            ],
+            bold: [
+                "confidence commands attention",
+                "strength moves mountains",
+                "courage faces the unknown",
+                "power reshapes worlds",
+                "determination breaks barriers",
+                "boldness creates legends",
+                "force multiplies impact"
+            ],
+            glitch: [
+                "er#or@404.notFound",
+                "reality.exe has stopped",
+                "sys%tem.malfunction.detected",
+                "d4t4_c0rruption_1n_pr0gr3ss",
+                "unexpected.behavior.logged",
+                "stack.overflow.exception",
+                "memory.leak.critical.alert"
+            ]
+        };
+
+        // Audio setup
+        let audioContext, analyser, microphone, dataArray;
+        let isListening = false;
+
+        // Custom cursor
+        const cursor = document.querySelector('.cursor');
+        let mouseX = 0, mouseY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursor.style.left = mouseX - 10 + 'px';
+            cursor.style.top = mouseY - 10 + 'px';
+        });
+
+        document.addEventListener('click', () => {
+            cursor.classList.add('clicked');
+            setTimeout(() => cursor.classList.remove('clicked'), 200);
+        });
+
+        // Spawn text function
+        function spawnText(triggerElement, category) {
+            const texts = spawnContent[category];
+            const randomText = texts[Math.floor(Math.random() * texts.length)];
+            
+            // Create spawned text element
+            const spawnedElement = document.createElement('div');
+            spawnedElement.className = `spawned-text spawn-type-${Math.ceil(Math.random() * 5)}`;
+            spawnedElement.textContent = randomText;
+            
+            // Random position around the screen
+            const x = Math.random() * (window.innerWidth - 300);
+            const y = Math.random() * (window.innerHeight - 100);
+            
+            spawnedElement.style.left = x + 'px';
+            spawnedElement.style.top = y + 'px';
+            
+            // Add to DOM
+            document.body.appendChild(spawnedElement);
+            
+            // Trigger animation
+            setTimeout(() => {
+                spawnedElement.classList.add('active');
+            }, 10);
+            
+            // Remove after animation
+            setTimeout(() => {
+                spawnedElement.classList.add('fade-out');
+                setTimeout(() => {
+                    if (spawnedElement.parentNode) {
+                        spawnedElement.parentNode.removeChild(spawnedElement);
+                    }
+                }, 800);
+            }, 3000 + Math.random() * 2000);
+        }
+
+        // Add click handlers to triggers
+        document.querySelectorAll('.trigger-title').forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                const category = trigger.dataset.spawn;
+                
+                // Spawn multiple texts for more impact
+                for (let i = 0; i < 3; i++) {
+                    setTimeout(() => {
+                        spawnText(trigger, category);
+                    }, i * 200);
+                }
+                
+                // Visual feedback on trigger
+                trigger.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    trigger.style.transform = '';
+                }, 150);
+            });
+        });
+
+        // Audio setup
+        function initAudio() {
+            const audioBtn = document.getElementById('audioBtn');
+            const audioStatus = document.getElementById('audioStatus');
+            
+            audioBtn.addEventListener('click', async () => {
+                if (!isListening) {
+                    try {
+                        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                        analyser = audioContext.createAnalyser();
+                        microphone = audioContext.createMediaStreamSource(stream);
+                        
+                        analyser.fftSize = 256;
+                        dataArray = new Uint8Array(analyser.frequencyBinCount);
+                        
+                        microphone.connect(analyser);
+                        
+                        isListening = true;
+                        audioBtn.textContent = 'Disable Audio';
+                        audioStatus.textContent = 'Audio: Active';
+                        
+                        updateAudioVisualization();
+                    } catch (err) {
+                        console.error('Microphone access denied:', err);
+                        audioStatus.textContent = 'Audio: Denied';
+                    }
+                } else {
+                    if (audioContext) {
+                        audioContext.close();
+                    }
+                    isListening = false;
+                    audioBtn.textContent = 'Enable Audio';
+                    audioStatus.textContent = 'Audio: Off';
+                    document.documentElement.style.setProperty('--audio-level', 0);
+                }
+            });
+        }
+
+        function updateAudioVisualization() {
+            if (!isListening) return;
+            
+            analyser.getByteFrequencyData(dataArray);
+            const average = dataArray.reduce((a, b) => a + b) / dataArray.length;
+            const normalizedLevel = Math.min(average / 50, 100); // Increased sensitivity
+            
+            document.documentElement.style.setProperty('--audio-level', normalizedLevel);
+            
+            // Auto-spawn text based on loud sounds
+            if (normalizedLevel > 30) {
+                const triggers = document.querySelectorAll('.trigger-title');
+                const randomTrigger = triggers[Math.floor(Math.random() * triggers.length)];
+                const category = randomTrigger.dataset.spawn;
+                spawnText(randomTrigger, category);
+            }
+            
+            requestAnimationFrame(updateAudioVisualization);
+        }
+
+        // Initialize
+        window.addEventListener('load', () => {
+            initAudio();
+        });
+
+        // Auto-spawn demo text occasionally
+        setInterval(() => {
+            if (Math.random() < 0.1) { // 10% chance every 2 seconds
+                const triggers = document.querySelectorAll('.trigger-title');
+                const randomTrigger = triggers[Math.floor(Math.random() * triggers.length)];
+                const category = randomTrigger.dataset.spawn;
+                spawnText(randomTrigger, category);
+            }
+        }, 2000);
+    </script>
+</body>
+</html>

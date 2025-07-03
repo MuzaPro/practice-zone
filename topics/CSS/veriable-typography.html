@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Variable Typography Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900;slnt@-10..0&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #0a0a0a;
+            --secondary-bg: #1a1a1a;
+            --accent: #00ff88;
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --scroll-progress: 0;
+            --mouse-x: 50;
+            --mouse-y: 50;
+            --time-weight: 400;
+            --audio-level: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: radial-gradient(circle at center, #1a1a1a 0%, var(--primary-bg) 100%);
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 8rem);
+            font-variation-settings: 
+                "wght" calc(300 + var(--scroll-progress) * 600),
+                "slnt" calc(var(--scroll-progress) * -10);
+            background: linear-gradient(45deg, var(--accent), #00aaff, #ff0088);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .hero-title:hover {
+            font-variation-settings: "wght" 900, "slnt" -5;
+            transform: scale(1.05);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            font-variation-settings: "wght" 300;
+            opacity: 0.8;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 5rem 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            font-variation-settings: "wght" 700;
+            color: var(--accent);
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .demo-card {
+            background: var(--secondary-bg);
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+
+        .demo-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.1);
+        }
+
+        .demo-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+            font-variation-settings: "wght" 600;
+        }
+
+        /* Hover Typography Demo */
+        .hover-demo {
+            font-size: 2.5rem;
+            font-variation-settings: "wght" 400;
+            transition: font-variation-settings 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+            padding: 2rem;
+            border: 2px dashed #333;
+            border-radius: 0.5rem;
+        }
+
+        .hover-demo:hover {
+            font-variation-settings: "wght" 900;
+            color: var(--accent);
+        }
+
+        /* Proximity Typography */
+        .proximity-demo {
+            font-size: 2rem;
+            text-align: center;
+            padding: 3rem;
+            font-variation-settings: "wght" 200;
+            transition: font-variation-settings 0.2s ease;
+            cursor: crosshair;
+            border: 1px solid #333;
+            border-radius: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Emotional Typography */
+        .emotion-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .emotion-btn {
+            padding: 0.5rem 1rem;
+            background: #333;
+            border: 1px solid #555;
+            color: white;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .emotion-btn:hover {
+            background: var(--accent);
+            color: black;
+        }
+
+        .emotion-btn.active {
+            background: var(--accent);
+            color: black;
+        }
+
+        .emotion-text {
+            font-size: 2rem;
+            text-align: center;
+            padding: 2rem;
+            transition: all 0.5s ease;
+            font-variation-settings: "wght" 400, "slnt" 0;
+        }
+
+        /* Data-driven Typography */
+        .data-demo {
+            text-align: center;
+        }
+
+        .stock-price {
+            font-size: 3rem;
+            font-variation-settings: "wght" calc(400 + var(--stock-change, 0) * 10);
+            color: hsl(calc(120 + var(--stock-change, 0) * 2), 70%, 50%);
+            transition: all 0.5s ease;
+        }
+
+        .slider-container {
+            margin: 2rem 0;
+        }
+
+        .slider {
+            width: 100%;
+            height: 5px;
+            border-radius: 5px;
+            background: #333;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+        }
+
+        /* Audio Typography */
+        .audio-demo {
+            text-align: center;
+        }
+
+        .audio-text {
+            font-size: 2.5rem;
+            font-variation-settings: "wght" calc(300 + var(--audio-level) * 6);
+            transition: font-variation-settings 0.1s ease;
+        }
+
+        .audio-controls {
+            margin: 2rem 0;
+        }
+
+        .audio-btn {
+            padding: 1rem 2rem;
+            background: var(--accent);
+            color: black;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .audio-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .audio-btn:disabled {
+            background: #666;
+            color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Reading Experience */
+        .reading-demo {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .reading-demo p {
+            margin-bottom: 1.5rem;
+            font-variation-settings: "wght" 400;
+            transition: font-variation-settings 0.3s ease;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+        }
+
+        .reading-demo p:hover {
+            font-variation-settings: "wght" 600;
+            background: rgba(0, 255, 136, 0.05);
+        }
+
+        .reading-demo p.focused {
+            font-variation-settings: "wght" 700;
+            background: rgba(0, 255, 136, 0.1);
+            border-left: 3px solid var(--accent);
+        }
+
+        /* Scroll Progress Indicator */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #333;
+            z-index: 1000;
+        }
+
+        .scroll-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), #00aaff);
+            width: calc(var(--scroll-progress) * 100%);
+            transition: width 0.1s ease;
+        }
+
+        /* Time-based Typography */
+        .time-demo {
+            text-align: center;
+            font-size: 2rem;
+            font-variation-settings: "wght" var(--time-weight);
+            transition: font-variation-settings 2s ease;
+        }
+
+        /* Utility Classes */
+        .text-center { text-align: center; }
+        .mb-2 { margin-bottom: 2rem; }
+        .mt-2 { margin-top: 2rem; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-title {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-indicator">
+        <div class="scroll-progress"></div>
+    </div>
+
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title" id="heroTitle">Variable Typography</h1>
+            <p class="hero-subtitle">The Future of Dynamic Text Design</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Interactive Demonstrations</h2>
+            
+            <div class="demo-grid">
+                <!-- Hover Effects -->
+                <div class="demo-card">
+                    <h3 class="demo-title">Hover to Transform</h3>
+                    <div class="hover-demo">
+                        Hover over me!
+                    </div>
+                    <p class="mt-2">Typography that responds to user interaction with smooth weight transitions.</p>
+                </div>
+
+                <!-- Proximity Effects -->
+                <div class="demo-card">
+                    <h3 class="demo-title">Mouse Proximity</h3>
+                    <div class="proximity-demo" id="proximityDemo">
+                        Move your cursor around
+                    </div>
+                    <p class="mt-2">Text weight changes based on cursor distance from the center.</p>
+                </div>
+
+                <!-- Time-based Typography -->
+                <div class="demo-card">
+                    <h3 class="demo-title">Time-Aware Typography</h3>
+                    <div class="time-demo" id="timeDemo">
+                        Current time influences weight
+                    </div>
+                    <p class="mt-2">Typography adapts based on time of day - lighter during night hours.</p>
+                </div>
+
+                <!-- Data-driven Typography -->
+                <div class="demo-card">
+                    <h3 class="demo-title">Data-Driven Design</h3>
+                    <div class="data-demo">
+                        <div class="stock-price" id="stockPrice">$1,250.00</div>
+                        <div class="slider-container">
+                            <input type="range" min="-50" max="50" value="0" class="slider" id="stockSlider">
+                        </div>
+                        <p>Stock Performance: <span id="stockChange">0%</span></p>
+                    </div>
+                    <p class="mt-2">Typography weight and color reflect data values in real-time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Emotional Typography</h2>
+            
+            <div class="demo-card">
+                <h3 class="demo-title">Emotion-Responsive Text</h3>
+                <div class="emotion-controls">
+                    <button class="emotion-btn" data-emotion="neutral">Neutral</button>
+                    <button class="emotion-btn" data-emotion="excited">Excited</button>
+                    <button class="emotion-btn" data-emotion="sad">Sad</button>
+                    <button class="emotion-btn" data-emotion="angry">Angry</button>
+                    <button class="emotion-btn" data-emotion="calm">Calm</button>
+                </div>
+                <div class="emotion-text" id="emotionText">
+                    Typography reflects emotional content
+                </div>
+                <p class="mt-2">Click emotions above to see how typography can convey feeling through weight, slant, and spacing.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Audio-Reactive Typography</h2>
+            
+            <div class="demo-card">
+                <h3 class="demo-title">Sound-Responsive Text</h3>
+                <div class="audio-demo">
+                    <div class="audio-text" id="audioText">
+                        Speak or make noise!
+                    </div>
+                    <div class="audio-controls">
+                        <button class="audio-btn" id="audioBtn">Enable Microphone</button>
+                    </div>
+                    <p class="mt-2">Typography weight responds to ambient sound levels (requires microphone permission).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Enhanced Reading Experience</h2>
+            
+            <div class="demo-card">
+                <h3 class="demo-title">Focus-Enhanced Reading</h3>
+                <div class="reading-demo" id="readingDemo">
+                    <p>Variable typography transforms how we interact with text content. Instead of static letterforms, we can create dynamic, responsive typography that adapts to user behavior and context.</p>
+                    <p>This technology opens up new possibilities for accessibility, allowing text to automatically adjust for different reading preferences and visual needs.</p>
+                    <p>The future of typography is not just about how text looks, but how it behaves and responds to create more engaging, personalized reading experiences.</p>
+                    <p>Click on any paragraph to see focus enhancement in action, where the selected text becomes bolder and more prominent.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Scroll-based typography updates
+        function updateScrollProgress() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.scrollHeight - window.innerHeight;
+            const scrollPercent = scrollTop / docHeight;
+            
+            document.documentElement.style.setProperty('--scroll-progress', scrollPercent);
+        }
+
+        // Mouse proximity effects
+        function initProximityDemo() {
+            const proximityDemo = document.getElementById('proximityDemo');
+            
+            proximityDemo.addEventListener('mousemove', (e) => {
+                const rect = proximityDemo.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                
+                const mouseX = e.clientX;
+                const mouseY = e.clientY;
+                
+                const distance = Math.sqrt(
+                    Math.pow(mouseX - centerX, 2) + Math.pow(mouseY - centerY, 2)
+                );
+                
+                const maxDistance = Math.sqrt(Math.pow(rect.width / 2, 2) + Math.pow(rect.height / 2, 2));
+                const proximity = 1 - Math.min(distance / maxDistance, 1);
+                
+                const weight = 200 + (proximity * 700);
+                proximityDemo.style.fontVariationSettings = `"wght" ${weight}`;
+            });
+            
+            proximityDemo.addEventListener('mouseleave', () => {
+                proximityDemo.style.fontVariationSettings = '"wght" 200';
+            });
+        }
+
+        // Time-based typography
+        function updateTimeTypography() {
+            const hour = new Date().getHours();
+            let timeWeight;
+            
+            if (hour >= 6 && hour < 18) {
+                timeWeight = 500; // Daytime - bolder
+            } else {
+                timeWeight = 300; // Night - lighter
+            }
+            
+            document.documentElement.style.setProperty('--time-weight', timeWeight);
+        }
+
+        // Data-driven typography
+        function initDataDemo() {
+            const slider = document.getElementById('stockSlider');
+            const stockPrice = document.getElementById('stockPrice');
+            const stockChange = document.getElementById('stockChange');
+            
+            slider.addEventListener('input', (e) => {
+                const value = parseInt(e.target.value);
+                document.documentElement.style.setProperty('--stock-change', value);
+                stockChange.textContent = `${value}%`;
+                
+                const basePrice = 1250;
+                const newPrice = basePrice + (basePrice * value / 100);
+                stockPrice.textContent = `$${newPrice.toFixed(2)}`;
+            });
+        }
+
+        // Emotional typography
+        function initEmotionalDemo() {
+            const buttons = document.querySelectorAll('.emotion-btn');
+            const emotionText = document.getElementById('emotionText');
+            
+            const emotions = {
+                neutral: { weight: 400, slant: 0, text: 'Typography reflects emotional content' },
+                excited: { weight: 800, slant: 0, text: 'AMAZING EXCITING CONTENT!' },
+                sad: { weight: 200, slant: -3, text: 'Somber and melancholic text...' },
+                angry: { weight: 900, slant: -8, text: 'BOLD AND AGGRESSIVE TYPOGRAPHY' },
+                calm: { weight: 300, slant: 0, text: 'Peaceful and serene typography' }
+            };
+            
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    buttons.forEach(b => b.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    const emotion = button.dataset.emotion;
+                    const style = emotions[emotion];
+                    
+                    emotionText.style.fontVariationSettings = `"wght" ${style.weight}, "slnt" ${style.slant}`;
+                    emotionText.textContent = style.text;
+                });
+            });
+        }
+
+        // Audio-reactive typography
+        function initAudioDemo() {
+            const audioBtn = document.getElementById('audioBtn');
+            const audioText = document.getElementById('audioText');
+            let audioContext, analyser, microphone, dataArray;
+            let isListening = false;
+            
+            audioBtn.addEventListener('click', async () => {
+                if (!isListening) {
+                    try {
+                        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                        analyser = audioContext.createAnalyser();
+                        microphone = audioContext.createMediaStreamSource(stream);
+                        
+                        analyser.fftSize = 256;
+                        dataArray = new Uint8Array(analyser.frequencyBinCount);
+                        
+                        microphone.connect(analyser);
+                        
+                        isListening = true;
+                        audioBtn.textContent = 'Stop Listening';
+                        audioBtn.style.background = '#ff4444';
+                        
+                        updateAudioVisualization();
+                    } catch (err) {
+                        console.error('Microphone access denied:', err);
+                        audioText.textContent = 'Microphone access denied';
+                    }
+                } else {
+                    if (audioContext) {
+                        audioContext.close();
+                    }
+                    isListening = false;
+                    audioBtn.textContent = 'Enable Microphone';
+                    audioBtn.style.background = '';
+                    audioText.style.fontVariationSettings = '"wght" 300';
+                }
+            });
+            
+            function updateAudioVisualization() {
+                if (!isListening) return;
+                
+                analyser.getByteFrequencyData(dataArray);
+                const average = dataArray.reduce((a, b) => a + b) / dataArray.length;
+                const normalizedLevel = average / 255;
+                
+                document.documentElement.style.setProperty('--audio-level', normalizedLevel * 100);
+                
+                requestAnimationFrame(updateAudioVisualization);
+            }
+        }
+
+        // Reading experience enhancement
+        function initReadingDemo() {
+            const paragraphs = document.querySelectorAll('#readingDemo p');
+            
+            paragraphs.forEach(p => {
+                p.addEventListener('click', () => {
+                    paragraphs.forEach(para => para.classList.remove('focused'));
+                    p.classList.add('focused');
+                });
+            });
+        }
+
+        // Hero title interaction
+        function initHeroInteraction() {
+            const heroTitle = document.getElementById('heroTitle');
+            
+            heroTitle.addEventListener('click', () => {
+                heroTitle.style.fontVariationSettings = '"wght" 100, "slnt" -10';
+                setTimeout(() => {
+                    heroTitle.style.fontVariationSettings = '';
+                }, 500);
+            });
+        }
+
+        // Initialize all demos
+        window.addEventListener('load', () => {
+            updateScrollProgress();
+            updateTimeTypography();
+            initProximityDemo();
+            initDataDemo();
+            initEmotionalDemo();
+            initAudioDemo();
+            initReadingDemo();
+            initHeroInteraction();
+        });
+
+        window.addEventListener('scroll', updateScrollProgress);
+        
+        // Update time-based typography every minute
+        setInterval(updateTimeTypography, 60000);
+    </script>
+</body>
+</html>

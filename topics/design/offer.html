@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Muza Productions Animation Package - Exclusive July-August Offer</title>
+    
+    <!-- Required Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+/* Muza Productions - Computational Brutalism Design System */
+/* Version 1.0 - With Dark Mode Support */
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* CSS Variables */
+:root {
+    /* Color Palette */
+    --white: #ffffff;
+    --gray-50: #fafafa;
+    --gray-100: #f5f5f5;
+    --gray-200: #e5e5e5;
+    --gray-300: #d4d4d4;
+    --gray-400: #a3a3a3;
+    --gray-500: #737373;
+    --gray-600: #525252;
+    --gray-700: #404040;
+    --gray-800: #262626;
+    --gray-900: #171717;
+    --black: #000000;
+    --accent: #ef4444;
+    
+    /* Theme Variables - Light Mode */
+    --bg-primary: var(--white);
+    --bg-secondary: var(--gray-50);
+    --bg-card: var(--white);
+    --text-primary: var(--gray-900);
+    --text-secondary: var(--gray-700);
+    --text-muted: var(--gray-600);
+    --border-primary: var(--black);
+    --border-secondary: var(--gray-300);
+    --shadow-color: var(--gray-900);
+    --shadow-opacity: 1;
+    --mesh-opacity: 0.3;
+    --mesh-color: rgba(0, 0, 0, 0.2);
+    --code-bg: var(--gray-900);
+    --code-text: var(--white);
+}
+
+/* Dark Mode Theme */
+[data-theme="dark"] {
+    --bg-primary: var(--gray-900);
+    --bg-secondary: var(--black);
+    --bg-card: var(--gray-800);
+    --text-primary: var(--gray-100);
+    --text-secondary: var(--gray-300);
+    --text-muted: var(--gray-400);
+    --border-primary: var(--gray-100);
+    --border-secondary: var(--gray-600);
+    --shadow-color: var(--gray-100);
+    --shadow-opacity: 0.3;
+    --mesh-opacity: 0.12;
+    --mesh-color: rgba(255, 255, 255, 0.25);
+    --code-bg: var(--black);
+    --code-text: var(--gray-100);
+}
+
+/* Base Typography */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.4;
+    overflow-x: hidden;
+    position: relative;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Animated Mesh Background */
+.mesh-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: var(--mesh-opacity);
+}
+
+/* Theme Toggle */
+.theme-toggle {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    z-index: 1000;
+    background: var(--bg-card);
+    border: 2px solid var(--border-primary);
+    color: var(--text-primary);
+    padding: 8px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.theme-toggle:hover {
+    background: var(--border-primary);
+    color: var(--bg-primary);
+}
+
+/* Container */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* Header Styles */
+header {
+    padding: 4rem 0 2rem;
+    border-bottom: 3px solid var(--border-primary);
+    margin-bottom: 4rem;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.logo {
+    width: 80px;
+    height: 80px;
+    border: 3px solid var(--border-primary);
+    background: var(--border-primary);
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 1.2rem;
+    color: var(--bg-primary);
+}
+
+/* Typography Hierarchy */
+.header-text h1, h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    line-height: 0.9;
+    margin-bottom: 0.5rem;
+}
+
+.header-text p {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+}
+
+h2, .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.section-subtitle {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+    margin-bottom: 3rem;
+}
+
+/* Intro/Highlight Sections */
+.intro {
+    border-left: 6px solid var(--border-primary);
+    padding-left: 2rem;
+    margin-bottom: 6rem;
+    max-width: 900px;
+}
+
+.intro p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+
+.highlight {
+    background: var(--border-primary);
+    color: var(--bg-primary);
+    padding: 2px 6px;
+    font-weight: 700;
+}
+
+/* Cards */
+.card, .project-card, .package-item {
+    background: var(--bg-card);
+    border: 3px solid var(--border-primary);
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+[data-theme="light"] .card,
+[data-theme="light"] .project-card,
+[data-theme="light"] .package-item {
+    box-shadow: 8px 8px 0px var(--gray-900);
+}
+
+[data-theme="dark"] .card,
+[data-theme="dark"] .project-card,
+[data-theme="dark"] .package-item {
+    box-shadow: 8px 8px 0px rgba(229, 229, 229, 0.3);
+}
+
+.card:hover, .project-card:hover, .package-item:hover {
+    transform: translate(-4px, -4px);
+}
+
+[data-theme="light"] .card:hover,
+[data-theme="light"] .project-card:hover,
+[data-theme="light"] .package-item:hover {
+    box-shadow: 12px 12px 0px var(--gray-900);
+}
+
+[data-theme="dark"] .card:hover,
+[data-theme="dark"] .project-card:hover,
+[data-theme="dark"] .package-item:hover {
+    box-shadow: 12px 12px 0px rgba(229, 229, 229, 0.3);
+}
+
+/* Package Items */
+.package-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 3rem;
+    margin-bottom: 4rem;
+}
+
+.package-content {
+    padding: 2rem;
+}
+
+.package-number {
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    background: var(--accent);
+    color: var(--white);
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 8px 12px;
+    border: 3px solid var(--border-primary);
+    z-index: 2;
+}
+
+.package-features {
+    list-style: none;
+    margin-top: 1rem;
+}
+
+.package-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.package-features li::before {
+    content: "✅";
+    font-size: 0.9rem;
+    margin-top: 0.1rem;
+}
+
+/* Button System */
+.btn-primary, .nav-pill {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-primary);
+    text-decoration: none;
+    border: 2px solid var(--border-primary);
+    padding: 8px 16px;
+    transition: all 0.2s ease;
+    background: var(--bg-card);
+    display: inline-block;
+    cursor: pointer;
+}
+
+.btn-primary:hover, .nav-pill:hover {
+    background: var(--border-primary);
+    color: var(--bg-primary);
+}
+
+.btn-cta, .cta-button {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: var(--border-primary);
+    color: var(--bg-primary);
+    border: 3px solid var(--border-primary);
+    padding: 1rem 2rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.btn-cta:hover, .cta-button:hover {
+    background: var(--bg-primary);
+    color: var(--border-primary);
+    transform: translate(-2px, -2px);
+}
+
+[data-theme="dark"] .btn-cta:hover,
+[data-theme="dark"] .cta-button:hover {
+    box-shadow: 4px 4px 0px rgba(229, 229, 229, 0.3);
+}
+
+[data-theme="light"] .btn-cta:hover,
+[data-theme="light"] .cta-button:hover {
+    box-shadow: 4px 4px 0px var(--black);
+}
+
+/* Navigation Pills */
+.nav-pills {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 4rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.nav-pill {
+    border-color: var(--border-secondary);
+    color: var(--text-muted);
+}
+
+/* Special Sections */
+.bonus-section {
+    background: var(--border-primary);
+    color: var(--bg-primary);
+    padding: 4rem;
+    border: 6px solid var(--border-primary);
+    margin: 6rem 0;
+    text-align: center;
+}
+
+.bonus-section h2 {
+    color: var(--accent);
+    margin-bottom: 2rem;
+}
+
+.bonus-section p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pricing-section {
+    background: var(--bg-secondary);
+    border-top: 6px solid var(--border-primary);
+    border-bottom: 6px solid var(--border-primary);
+    padding: 6rem 0;
+    margin: 6rem 0;
+    text-align: center;
+}
+
+.price-display {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    font-weight: 900;
+    color: var(--accent);
+    margin: 2rem 0;
+}
+
+.value-prop {
+    background: var(--bg-card);
+    border: 3px solid var(--border-primary);
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 600px;
+}
+
+[data-theme="light"] .value-prop {
+    box-shadow: 8px 8px 0px var(--gray-900);
+}
+
+[data-theme="dark"] .value-prop {
+    box-shadow: 8px 8px 0px rgba(229, 229, 229, 0.3);
+}
+
+.roi-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.roi-stat {
+    background: var(--border-primary);
+    color: var(--bg-primary);
+    padding: 2rem;
+    border: 3px solid var(--border-primary);
+}
+
+.roi-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.roi-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .header-text h1, h1 {
+        font-size: 2.5rem;
+    }
+
+    .intro {
+        border-left: 4px solid var(--border-primary);
+        padding-left: 1rem;
+    }
+
+    .package-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .bonus-section, .pricing-section {
+        padding: 2rem;
+    }
+
+    .roi-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .price-display {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 1rem;
+    }
+
+    .package-content {
+        padding: 1.5rem;
+    }
+
+    .theme-toggle {
+        top: 1rem;
+        right: 1rem;
+    }
+
+    .roi-stats {
+        grid-template-columns: 1fr;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Required Elements for Design System -->
+    <canvas class="mesh-background" id="meshCanvas"></canvas>
+    <button class="theme-toggle" id="themeToggle">◐ DARK</button>
+    
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="logo">
+                    MUZA
+                </div>
+                <div class="header-text">
+                    <h1>Animation Package</h1>
+                    <p>Exclusive July-August Portfolio Enhancement Offer</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav-pills">
+            <a href="#problem" class="nav-pill">The Problem</a>
+            <a href="#package" class="nav-pill">What You Get</a>
+            <a href="#bonus" class="nav-pill">Exclusive Bonus</a>
+            <a href="#pricing" class="nav-pill">Investment</a>
+            <a href="#cta" class="nav-pill">Get Started</a>
+        </nav>
+
+        <!-- Problem Statement -->
+        <div class="intro" id="problem">
+            <h2>The Problem Every Tech Company Faces</h2>
+            <p>
+                You've built innovative technology that transforms how people work, learn, or solve problems. 
+                But here's what you know: <span class="highlight">the most groundbreaking solution in the world still fails if prospects can't quickly grasp what it does.</span>
+            </p>
+            <p>
+                Your prospects need to see your technology in action. But explaining complex workflows, AI systems, 
+                or training platforms in words? That's like teaching someone to drive through a manual.
+            </p>
+        </div>
+
+        <!-- Package Contents -->
+        <section class="section" id="package">
+            <h2 class="section-title">What You Get</h2>
+            <p class="section-subtitle">Complete Production Package</p>
+            
+            <div class="package-grid">
+                <!-- Complete Animation Production -->
+                <div class="package-item">
+                    <div class="package-number">01</div>
+                    <div class="package-content">
+                        <h3>Complete Animation Production</h3>
+                        <ul class="package-features">
+                            <li>Professional Script Development - We translate your technology into compelling narrative</li>
+                            <li>Cinematic Storyboard - Frame-by-frame visualization of your solution</li>
+                            <li>60-70 Second Cinematic Animation - Hollywood-grade 3D visualization of your technology</li>
+                            <li>2 Rounds of Revisions on script, storyboard, AND final animation</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Professional Finishing -->
+                <div class="package-item">
+                    <div class="package-number">02</div>
+                    <div class="package-content">
+                        <h3>Professional Finishing</h3>
+                        <ul class="package-features">
+                            <li>Professional Sound Design - Custom audio that reinforces your message</li>
+                            <li>Human Narrator - Professional voice talent for your target audience</li>
+                            <li>Post-Production Mastery - Color grading and final polish using DaVinci Resolve</li>
+                            <li>Multi-Format Delivery - 4K, HD, social media cuts, presentation-ready assets</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Marketing Arsenal -->
+                <div class="package-item">
+                    <div class="package-number">03</div>
+                    <div class="package-content">
+                        <h3>Marketing Arsenal Included</h3>
+                        <ul class="package-features">
+                            <li>Extended Production Clips - Short hero shots for website headers, social media, conference presentations</li>
+                            <li>Social Media Cut-Downs - Optimized versions for LinkedIn, YouTube, and other platforms</li>
+                            <li>Presentation Assets - High-resolution stills for investor decks and partnership meetings</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Exclusive Bonus -->
+        <div class="bonus-section" id="bonus">
+            <h2>🚀 JULY-AUGUST EXCLUSIVE BONUS 🚀</h2>
+            <h3 style="color: var(--bg-primary); margin-bottom: 2rem;">Custom Interactive Experience</h3>
+            <p>
+                This is where it gets interesting. We're expanding into interactive web experiences and you get first access:
+            </p>
+            <div class="package-grid" style="margin-top: 3rem;">
+                <div class="package-item" style="background: var(--bg-primary); color: var(--text-primary);">
+                    <div class="package-content">
+                        <ul class="package-features">
+                            <li>3-Stage Interactive Demo - Web-based experience showcasing your technology workflow</li>
+                            <li>Click-Through Exploration - Visitors can interact with your solution, not just watch it</li>
+                            <li>Mobile-Optimized - Works perfectly on tablets for conference demos and sales meetings</li>
+                            <li>Analytics Dashboard - Track engagement, time spent, interaction data</li>
+                            <li>Embed Anywhere - Your website, sales presentations, partner portals</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <p style="margin-top: 2rem;">
+                This interactive experience is normally a separate project. You get it included because we're building our interactive portfolio.
+            </p>
+            <a href="https://www.muzascience.com/int-pages" class="btn-cta" style="margin-top: 2rem;">View Examples</a>
+        </div>
+
+        <!-- Pricing Section -->
+        <section class="pricing-section" id="pricing">
+            <h2 class="section-title">Your Investment</h2>
+            <div class="price-display">$6,000</div>
+            <p style="font-family: 'JetBrains Mono', monospace; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 2rem;">
+                Complete package. No hidden fees. No upsells.
+            </p>
+            
+            <div class="value-prop">
+                <h3>Why This Pricing Makes Zero Sense (But We're Doing It Anyway)</h3>
+                <p style="text-align: left; margin-top: 1rem;">
+                    We're offering this package at this price for three reasons: Portfolio Expansion - We need more tech/education projects as we expand into new markets. Interactive Showcase - Your project becomes our demonstration piece for future interactive clients. Capacity Timing - July-August lets us shift focus while maintaining team utilization.
+                </p>
+            </div>
+
+            <h3 style="margin-top: 4rem;">The Real ROI</h3>
+            <div class="roi-stats">
+                <div class="roi-stat">
+                    <span class="roi-number">417%-8,333%+</span>
+                    <div class="roi-label">Conservative ROI</div>
+                    <p style="font-size: 0.8rem; margin-top: 0.5rem;">If this helps close just ONE additional enterprise deal ($25K-$500K+)</p>
+                </div>
+                <div class="roi-stat">
+                    <span class="roi-number">IMPOSSIBLE</span>
+                    <div class="roi-label">To Calculate</div>
+                    <p style="font-size: 0.8rem; margin-top: 0.5rem;">Impact on funding, partnerships, market positioning, sales cycle acceleration</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Urgency & Guarantee -->
+        <section class="section">
+            <h2 class="section-title">Why July-August Only?</h2>
+            <div class="intro">
+                <p>
+                    The interactive experience bonus ends August 31st. After that, interactive projects are quoted separately.
+                </p>
+                <p>
+                    Simple reason: We're officially launching interactive services in September. These July-August projects become our showcase portfolio. After August, different pricing structure.
+                </p>
+            </div>
+
+            <div class="value-prop">
+                <h3>The Guarantee You Won't Need</h3>
+                <p style="text-align: left;">
+                    If you're not satisfied with the animation quality, we'll revise until you are. If we can't deliver the cinematic standard you see in our scientific publication portfolio, full refund.
+                </p>
+                <p style="text-align: left; margin-top: 1rem; font-weight: 600;">
+                    We've delivered scientific animations for Nature, Science, and Cell publications. Zero refunds. Zero unhappy clients.
+                </p>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <div class="bonus-section" id="cta">
+            <h2>Ready to Make Your Technology Impossible to Ignore?</h2>
+            <p>
+                This offer expires when we fill our July-August capacity OR August 31st, whichever comes first.
+            </p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin: 3rem 0; text-align: left;">
+                <div>
+                    <h4 style="color: var(--accent); margin-bottom: 1rem;">Next Steps:</h4>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 0.5rem;">✓ 50% deposit ($3,000)</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Project kicks off within 7 days</li>
+                        <li style="margin-bottom: 0.5rem;">✓ 6-week delivery timeline</li>
+                        <li style="margin-bottom: 0.5rem;">✓ Interactive experience delivered by September 15th</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <p style="font-size: 1.2rem; font-weight: 600; margin: 2rem 0;">
+                The question isn't whether professional animation works. The question is: will you be the company that prospects remember, or the one they scroll past?
+            </p>
+            
+            <a href="#contact" class="btn-cta" style="font-size: 1.1rem; padding: 1.5rem 3rem;">Start Your Project Today</a>
+        </div>
+    </div>
+
+    <!-- Design System Script -->
+    <script>
+/**
+ * Muza Productions - Computational Brutalism Design System
+ * JavaScript Module v1.0
+ */
+
+// Global variables for mesh animation
+let meshCanvas, meshCtx;
+let meshNodes = [];
+let mouseX = 0;
+let mouseY = 0;
+let animationId;
+
+/**
+ * Initialize the entire Muza design system
+ */
+function initializeMuza() {
+    initializeTheme();
+    initializeMeshBackground();
+    initializeAnimations();
+    initializeEventListeners();
+}
+
+/**
+ * Theme Management
+ */
+function initializeTheme() {
+    const themeToggle = document.getElementById('themeToggle');
+    if (!themeToggle) return;
+
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const currentTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
+
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    updateThemeToggleText(themeToggle, currentTheme);
+
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeToggleText(themeToggle, newTheme);
+    });
+}
+
+function updateThemeToggleText(button, theme) {
+    button.textContent = theme === 'dark' ? '☀ LIGHT' : '◐ DARK';
+}
+
+/**
+ * Mesh Background Animation
+ */
+function initializeMeshBackground() {
+    meshCanvas = document.getElementById('meshCanvas');
+    if (!meshCanvas) return;
+
+    meshCtx = meshCanvas.getContext('2d');
+    resizeCanvas();
+    createNodes();
+    animateMesh();
+    
+    window.addEventListener('resize', () => {
+        resizeCanvas();
+        createNodes();
+    });
+}
+
+function resizeCanvas() {
+    if (!meshCanvas) return;
+    meshCanvas.width = window.innerWidth;
+    meshCanvas.height = window.innerHeight;
+}
+
+function createNodes() {
+    meshNodes = [];
+    const nodeCount = 50;
+    
+    for (let i = 0; i < nodeCount; i++) {
+        meshNodes.push({
+            x: Math.random() * meshCanvas.width,
+            y: Math.random() * meshCanvas.height,
+            vx: (Math.random() - 0.5) * 0.5,
+            vy: (Math.random() - 0.5) * 0.5,
+            radius: Math.random() * 2 + 1
+        });
+    }
+}
+
+function updateNodes() {
+    meshNodes.forEach(node => {
+        node.x += node.vx;
+        node.y += node.vy;
+        
+        if (node.x < 0 || node.x > meshCanvas.width) node.vx *= -1;
+        if (node.y < 0 || node.y > meshCanvas.height) node.vy *= -1;
+        
+        const dx = mouseX - node.x;
+        const dy = mouseY - node.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        if (distance < 100) {
+            node.vx += dx * 0.00005;
+            node.vy += dy * 0.00005;
+        }
+    });
+}
+
+function drawConnections() {
+    const meshColor = getComputedStyle(document.documentElement)
+        .getPropertyValue('--mesh-color').trim();
+    meshCtx.strokeStyle = meshColor;
+    meshCtx.lineWidth = 0.8;
+    
+    for (let i = 0; i < meshNodes.length; i++) {
+        for (let j = i + 1; j < meshNodes.length; j++) {
+            const dx = meshNodes[i].x - meshNodes[j].x;
+            const dy = meshNodes[i].y - meshNodes[j].y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            if (distance < 180) {
+                const opacity = 1 - (distance / 180);
+                const currentColor = getComputedStyle(document.documentElement)
+                    .getPropertyValue('--mesh-color').trim();
+                
+                meshCtx.strokeStyle = currentColor.replace(/[\d\.]+\)$/g, (opacity * 0.6) + ')');
+                
+                meshCtx.beginPath();
+                meshCtx.moveTo(meshNodes[i].x, meshNodes[i].y);
+                meshCtx.lineTo(meshNodes[j].x, meshNodes[j].y);
+                meshCtx.stroke();
+            }
+        }
+    }
+}
+
+function drawNodes() {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    meshCtx.fillStyle = isDark ? 'rgba(255, 255, 255, 0.9)' : 'rgba(0, 0, 0, 0.8)';
+    
+    meshNodes.forEach(node => {
+        meshCtx.shadowColor = isDark ? 'rgba(255, 255, 255, 0.3)' : 'rgba(0, 0, 0, 0.2)';
+        meshCtx.shadowBlur = 4;
+        
+        meshCtx.beginPath();
+        meshCtx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+        meshCtx.fill();
+        
+        meshCtx.shadowBlur = 0;
+    });
+}
+
+function animateMesh() {
+    if (!meshCtx) return;
+    
+    meshCtx.clearRect(0, 0, meshCanvas.width, meshCanvas.height);
+    
+    updateNodes();
+    drawConnections();
+    drawNodes();
+    
+    animationId = requestAnimationFrame(animateMesh);
+}
+
+/**
+ * Initialize scroll animations
+ */
+function initializeAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    const cards = document.querySelectorAll('.package-item, .value-prop, .roi-stat');
+    cards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+        observer.observe(card);
+    });
+}
+
+/**
+ * Initialize event listeners
+ */
+function initializeEventListeners() {
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+}
+
+// Initialize when DOM is loaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeMuza);
+} else {
+    initializeMuza();
+}
+    </script>
+</body>
+</html>
